@@ -1,0 +1,605 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07FEAFE42ABD2EE400F4108D /* ScoreFiveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE32ABD2EE400F4108D /* ScoreFiveApp.swift */; };
+		07FEAFE62ABD2EE400F4108D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE52ABD2EE400F4108D /* ContentView.swift */; };
+		07FEAFE82ABD2EE400F4108D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE72ABD2EE400F4108D /* Item.swift */; };
+		07FEAFEA2ABD2EE500F4108D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07FEAFE92ABD2EE500F4108D /* Assets.xcassets */; };
+		07FEAFED2ABD2EE500F4108D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07FEAFEC2ABD2EE500F4108D /* Preview Assets.xcassets */; };
+		07FEAFF92ABD2EE500F4108D /* ScoreFiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFF82ABD2EE500F4108D /* ScoreFiveTests.swift */; };
+		07FEB0032ABD2EE500F4108D /* ScoreFiveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEB0022ABD2EE500F4108D /* ScoreFiveUITests.swift */; };
+		07FEB0052ABD2EE500F4108D /* ScoreFiveUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEB0042ABD2EE500F4108D /* ScoreFiveUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		07FEAFF52ABD2EE500F4108D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07FEAFD82ABD2EE400F4108D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07FEAFDF2ABD2EE400F4108D;
+			remoteInfo = ScoreFive;
+		};
+		07FEAFFF2ABD2EE500F4108D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07FEAFD82ABD2EE400F4108D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07FEAFDF2ABD2EE400F4108D;
+			remoteInfo = ScoreFive;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		07FEAFE02ABD2EE400F4108D /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		07FEAFE32ABD2EE400F4108D /* ScoreFiveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreFiveApp.swift; sourceTree = "<group>"; };
+		07FEAFE52ABD2EE400F4108D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		07FEAFE72ABD2EE400F4108D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		07FEAFE92ABD2EE500F4108D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		07FEAFEC2ABD2EE500F4108D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		07FEAFEE2ABD2EE500F4108D /* ScoreFive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScoreFive.entitlements; sourceTree = "<group>"; };
+		07FEAFEF2ABD2EE500F4108D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07FEAFF42ABD2EE500F4108D /* ScoreFiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScoreFiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		07FEAFF82ABD2EE500F4108D /* ScoreFiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreFiveTests.swift; sourceTree = "<group>"; };
+		07FEAFFE2ABD2EE500F4108D /* ScoreFiveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScoreFiveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		07FEB0022ABD2EE500F4108D /* ScoreFiveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreFiveUITests.swift; sourceTree = "<group>"; };
+		07FEB0042ABD2EE500F4108D /* ScoreFiveUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreFiveUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		07FEAFDD2ABD2EE400F4108D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07FEAFF12ABD2EE500F4108D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07FEAFFB2ABD2EE500F4108D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		07FEAFD72ABD2EE400F4108D = {
+			isa = PBXGroup;
+			children = (
+				07FEAFE22ABD2EE400F4108D /* ScoreFive */,
+				07FEAFF72ABD2EE500F4108D /* ScoreFiveTests */,
+				07FEB0012ABD2EE500F4108D /* ScoreFiveUITests */,
+				07FEAFE12ABD2EE400F4108D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		07FEAFE12ABD2EE400F4108D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07FEAFE02ABD2EE400F4108D /* ScoreFive.app */,
+				07FEAFF42ABD2EE500F4108D /* ScoreFiveTests.xctest */,
+				07FEAFFE2ABD2EE500F4108D /* ScoreFiveUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		07FEAFE22ABD2EE400F4108D /* ScoreFive */ = {
+			isa = PBXGroup;
+			children = (
+				07FEAFE32ABD2EE400F4108D /* ScoreFiveApp.swift */,
+				07FEAFE52ABD2EE400F4108D /* ContentView.swift */,
+				07FEAFE72ABD2EE400F4108D /* Item.swift */,
+				07FEAFE92ABD2EE500F4108D /* Assets.xcassets */,
+				07FEAFEE2ABD2EE500F4108D /* ScoreFive.entitlements */,
+				07FEAFEF2ABD2EE500F4108D /* Info.plist */,
+				07FEAFEB2ABD2EE500F4108D /* Preview Content */,
+			);
+			path = ScoreFive;
+			sourceTree = "<group>";
+		};
+		07FEAFEB2ABD2EE500F4108D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				07FEAFEC2ABD2EE500F4108D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		07FEAFF72ABD2EE500F4108D /* ScoreFiveTests */ = {
+			isa = PBXGroup;
+			children = (
+				07FEAFF82ABD2EE500F4108D /* ScoreFiveTests.swift */,
+			);
+			path = ScoreFiveTests;
+			sourceTree = "<group>";
+		};
+		07FEB0012ABD2EE500F4108D /* ScoreFiveUITests */ = {
+			isa = PBXGroup;
+			children = (
+				07FEB0022ABD2EE500F4108D /* ScoreFiveUITests.swift */,
+				07FEB0042ABD2EE500F4108D /* ScoreFiveUITestsLaunchTests.swift */,
+			);
+			path = ScoreFiveUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		07FEAFDF2ABD2EE400F4108D /* ScoreFive */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07FEB0082ABD2EE500F4108D /* Build configuration list for PBXNativeTarget "ScoreFive" */;
+			buildPhases = (
+				07FEAFDC2ABD2EE400F4108D /* Sources */,
+				07FEAFDD2ABD2EE400F4108D /* Frameworks */,
+				07FEAFDE2ABD2EE400F4108D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScoreFive;
+			productName = ScoreFive;
+			productReference = 07FEAFE02ABD2EE400F4108D /* ScoreFive.app */;
+			productType = "com.apple.product-type.application";
+		};
+		07FEAFF32ABD2EE500F4108D /* ScoreFiveTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07FEB00B2ABD2EE500F4108D /* Build configuration list for PBXNativeTarget "ScoreFiveTests" */;
+			buildPhases = (
+				07FEAFF02ABD2EE500F4108D /* Sources */,
+				07FEAFF12ABD2EE500F4108D /* Frameworks */,
+				07FEAFF22ABD2EE500F4108D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07FEAFF62ABD2EE500F4108D /* PBXTargetDependency */,
+			);
+			name = ScoreFiveTests;
+			productName = ScoreFiveTests;
+			productReference = 07FEAFF42ABD2EE500F4108D /* ScoreFiveTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		07FEAFFD2ABD2EE500F4108D /* ScoreFiveUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07FEB00E2ABD2EE500F4108D /* Build configuration list for PBXNativeTarget "ScoreFiveUITests" */;
+			buildPhases = (
+				07FEAFFA2ABD2EE500F4108D /* Sources */,
+				07FEAFFB2ABD2EE500F4108D /* Frameworks */,
+				07FEAFFC2ABD2EE500F4108D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07FEB0002ABD2EE500F4108D /* PBXTargetDependency */,
+			);
+			name = ScoreFiveUITests;
+			productName = ScoreFiveUITests;
+			productReference = 07FEAFFE2ABD2EE500F4108D /* ScoreFiveUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		07FEAFD82ABD2EE400F4108D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					07FEAFDF2ABD2EE400F4108D = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					07FEAFF32ABD2EE500F4108D = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 07FEAFDF2ABD2EE400F4108D;
+					};
+					07FEAFFD2ABD2EE500F4108D = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 07FEAFDF2ABD2EE400F4108D;
+					};
+				};
+			};
+			buildConfigurationList = 07FEAFDB2ABD2EE400F4108D /* Build configuration list for PBXProject "ScoreFive" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 07FEAFD72ABD2EE400F4108D;
+			productRefGroup = 07FEAFE12ABD2EE400F4108D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				07FEAFDF2ABD2EE400F4108D /* ScoreFive */,
+				07FEAFF32ABD2EE500F4108D /* ScoreFiveTests */,
+				07FEAFFD2ABD2EE500F4108D /* ScoreFiveUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		07FEAFDE2ABD2EE400F4108D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07FEAFED2ABD2EE500F4108D /* Preview Assets.xcassets in Resources */,
+				07FEAFEA2ABD2EE500F4108D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07FEAFF22ABD2EE500F4108D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07FEAFFC2ABD2EE500F4108D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		07FEAFDC2ABD2EE400F4108D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07FEAFE62ABD2EE400F4108D /* ContentView.swift in Sources */,
+				07FEAFE82ABD2EE400F4108D /* Item.swift in Sources */,
+				07FEAFE42ABD2EE400F4108D /* ScoreFiveApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07FEAFF02ABD2EE500F4108D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07FEAFF92ABD2EE500F4108D /* ScoreFiveTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07FEAFFA2ABD2EE500F4108D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07FEB0032ABD2EE500F4108D /* ScoreFiveUITests.swift in Sources */,
+				07FEB0052ABD2EE500F4108D /* ScoreFiveUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		07FEAFF62ABD2EE500F4108D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07FEAFDF2ABD2EE400F4108D /* ScoreFive */;
+			targetProxy = 07FEAFF52ABD2EE500F4108D /* PBXContainerItemProxy */;
+		};
+		07FEB0002ABD2EE500F4108D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07FEAFDF2ABD2EE400F4108D /* ScoreFive */;
+			targetProxy = 07FEAFFF2ABD2EE500F4108D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		07FEB0062ABD2EE500F4108D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		07FEB0072ABD2EE500F4108D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		07FEB0092ABD2EE500F4108D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ScoreFive/Preview Content\"";
+				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScoreFive/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		07FEB00A2ABD2EE500F4108D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ScoreFive/Preview Content\"";
+				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScoreFive/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		07FEB00C2ABD2EE500F4108D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFiveTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScoreFive.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ScoreFive";
+			};
+			name = Debug;
+		};
+		07FEB00D2ABD2EE500F4108D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFiveTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScoreFive.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ScoreFive";
+			};
+			name = Release;
+		};
+		07FEB00F2ABD2EE500F4108D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFiveUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ScoreFive;
+			};
+			name = Debug;
+		};
+		07FEB0102ABD2EE500F4108D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFiveUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ScoreFive;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07FEAFDB2ABD2EE400F4108D /* Build configuration list for PBXProject "ScoreFive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07FEB0062ABD2EE500F4108D /* Debug */,
+				07FEB0072ABD2EE500F4108D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07FEB0082ABD2EE500F4108D /* Build configuration list for PBXNativeTarget "ScoreFive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07FEB0092ABD2EE500F4108D /* Debug */,
+				07FEB00A2ABD2EE500F4108D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07FEB00B2ABD2EE500F4108D /* Build configuration list for PBXNativeTarget "ScoreFiveTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07FEB00C2ABD2EE500F4108D /* Debug */,
+				07FEB00D2ABD2EE500F4108D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07FEB00E2ABD2EE500F4108D /* Build configuration list for PBXNativeTarget "ScoreFiveUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07FEB00F2ABD2EE500F4108D /* Debug */,
+				07FEB0102ABD2EE500F4108D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 07FEAFD82ABD2EE400F4108D /* Project object */;
+}

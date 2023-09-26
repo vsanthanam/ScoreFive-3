@@ -1,5 +1,5 @@
 // ScoreFive
-// ScoreFiveTests.swift
+// Modifiers.swift
 //
 // MIT License
 //
@@ -23,32 +23,51 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@testable import ScoreFive
-import XCTest
+import Foundation
+import SwiftUI
 
-final class ScoreFiveTests: XCTestCase {
+private struct PlayerNamesListFormatterViewModifier: ViewModifier {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    // MARK: - API
+
+    let formatter: ListFormatter
+
+    // MARK: - ViewModifier
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        content
+            .environment(\.playerNamesListFormatter, formatter)
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+}
+
+private struct RecordLastUpdatedDateFormatterViewModifier: ViewModifier {
+
+    // MARK: - API
+
+    let formatter: DateFormatter
+
+    // MARK: - ViewModifier
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        content
+            .environment(\.recordLastUpdatedDateFormatter, formatter)
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+}
+
+extension View {
+
+    func playerNamesListFormatter(_ formatter: ListFormatter) -> some View {
+        let modifier = PlayerNamesListFormatterViewModifier(formatter: formatter)
+        return ModifiedContent(content: self, modifier: modifier)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    func recordLastUpdatedDateFormatter(_ formatter: DateFormatter) -> some View {
+        let modifier = RecordLastUpdatedDateFormatterViewModifier(formatter: formatter)
+        return ModifiedContent(content: self, modifier: modifier)
     }
 
 }

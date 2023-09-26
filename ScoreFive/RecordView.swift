@@ -1,5 +1,5 @@
 // ScoreFive
-// ScoreFiveTests.swift
+// RecordView.swift
 //
 // MIT License
 //
@@ -23,32 +23,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@testable import ScoreFive
-import XCTest
+import FiveKit
+import SwiftUI
+import Utils
 
-final class ScoreFiveTests: XCTestCase {
+struct RecordView: View {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    // MARK: - API
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    @Bindable
+    var activeRecord: Record
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
+    // MARK: - View
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+    @ViewBuilder
+    var body: some View {
+        List {
+            ForEach(activeRecord.game.rounds) { round in
+                Text("Twee")
+            }
+            Button("Add Scores") {
+                addingRound.toggle()
+            }
+        }
+        .listStyle(.plain)
+        .sheet(isPresented: $addingRound) {
+            EditRoundView(scoreCard: $activeRecord.game, index: nil)
+        }
+        .sheet(item: $editingRound, id: \.self) { index in
+            EditRoundView(scoreCard: $activeRecord.game, index: index)
         }
     }
 
+    // MARK: - Private
+
+    @State
+    private var addingRound = false
+
+    @State
+    private var editingRound: Int? = nil
+
+}
+
+#Preview {
+    RecordView(activeRecord: .init(game: .init(players: ["Player 1", "Player 2"], scoreLimit: 250)))
 }

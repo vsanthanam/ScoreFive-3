@@ -1,5 +1,5 @@
 // ScoreFive
-// ScoreFiveTests.swift
+// Environment.swift
 //
 // MIT License
 //
@@ -23,32 +23,50 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@testable import ScoreFive
-import XCTest
+import Foundation
+import SwiftUI
 
-final class ScoreFiveTests: XCTestCase {
+private struct PlayerNamesListFormatterEnvironmentKey: EnvironmentKey {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    // MARK: - EnvironmentKey
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    typealias Value = ListFormatter
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
+    static let defaultValue: Value = .init()
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+}
+
+private struct RecordLastUpdatedDateFormatterEnvironmentKey: EnvironmentKey {
+
+    // MARK: - EnvironmentKey
+
+    typealias Value = DateFormatter
+
+    static let defaultValue: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }()
+}
+
+extension EnvironmentValues {
+
+    var playerNamesListFormatter: ListFormatter {
+        get {
+            self[PlayerNamesListFormatterEnvironmentKey.self]
+        }
+        set {
+            self[PlayerNamesListFormatterEnvironmentKey.self] = newValue
         }
     }
 
+    var recordLastUpdatedDateFormatter: DateFormatter {
+        get {
+            self[RecordLastUpdatedDateFormatterEnvironmentKey.self]
+        }
+        set {
+            self[RecordLastUpdatedDateFormatterEnvironmentKey.self] = newValue
+        }
+    }
 }

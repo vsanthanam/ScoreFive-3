@@ -57,17 +57,64 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
 
     public private(set) var rounds = [Round]()
 
+    public func canSetScoreLimit(to scoreLimit: Int) -> Bool {
+        let maxScore = alivePlayers
+            .map { player in
+                totalScore(forPlayer: player)
+            }
+            .max() ?? 0
+        return scoreLimit > maxScore && scoreLimit >= 50
+    }
+
+    public mutating func setScoreLimit(to scoreLimit: Int) {
+        precondition(canSetScoreLimit(to: scoreLimit))
+        self.scoreLimit = scoreLimit
+    }
+
     public func canAddRound(_ round: Round) -> Bool {
         guard alivePlayers.count >= 2 else { return false }
-        return alivePlayers
-            .allSatisfy { player in
-                round.players.contains(player)
-            }
+        return alivePlayers == round.players
     }
 
     public mutating func addRound(_ round: Round) {
         precondition(canAddRound(round))
         rounds.append(round)
+    }
+
+    public func canRemoveRound(atIndex index: Int) -> Bool {
+        guard rounds.indices.last != index else {
+            return true
+        }
+        var copy = self
+        copy.rounds.remove(at: index)
+        return alivePlayers == copy.alivePlayers
+    }
+
+    @discardableResult
+    public mutating func removeRound(atIndex index: Int) -> Round {
+        precondition(canRemoveRound(atIndex: index))
+        let round = rounds[index]
+        rounds.remove(at: index)
+        return round
+    }
+
+    public func canRemoveRound(id: String) -> Bool {
+        guard let round = rounds.filter({ round in round.id == id }).first,
+              let index = rounds.firstIndex(of: round) else {
+            return false
+        }
+        return canRemoveRound(atIndex: index)
+    }
+
+    @discardableResult
+    public mutating func removeRound(id: String) -> Round {
+        precondition(canRemoveRound(id: id))
+        guard let round = rounds.filter({ round in round.id == id }).first,
+              let index = rounds.firstIndex(of: round) else {
+            fatalError()
+        }
+        removeRound(atIndex: index)
+        return round
     }
 
     public func totalScore(forPlayer player: String) -> Int {
@@ -79,6 +126,14 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
                 round.score(forPlayer: player)
             }
             .reduce(0, +)
+    }
+
+    public subscript(_ player: String) -> Int {
+        totalScore(forPlayer: player)
+    }
+
+    public subscript(_ index: Int) -> Round {
+        rounds[index]
     }
 
     public struct Round: Equatable, Hashable, Sendable, Identifiable, Codable {

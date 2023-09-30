@@ -33,7 +33,7 @@ struct EditRoundView: View {
     @Binding
     var scoreCard: ScoreCard
 
-    let editingIndex: Int?
+    let editingRound: ScoreCard.Round?
 
     let players: [String]
 
@@ -79,10 +79,9 @@ struct EditRoundView: View {
             }
         }
         .onAppear {
-            if let editingIndex {
-                let round = scoreCard.rounds[editingIndex]
+            if let editingRound {
                 players.forEach { player in
-                    scores[player] = round[player]
+                    scores[player] = editingRound[player]
                 }
             }
             focus = players[0]
@@ -101,7 +100,7 @@ struct EditRoundView: View {
     private var scores: [String: Int] = [:]
 
     private var title: String {
-        editingIndex == nil ? "Add Scores" : "Edit Scores"
+        editingRound == nil ? "Add Scores" : "Edit Scores"
     }
 
     private var containsAllScores: Bool {
@@ -121,12 +120,12 @@ struct EditRoundView: View {
     }
 
     private var canSave: Bool {
-        guard editingIndex == nil else { return false }
+        guard editingRound == nil else { return false }
         return containsAllScores && areScoresLegal && hasWinner && hasLoser
     }
 
     private func save() {
-        guard editingIndex == nil else {
+        guard editingRound == nil else {
             dismiss()
             return
         }

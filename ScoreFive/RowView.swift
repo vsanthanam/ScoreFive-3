@@ -134,7 +134,7 @@ struct RowView: View {
                             .foregroundStyle(entry.highlight.color)
                             .frame(maxWidth: .infinity)
                             .fontWeight(configuration.isAccented ? .bold : .regular)
-                            .opacity(entry.eliminated ? 0.5 : 1.0)
+                            .opacity(entry.eliminated ? 0.3 : 1.0)
 
                     }
                 }

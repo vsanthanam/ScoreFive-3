@@ -49,19 +49,25 @@ struct RecordView: View {
             Spacer()
                 .frame(maxWidth: .infinity, minHeight: 2.0, maxHeight: 2.0)
             List {
-                ForEach(activeRecord.game.rounds.indices, id: \.self) { index in
+                ForEach(activeRecord.game.rounds) { round in
                     Button {
-                        editingRound = index
+                        editingRound = round
                     } label: {
-                        let round = activeRecord.game.rounds[index]
-                        RowView(signpost: index.description,
+                        RowView(signpost: activeRecord.game.rounds.firstIndex(of: round)?.description ?? "X",
                                 entries: activeRecord.players
                                     .map { player in
                                         RowView.Entry(
                                             content: round[player]?.description,
-                                            highlight: round.highlight(for: player)
+                                            highlight: round.highlight(for: player),
+                                            eliminated: !activeRecord.game.alivePlayers.contains(player)
                                         )
                                     })
+                    }
+                    .deleteDisabled(!activeRecord.game.canRemoveRound(id: round.id))
+                }
+                .onDelete { indexSet in
+                    indexSet.forEach { index in
+                        activeRecord.game.removeRound(atIndex: index)
                     }
                 }
                 .listRowInsets(.init())
@@ -78,25 +84,27 @@ struct RecordView: View {
             }
             RowView(entries: activeRecord.game.players.map { player in
                 RowView.Entry(
-                    content: activeRecord.game.totalScore(forPlayer: player).description
+                    content: activeRecord.game[player].description,
+                    highlight: activeRecord.game.highlight(for: player),
+                    eliminated: !activeRecord.game.alivePlayers.contains(player)
                 )
             })
-            .rowViewConfiguration(isAccented: true)
+            .rowViewConfiguration(isAccented: true, hasTopDivider: true)
         }
         .navigationTitle("Score Card")
         .listStyle(.plain)
         .sheet(isPresented: $addingRound) {
             EditRoundView(
                 scoreCard: $activeRecord.game,
-                editingIndex: nil,
+                editingRound: nil,
                 players: activeRecord.game.alivePlayers
             )
         }
-        .sheet(item: $editingRound, id: \.self) { index in
+        .sheet(item: $editingRound, id: \.self) { round in
             EditRoundView(
                 scoreCard: $activeRecord.game,
-                editingIndex: index,
-                players: activeRecord.game.rounds[index].players
+                editingRound: round,
+                players: round.players
             )
         }
     }
@@ -107,7 +115,7 @@ struct RecordView: View {
     private var addingRound = false
 
     @State
-    private var editingRound: Int? = nil
+    private var editingRound: ScoreCard.Round? = nil
 
 }
 
@@ -150,6 +158,40 @@ private extension ScoreCard.Round {
         }
 
     }
+}
+
+private extension ScoreCard {
+
+    private var lowestScore: Int {
+        alivePlayers
+            .compactMap { player in
+                self[player]
+            }
+            .min() ?? 0
+    }
+
+    private var highestScore: Int {
+        alivePlayers
+            .compactMap { player in
+                self[player]
+            }
+            .max() ?? 0
+    }
+
+    func highlight(for player: String) -> RowView.Entry.Highlight {
+        guard !rounds.isEmpty, alivePlayers.contains(player) else {
+            return .none
+        }
+        switch self[player] {
+        case lowestScore:
+            return .winning
+        case highestScore:
+            return .losing
+        default:
+            return .none
+        }
+    }
+
 }
 
 #Preview {

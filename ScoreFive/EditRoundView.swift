@@ -59,6 +59,9 @@ struct EditRoundView: View {
                         Text("At least one player must have a score of 0")
                     } else if !hasLoser {
                         Text("At least one player must have a score greater than 0")
+                    } else if !canSave {
+                        Text("Cannot change an existing score by this much. Delete newer scores first.")
+                            .foregroundStyle(Color.red)
                     } else {
                         EmptyView()
                     }
@@ -120,66 +123,31 @@ struct EditRoundView: View {
     }
 
     private var canSave: Bool {
-        guard editingRound == nil else { return false }
-        return containsAllScores && areScoresLegal && hasWinner && hasLoser
+        guard containsAllScores, areScoresLegal, hasWinner, hasLoser else {
+            return false
+        }
+        if let editingRound {
+            var newRound = ScoreCard.Round(players: players, id: editingRound.id)
+            players.forEach { player in
+                newRound[player] = scores[player]
+            }
+            return scoreCard.canReplaceRound(id: editingRound.id, withRound: newRound)
+        } else {
+            return true
+        }
     }
 
     private func save() {
-        guard editingRound == nil else {
-            dismiss()
-            return
-        }
         var round = ScoreCard.Round(players: players)
         for player in players {
             round[player] = scores[player]
         }
-        scoreCard.addRound(round)
+        if let editingRound {
+            scoreCard.replaceRound(id: editingRound.id, withRound: round)
+        } else {
+            scoreCard.addRound(round)
+        }
         dismiss()
     }
 
-}
-
-struct KeyboardToolbar<ToolbarView: View>: ViewModifier {
-    @State
-    var height: CGFloat = 0
-
-    private let toolbarView: ToolbarView
-
-    @State var showContent = false
-
-    init(@ViewBuilder toolbar: () -> ToolbarView) {
-        toolbarView = toolbar()
-    }
-
-    @ViewBuilder
-    func body(content: Content) -> some View {
-        ZStack(alignment: .bottom) {
-            VStack {
-                GeometryReader { geometry in
-                    VStack {
-                        content
-                    }
-                    .frame(width: geometry.size.width, height: geometry.size.height - height)
-                }
-                toolbarView
-                    .background(
-                        GeometryReader { proxy in
-                            Color.clear
-                                .onChange(of: proxy.size.height) { lhs, rhs in
-                                    height = rhs
-                                }
-                        }
-                    )
-            }
-        }
-
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-}
-
-extension View {
-    func keyboardToolbar<ToolbarView>(@ViewBuilder view: @escaping () -> ToolbarView) -> some View where ToolbarView: View {
-        let modifier = KeyboardToolbar(toolbar: view)
-        return ModifiedContent(content: self, modifier: modifier)
-    }
 }

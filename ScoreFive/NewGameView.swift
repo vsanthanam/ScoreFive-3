@@ -162,7 +162,7 @@ struct NewGameView: View {
                 return name
             }
         let card = ScoreCard(players: names, scoreLimit: scoreLimit ?? 50)
-        let record = Record(game: card)
+        let record = Record(scoreCard: card)
         modelContext.insert(record)
         pages.append(record)
         dismiss()

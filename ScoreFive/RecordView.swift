@@ -49,25 +49,25 @@ struct RecordView: View {
             Spacer()
                 .frame(maxWidth: .infinity, minHeight: 2.0, maxHeight: 2.0)
             List {
-                ForEach(activeRecord.game.rounds) { round in
+                ForEach(activeRecord.scoreCard.rounds) { round in
                     Button {
                         editingRound = round
                     } label: {
-                        RowView(signpost: activeRecord.game.rounds.firstIndex(of: round)?.description ?? "X",
+                        RowView(signpost: activeRecord.scoreCard.rounds.firstIndex(of: round)?.description ?? "X",
                                 entries: activeRecord.players
                                     .map { player in
                                         RowView.Entry(
                                             content: round[player]?.description,
                                             highlight: round.highlight(for: player),
-                                            eliminated: !activeRecord.game.alivePlayers.contains(player)
+                                            eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
                                         )
                                     })
                     }
-                    .deleteDisabled(!activeRecord.game.canRemoveRound(id: round.id))
+                    .deleteDisabled(!activeRecord.scoreCard.canRemoveRound(id: round.id))
                 }
                 .onDelete { indexSet in
                     indexSet.forEach { index in
-                        activeRecord.game.removeRound(atIndex: index)
+                        activeRecord.scoreCard.removeRound(atIndex: index)
                     }
                 }
                 .listRowInsets(.init())
@@ -82,11 +82,11 @@ struct RecordView: View {
                 .listRowInsets(.init())
                 .listRowSeparator(.hidden)
             }
-            RowView(entries: activeRecord.game.players.map { player in
+            RowView(entries: activeRecord.scoreCard.players.map { player in
                 RowView.Entry(
-                    content: activeRecord.game[player].description,
-                    highlight: activeRecord.game.highlight(for: player),
-                    eliminated: !activeRecord.game.alivePlayers.contains(player)
+                    content: activeRecord.scoreCard[player].description,
+                    highlight: activeRecord.scoreCard.highlight(for: player),
+                    eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
                 )
             })
             .rowViewConfiguration(isAccented: true, hasTopDivider: true)
@@ -95,14 +95,14 @@ struct RecordView: View {
         .listStyle(.plain)
         .sheet(isPresented: $addingRound) {
             EditRoundView(
-                scoreCard: $activeRecord.game,
+                scoreCard: $activeRecord.scoreCard,
                 editingRound: nil,
-                players: activeRecord.game.alivePlayers
+                players: activeRecord.scoreCard.alivePlayers
             )
         }
         .sheet(item: $editingRound, id: \.self) { round in
             EditRoundView(
-                scoreCard: $activeRecord.game,
+                scoreCard: $activeRecord.scoreCard,
                 editingRound: round,
                 players: round.players
             )
@@ -195,5 +195,5 @@ private extension ScoreCard {
 }
 
 #Preview {
-    RecordView(activeRecord: .init(game: .init(players: ["Player 1", "Player 2"], scoreLimit: 250)))
+    RecordView(activeRecord: .init(scoreCard: .init(players: ["Player 1", "Player 2"], scoreLimit: 250)))
 }

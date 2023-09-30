@@ -90,7 +90,7 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
     /// - Parameter round: The propsed new round
     /// - Returns: `true` if the round can be added, otherwise `false`
     public func canAddRound(_ round: Round) -> Bool {
-        guard alivePlayers.count >= 2, round.isCompolete else { return false }
+        guard alivePlayers.count >= 2, round.isComplete else { return false }
         return alivePlayers == round.players
     }
 
@@ -142,8 +142,13 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         removeRound(atIndex: index)
     }
 
+    /// Whether or not the round at the provided index can be replaced with the provided round
+    /// - Parameters:
+    ///   - index: The index of the round you wish to replace
+    ///   - round: The new round use instead
+    /// - Returns: `true` if the replacement is possible, otherwise `false` if it is not (or if no such round exists to be replaced)
     public func canReplaceRound(atIndex index: Int, withRound round: Round) -> Bool {
-        guard rounds.indices.contains(index), rounds[index].players == round.players, round.isCompolete else {
+        guard rounds.indices.contains(index), rounds[index].players == round.players, round.isComplete else {
             return false
         }
         guard rounds.indices.last != index else {
@@ -154,6 +159,10 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         return copy.alivePlayers == alivePlayers
     }
 
+    /// Replace the round at the provided index with the provided round
+    /// - Parameters:
+    ///   - index: The index of the round you wish to replace
+    ///   - round: The round to use instead
     public mutating func replaceRound(atIndex index: Int, withRound round: Round) {
         precondition(canReplaceRound(atIndex: index, withRound: round))
         var newRound = Round(players: round.players, id: round.id)
@@ -163,6 +172,11 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         rounds[index] = newRound
     }
 
+    /// Whether or not the round with the provided ID can be replaced with the provided round
+    /// - Parameters:
+    ///   - id: The ID of the round you wish to replace
+    ///   - round: The round to use instead
+    /// - Returns: `true` if the replacement is possible, otherwise `false` if it is not (or if no such round exists to be replaced)
     public func canReplaceRound(id: String, withRound round: Round) -> Bool {
         guard let old = rounds.filter({ round in round.id == id }).first,
               let index = rounds.firstIndex(of: old) else {
@@ -215,7 +229,7 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
 
         // MARK: - API
 
-        public var isCompolete: Bool {
+        public var isComplete: Bool {
             guard players.count >= 2 else {
                 return false
             }

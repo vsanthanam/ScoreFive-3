@@ -96,6 +96,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07F8AFD12AC8CE8300771FBC /* Src */ = {
+			isa = PBXGroup;
+			children = (
+				07F8AFD32AC8CEAA00771FBC /* Models */,
+				07F8AFD22AC8CE9600771FBC /* Views */,
+				07FEB02C2AC0D67E00F4108D /* Environment.swift */,
+				07FEB02E2AC0D86000F4108D /* Modifiers.swift */,
+				07FEB0202AC0CC3B00F4108D /* Packages */,
+			);
+			path = Src;
+			sourceTree = "<group>";
+		};
+		07F8AFD22AC8CE9600771FBC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				07FEB0162AC0A43F00F4108D /* NewGameView.swift */,
+				07FEB0302AC0E89400F4108D /* RecordView.swift */,
+				074601312AC11413006A3CBE /* EditRoundView.swift */,
+				07496AC52AC87BEA005E76B5 /* RowView.swift */,
+				07FEAFE32ABD2EE400F4108D /* ScoreFive.swift */,
+				07FEAFE52ABD2EE400F4108D /* RootView.swift */,
+				07FEB0262AC0CE7600F4108D /* LoadGameView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		07F8AFD32AC8CEAA00771FBC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				07FEB0112AC09EF100F4108D /* Record.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		07FEAFD72ABD2EE400F4108D = {
 			isa = PBXGroup;
 			children = (
@@ -120,21 +154,11 @@
 		07FEAFE22ABD2EE400F4108D /* ScoreFive */ = {
 			isa = PBXGroup;
 			children = (
-				07FEB0202AC0CC3B00F4108D /* Packages */,
-				07FEAFE32ABD2EE400F4108D /* ScoreFive.swift */,
-				07FEAFE52ABD2EE400F4108D /* RootView.swift */,
+				07F8AFD12AC8CE8300771FBC /* Src */,
 				07FEAFE92ABD2EE500F4108D /* Assets.xcassets */,
 				07FEAFEE2ABD2EE500F4108D /* ScoreFive.entitlements */,
 				07FEAFEF2ABD2EE500F4108D /* Info.plist */,
 				07FEAFEB2ABD2EE500F4108D /* Preview Content */,
-				07FEB0112AC09EF100F4108D /* Record.swift */,
-				07FEB0162AC0A43F00F4108D /* NewGameView.swift */,
-				07FEB0262AC0CE7600F4108D /* LoadGameView.swift */,
-				07FEB02C2AC0D67E00F4108D /* Environment.swift */,
-				07FEB02E2AC0D86000F4108D /* Modifiers.swift */,
-				07FEB0302AC0E89400F4108D /* RecordView.swift */,
-				074601312AC11413006A3CBE /* EditRoundView.swift */,
-				07496AC52AC87BEA005E76B5 /* RowView.swift */,
 			);
 			path = ScoreFive;
 			sourceTree = "<group>";

@@ -68,7 +68,10 @@ struct EditRoundView: View {
                 }
                 if canSave {
                     Section {
-                        Button("Save", action: save)
+                        Button(action: save) {
+                            Text("Save")
+                                .frame(maxWidth: .infinity)
+                        }
                     }
                 }
             }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		074601322AC11413006A3CBE /* EditRoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074601312AC11413006A3CBE /* EditRoundView.swift */; };
 		07496AC62AC87BEA005E76B5 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07496AC52AC87BEA005E76B5 /* RowView.swift */; };
+		07F8AFD62AC8E63400771FBC /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 07F8AFD52AC8E63400771FBC /* Utils */; };
+		07F8AFD92AC8E66300771FBC /* FiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 07F8AFD82AC8E66300771FBC /* FiveKit */; };
 		07FEAFE42ABD2EE400F4108D /* ScoreFive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE32ABD2EE400F4108D /* ScoreFive.swift */; };
 		07FEAFE62ABD2EE400F4108D /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE52ABD2EE400F4108D /* RootView.swift */; };
 		07FEAFEA2ABD2EE500F4108D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07FEAFE92ABD2EE500F4108D /* Assets.xcassets */; };
@@ -74,6 +76,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07F8AFD62AC8E63400771FBC /* Utils in Frameworks */,
+				07F8AFD92AC8E66300771FBC /* FiveKit in Frameworks */,
 				07FEB0372AC0EC5800F4108D /* Utils in Frameworks */,
 				07FEB0252AC0CC4C00F4108D /* FiveKit in Frameworks */,
 			);
@@ -223,6 +227,8 @@
 			packageProductDependencies = (
 				07FEB0242AC0CC4C00F4108D /* FiveKit */,
 				07FEB0362AC0EC5800F4108D /* Utils */,
+				07F8AFD52AC8E63400771FBC /* Utils */,
+				07F8AFD82AC8E66300771FBC /* FiveKit */,
 			);
 			productName = ScoreFive;
 			productReference = 07FEAFE02ABD2EE400F4108D /* ScoreFive.app */;
@@ -297,7 +303,8 @@
 			);
 			mainGroup = 07FEAFD72ABD2EE400F4108D;
 			packageReferences = (
-				07FEB0232AC0CC4C00F4108D /* XCLocalSwiftPackageReference "ScoreFive/Packages/FiveKit" */,
+				07F8AFD42AC8E63400771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/Utils" */,
+				07F8AFD72AC8E66300771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/FiveKit" */,
 			);
 			productRefGroup = 07FEAFE12ABD2EE400F4108D /* Products */;
 			projectDirPath = "";
@@ -687,13 +694,25 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		07FEB0232AC0CC4C00F4108D /* XCLocalSwiftPackageReference "ScoreFive/Packages/FiveKit" */ = {
+		07F8AFD42AC8E63400771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/Utils" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ScoreFive/Packages/FiveKit;
+			relativePath = ScoreFive/Src/Packages/Utils;
+		};
+		07F8AFD72AC8E66300771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/FiveKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ScoreFive/Src/Packages/FiveKit;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		07F8AFD52AC8E63400771FBC /* Utils */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Utils;
+		};
+		07F8AFD82AC8E66300771FBC /* FiveKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FiveKit;
+		};
 		07FEB0242AC0CC4C00F4108D /* FiveKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FiveKit;

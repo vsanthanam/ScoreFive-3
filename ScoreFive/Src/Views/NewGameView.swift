@@ -90,16 +90,22 @@ struct NewGameView: View {
                 }
                 if players.count < 8 {
                     Section {
-                        Button("Add Player") {
+                        Button {
                             withAnimation {
                                 addPlayer()
                             }
+                        } label: {
+                            Text("Add Player")
+                                .frame(maxWidth: .infinity)
                         }
                     }
                 }
                 if validScoreLimit, validPlayerNames {
                     Section {
-                        Button("Start Game", action: startGame)
+                        Button(action: startGame) {
+                            Text("Start Game")
+                                .frame(minWidth: .infinity)
+                        }
                     }
                 }
             }

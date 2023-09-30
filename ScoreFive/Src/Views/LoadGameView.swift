@@ -71,7 +71,7 @@ struct LoadGameView: View {
     @State
     private var showAll = false
 
-    @Query(sort: \Record.lastUpdated)
+    @Query(sort: \Record.lastUpdated, order: .reverse)
     private var allRecords: [Record]
 
     @Environment(\.modelContext)

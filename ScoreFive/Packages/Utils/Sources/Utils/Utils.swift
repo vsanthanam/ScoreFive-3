@@ -152,3 +152,18 @@ private struct WrappedIdentifiable<T, ID>: Identifiable where ID: Hashable {
         value[keyPath: path]
     }
 }
+
+public struct WithUUID<Wrapped>: Identifiable {
+
+    public init(value: Wrapped, uuid: UUID = .init()) {
+        self.value = value
+        id = uuid
+    }
+
+    public let value: Wrapped
+
+    public typealias ID = UUID
+
+    public let id: UUID
+
+}

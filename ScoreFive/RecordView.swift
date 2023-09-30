@@ -38,20 +38,66 @@ struct RecordView: View {
 
     @ViewBuilder
     var body: some View {
-        List {
-            ForEach(activeRecord.game.rounds) { round in
-                Text("Twee")
+        VStack(spacing: 0.0) {
+            RowView(entries: activeRecord.players.map { player in
+                RowView.Entry(
+                    content: player.playerSignpost,
+                    highlight: .none
+                )
+            })
+            .rowViewConfiguration(hasTopDivider: true, hasBottomDivider: true)
+            Spacer()
+                .frame(maxWidth: .infinity, minHeight: 2.0, maxHeight: 2.0)
+            List {
+                ForEach(activeRecord.game.rounds.indices, id: \.self) { index in
+                    Button {
+                        editingRound = index
+                    } label: {
+                        let round = activeRecord.game.rounds[index]
+                        RowView(signpost: index.description,
+                                entries: activeRecord.players
+                                    .map { player in
+                                        RowView.Entry(
+                                            content: round[player]?.description,
+                                            highlight: round.highlight(for: player)
+                                        )
+                                    })
+                    }
+                }
+                .listRowInsets(.init())
+                .listRowSeparator(.hidden)
+                .rowViewConfiguration(hasTopDivider: true)
+                Button {
+                    addingRound.toggle()
+                } label: {
+                    Text("Add Scores")
+                        .frame(maxWidth: .infinity)
+                }
+                .listRowInsets(.init())
+                .listRowSeparator(.hidden)
             }
-            Button("Add Scores") {
-                addingRound.toggle()
-            }
+            RowView(entries: activeRecord.game.players.map { player in
+                RowView.Entry(
+                    content: activeRecord.game.totalScore(forPlayer: player).description
+                )
+            })
+            .rowViewConfiguration(isAccented: true)
         }
+        .navigationTitle("Score Card")
         .listStyle(.plain)
         .sheet(isPresented: $addingRound) {
-            EditRoundView(scoreCard: $activeRecord.game, index: nil)
+            EditRoundView(
+                scoreCard: $activeRecord.game,
+                editingIndex: nil,
+                players: activeRecord.game.alivePlayers
+            )
         }
         .sheet(item: $editingRound, id: \.self) { index in
-            EditRoundView(scoreCard: $activeRecord.game, index: index)
+            EditRoundView(
+                scoreCard: $activeRecord.game,
+                editingIndex: index,
+                players: activeRecord.game.rounds[index].players
+            )
         }
     }
 
@@ -63,6 +109,47 @@ struct RecordView: View {
     @State
     private var editingRound: Int? = nil
 
+}
+
+private extension String {
+    var playerSignpost: String {
+        let comps = split(separator: " ")
+        if comps.count == 2, comps[0].lowercased() == "player", Int(comps[1]) != nil {
+            return "P" + comps[1]
+        } else {
+            return first?.lowercased() ?? "X"
+        }
+    }
+}
+
+private extension ScoreCard.Round {
+    private var lowestScore: Int {
+        players
+            .compactMap { player in
+                self[player]
+            }
+            .min() ?? 0
+    }
+
+    private var highestScore: Int {
+        players
+            .compactMap { player in
+                self[player]
+            }
+            .max() ?? 50
+    }
+
+    func highlight(for player: String) -> RowView.Entry.Highlight {
+        switch self[player] {
+        case lowestScore:
+            .winning
+        case highestScore:
+            .losing
+        default:
+            .none
+        }
+
+    }
 }
 
 #Preview {

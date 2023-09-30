@@ -1,5 +1,5 @@
 // ScoreFive
-// Five.swift
+// ScoreCard.swift
 //
 // MIT License
 //
@@ -164,10 +164,14 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
 
 @discardableResult
 public func validateScore(_ score: Int) throws -> Int {
-    guard score >= 0, score <= 50 else {
+    guard isLegalScore(score) else {
         throw ScoreCardError.invalidScore
     }
     return score
+}
+
+public func isLegalScore(_ score: Int) -> Bool {
+    score >= 0 && score <= 50
 }
 
 private enum ScoreCardError: Error {

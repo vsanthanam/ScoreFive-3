@@ -114,9 +114,9 @@ struct NewGameView: View {
                     }
                 }
             }
-            .onAppear {
-                focus = .scoreLimit
-            }
+        }
+        .onAppear {
+            focus = .scoreLimit
         }
     }
 

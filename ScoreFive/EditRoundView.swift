@@ -28,26 +28,14 @@ import SwiftUI
 
 struct EditRoundView: View {
 
-    // MARK: - Initializers
-
-    init(scoreCard: Binding<ScoreCard>, index: Int? = nil) {
-        _scoreCard = scoreCard
-        self.index = index
-        if let index {
-            title = "Edit Scores"
-            _round = .init(initialValue: scoreCard.wrappedValue.rounds[index])
-        } else {
-            title = "Add Scores"
-            _round = .init(initialValue: ScoreCard.Round(players: scoreCard.wrappedValue.alivePlayers))
-        }
-    }
-
     // MARK: - API
 
     @Binding
     var scoreCard: ScoreCard
 
-    let index: Int?
+    let editingIndex: Int?
+
+    let players: [String]
 
     // MARK: - View
 
@@ -55,10 +43,30 @@ struct EditRoundView: View {
     var body: some View {
         NavigationStack {
             Form {
-                ForEach(round.players, id: \.self) { player in
-                    TextField(player, value: $round[player], format: .number)
-                        .focused($focus, equals: player)
-                        .keyboardType(.numberPad)
+                Section {
+                    ForEach(players, id: \.self) { player in
+                        TextField(player, value: $scores.animation()[player], format: .number)
+                            .focused($focus, equals: player)
+                            .keyboardType(.numberPad)
+                    }
+                } footer: {
+                    if !areScoresLegal {
+                        Text("Scores must be between 0 and 50")
+                            .foregroundStyle(Color.red)
+                    } else if !containsAllScores {
+                        Text("Enter a score for every player")
+                    } else if !hasWinner {
+                        Text("At least one player must have a score of 0")
+                    } else if !hasLoser {
+                        Text("At least one player must have a score greater than 0")
+                    } else {
+                        EmptyView()
+                    }
+                }
+                if canSave {
+                    Section {
+                        Button("Save", action: save)
+                    }
                 }
             }
             .navigationTitle(title)
@@ -70,12 +78,18 @@ struct EditRoundView: View {
                 }
             }
         }
+        .onAppear {
+            if let editingIndex {
+                let round = scoreCard.rounds[editingIndex]
+                players.forEach { player in
+                    scores[player] = round[player]
+                }
+            }
+            focus = players[0]
+        }
     }
 
     // MARK: - Private
-
-    @State
-    private var round: ScoreCard.Round
 
     @FocusState
     private var focus: String?
@@ -83,6 +97,90 @@ struct EditRoundView: View {
     @Environment(\.dismiss)
     private var dismiss: DismissAction
 
-    private let title: String
+    @State
+    private var scores: [String: Int] = [:]
 
+    private var title: String {
+        editingIndex == nil ? "Add Scores" : "Edit Scores"
+    }
+
+    private var containsAllScores: Bool {
+        scores.values.count == players.count
+    }
+
+    private var areScoresLegal: Bool {
+        scores.values.allSatisfy(isLegalScore)
+    }
+
+    private var hasWinner: Bool {
+        scores.values.contains(0)
+    }
+
+    private var hasLoser: Bool {
+        !scores.values.filter { score in score != 0 }.isEmpty
+    }
+
+    private var canSave: Bool {
+        guard editingIndex == nil else { return false }
+        return containsAllScores && areScoresLegal && hasWinner && hasLoser
+    }
+
+    private func save() {
+        guard editingIndex == nil else {
+            dismiss()
+            return
+        }
+        var round = ScoreCard.Round(players: players)
+        for player in players {
+            round[player] = scores[player]
+        }
+        scoreCard.addRound(round)
+        dismiss()
+    }
+
+}
+
+struct KeyboardToolbar<ToolbarView: View>: ViewModifier {
+    @State
+    var height: CGFloat = 0
+
+    private let toolbarView: ToolbarView
+
+    @State var showContent = false
+
+    init(@ViewBuilder toolbar: () -> ToolbarView) {
+        toolbarView = toolbar()
+    }
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        ZStack(alignment: .bottom) {
+            VStack {
+                GeometryReader { geometry in
+                    VStack {
+                        content
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height - height)
+                }
+                toolbarView
+                    .background(
+                        GeometryReader { proxy in
+                            Color.clear
+                                .onChange(of: proxy.size.height) { lhs, rhs in
+                                    height = rhs
+                                }
+                        }
+                    )
+            }
+        }
+
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+extension View {
+    func keyboardToolbar<ToolbarView>(@ViewBuilder view: @escaping () -> ToolbarView) -> some View where ToolbarView: View {
+        let modifier = KeyboardToolbar(toolbar: view)
+        return ModifiedContent(content: self, modifier: modifier)
+    }
 }

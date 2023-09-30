@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		074601322AC11413006A3CBE /* EditRoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074601312AC11413006A3CBE /* EditRoundView.swift */; };
+		07496AC62AC87BEA005E76B5 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07496AC52AC87BEA005E76B5 /* RowView.swift */; };
 		07FEAFE42ABD2EE400F4108D /* ScoreFive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE32ABD2EE400F4108D /* ScoreFive.swift */; };
 		07FEAFE62ABD2EE400F4108D /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE52ABD2EE400F4108D /* RootView.swift */; };
 		07FEAFEA2ABD2EE500F4108D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07FEAFE92ABD2EE500F4108D /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		074601312AC11413006A3CBE /* EditRoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoundView.swift; sourceTree = "<group>"; };
+		07496AC52AC87BEA005E76B5 /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
 		07FEAFE02ABD2EE400F4108D /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07FEAFE32ABD2EE400F4108D /* ScoreFive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreFive.swift; sourceTree = "<group>"; };
 		07FEAFE52ABD2EE400F4108D /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				07FEB02E2AC0D86000F4108D /* Modifiers.swift */,
 				07FEB0302AC0E89400F4108D /* RecordView.swift */,
 				074601312AC11413006A3CBE /* EditRoundView.swift */,
+				07496AC52AC87BEA005E76B5 /* RowView.swift */,
 			);
 			path = ScoreFive;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07FEAFE62ABD2EE400F4108D /* RootView.swift in Sources */,
+				07496AC62AC87BEA005E76B5 /* RowView.swift in Sources */,
 				074601322AC11413006A3CBE /* EditRoundView.swift in Sources */,
 				07FEB02D2AC0D67E00F4108D /* Environment.swift in Sources */,
 				07FEB02F2AC0D86000F4108D /* Modifiers.swift in Sources */,

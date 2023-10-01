@@ -50,6 +50,16 @@ private struct RecordLastUpdatedDateFormatterEnvironmentKey: EnvironmentKey {
     }()
 }
 
+private struct RecordViewRowConfigurationEnvironmentKey: EnvironmentKey {
+
+    // MARK: - EnvironmentKey
+
+    typealias Value = RecordViewRow.Configuration
+
+    static let defaultValue: RecordViewRow.Configuration = .init()
+
+}
+
 extension EnvironmentValues {
 
     var playerNamesListFormatter: ListFormatter {
@@ -69,4 +79,14 @@ extension EnvironmentValues {
             self[RecordLastUpdatedDateFormatterEnvironmentKey.self] = newValue
         }
     }
+
+    var recordViewRowConfiguration: RecordViewRow.Configuration {
+        get {
+            self[RecordViewRowConfigurationEnvironmentKey.self]
+        }
+        set {
+            self[RecordViewRowConfigurationEnvironmentKey.self] = newValue
+        }
+    }
+
 }

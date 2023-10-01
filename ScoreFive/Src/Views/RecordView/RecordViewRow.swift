@@ -1,5 +1,5 @@
 // ScoreFive
-// RowView.swift
+// RecordViewRow.swift
 //
 // MIT License
 //
@@ -25,11 +25,11 @@
 
 import SwiftUI
 
-struct RowView: View {
+struct RecordViewRow: View {
 
     // MARK: - Initializers
 
-    init(signpost: String? = nil, entries: [RowView.Entry]) {
+    init(signpost: String? = nil, entries: [RecordViewRow.Entry]) {
         self.signpost = signpost
         self.entries = entries
     }
@@ -73,7 +73,7 @@ struct RowView: View {
 
         init(
             content: String?,
-            highlight: RowView.Entry.Highlight = .none,
+            highlight: RecordViewRow.Entry.Highlight = .none,
             eliminated: Bool = false
         ) {
             self.content = content
@@ -152,99 +152,12 @@ struct RowView: View {
     @ScaledMetric(relativeTo: .body)
     private var rowHeight = 44.0
 
-    @Environment(\.rowViewConfiguration)
+    @Environment(\.recordViewRowConfiguration)
     private var configuration: Configuration
 }
 
-private struct RowViewConfigurationEnvironmentKey: EnvironmentKey {
-
-    // MARK: - EnvironmentKey
-
-    typealias Value = RowView.Configuration
-
-    static let defaultValue: RowView.Configuration = .init()
-
-}
-
-extension EnvironmentValues {
-
-    var rowViewConfiguration: RowView.Configuration {
-        get {
-            self[RowViewConfigurationEnvironmentKey.self]
-        }
-        set {
-            self[RowViewConfigurationEnvironmentKey.self] = newValue
-        }
-    }
-}
-
-private struct RowViewConfigurationViewModifier: ViewModifier {
-
-    // MARK: - Initializers
-
-    init(configuration: RowView.Configuration) {
-        rowViewConfiguration = configuration
-        isAccented = nil
-        hasTopDivider = nil
-        hasBottomDivider = nil
-    }
-
-    init(isAccented: Bool?, hasTopDivider: Bool?, hasBottomDivider: Bool?) {
-        rowViewConfiguration = nil
-        self.isAccented = isAccented
-        self.hasTopDivider = hasTopDivider
-        self.hasBottomDivider = hasBottomDivider
-    }
-
-    // MARK: - API
-
-    let rowViewConfiguration: RowView.Configuration?
-
-    let isAccented: Bool?
-
-    let hasTopDivider: Bool?
-
-    let hasBottomDivider: Bool?
-
-    // MARK: - ViewModifier
-
-    @ViewBuilder
-    func body(content: Content) -> some View {
-        content
-            .environment(\.rowViewConfiguration, newConfiguration)
-    }
-
-    // MARK: - Private
-
-    @Environment(\.rowViewConfiguration)
-    private var existingConfiguration: RowView.Configuration
-
-    private var newConfiguration: RowView.Configuration {
-        rowViewConfiguration ?? .init(
-            isAccented: isAccented ?? existingConfiguration.isAccented,
-            hasTopDivider: hasTopDivider ?? existingConfiguration.hasTopDivider,
-            hasBottomDivider: hasBottomDivider ?? existingConfiguration.hasTopDivider
-        )
-    }
-
-}
-
-extension View {
-
-    func rowViewConfiguration(_ configuration: RowView.Configuration) -> some View {
-        let modifier = RowViewConfigurationViewModifier(configuration: configuration)
-        return ModifiedContent(content: self, modifier: modifier)
-    }
-
-    func rowViewConfiguration(isAccented: Bool? = nil, hasTopDivider: Bool? = nil, hasBottomDivider: Bool? = nil) -> some View {
-        let modifier = RowViewConfigurationViewModifier(isAccented: isAccented, hasTopDivider: hasTopDivider, hasBottomDivider: hasBottomDivider)
-        return ModifiedContent(content: self, modifier: modifier)
-    }
-
-}
-
 #Preview(traits: .sizeThatFitsLayout) {
-    RowView(signpost: "X", entries: [
+    RecordViewRow(signpost: "X", entries: [
         .init(content: "12", highlight: .none, eliminated: false),
         .init(content: "24", highlight: .losing, eliminated: false),
         .init(content: "0", highlight: .winning, eliminated: false)
@@ -252,11 +165,11 @@ extension View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    RowView(signpost: "X", entries: [
+    RecordViewRow(signpost: "X", entries: [
         .init(content: "252", highlight: .none, eliminated: true),
         .init(content: "124", highlight: .losing, eliminated: false),
         .init(content: "80", highlight: .winning, eliminated: false),
         .init(content: "101", highlight: .none, eliminated: false)
     ])
-    .rowViewConfiguration(isAccented: true, hasTopDivider: true, hasBottomDivider: true)
+    .recordViewRowConfiguration(isAccented: true, hasTopDivider: true, hasBottomDivider: true)
 }

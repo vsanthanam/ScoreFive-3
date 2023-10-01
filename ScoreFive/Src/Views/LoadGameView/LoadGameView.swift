@@ -44,7 +44,7 @@ struct LoadGameView: View {
                 }
                 Section {
                     ForEach(visibleRecords) { record in
-                        Row(record: record, onSelect: selectRecord)
+                        LoadGameViewRow(record: record, onSelect: selectRecord)
                     }
                     .onDelete { indexSet in
                         withAnimation {
@@ -133,45 +133,6 @@ struct LoadGameView: View {
             allRecords
                 .forEach(modelContext.delete)
         }
-    }
-
-    private struct Row: View {
-
-        // MARK: - API
-
-        let record: Record
-
-        let onSelect: (Record) -> Void
-
-        // MARK: - View
-
-        @ViewBuilder
-        var body: some View {
-            Button {
-                onSelect(record)
-            } label: {
-                HStack {
-                    Image(systemName: record.isComplete ? "flag.checkered" : "clock")
-                        .foregroundColor(Color.label)
-                    VStack(alignment: .leading) {
-                        Text(playerNamesListFormatter.string(from: record.players) ?? "Unknown")
-                            .foregroundStyle(Color.label)
-                        Text(recordLastUpdatedDateFormatter.string(from: record.lastUpdated))
-                            .font(.caption)
-                            .foregroundStyle(Color.secondaryLabel)
-                    }
-                }
-            }
-        }
-
-        // MARK: - Private
-
-        @Environment(\.playerNamesListFormatter)
-        private var playerNamesListFormatter: ListFormatter
-
-        @Environment(\.recordLastUpdatedDateFormatter)
-        private var recordLastUpdatedDateFormatter: DateFormatter
-
     }
 }
 

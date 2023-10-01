@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		074601322AC11413006A3CBE /* EditRoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074601312AC11413006A3CBE /* EditRoundView.swift */; };
-		07496AC62AC87BEA005E76B5 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07496AC52AC87BEA005E76B5 /* RowView.swift */; };
+		07496AC62AC87BEA005E76B5 /* RecordViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */; };
+		07D3C33C2AC9CC690003C7FA /* LoadGameViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */; };
 		07F8AFD62AC8E63400771FBC /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 07F8AFD52AC8E63400771FBC /* Utils */; };
 		07F8AFD92AC8E66300771FBC /* FiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 07F8AFD82AC8E66300771FBC /* FiveKit */; };
-		07FEAFE42ABD2EE400F4108D /* ScoreFive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE32ABD2EE400F4108D /* ScoreFive.swift */; };
+		07FEAFE42ABD2EE400F4108D /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE32ABD2EE400F4108D /* App.swift */; };
 		07FEAFE62ABD2EE400F4108D /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE52ABD2EE400F4108D /* RootView.swift */; };
 		07FEAFEA2ABD2EE500F4108D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07FEAFE92ABD2EE500F4108D /* Assets.xcassets */; };
 		07FEAFED2ABD2EE500F4108D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07FEAFEC2ABD2EE500F4108D /* Preview Assets.xcassets */; };
@@ -48,9 +49,10 @@
 
 /* Begin PBXFileReference section */
 		074601312AC11413006A3CBE /* EditRoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoundView.swift; sourceTree = "<group>"; };
-		07496AC52AC87BEA005E76B5 /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
+		07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewRow.swift; sourceTree = "<group>"; };
+		07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGameViewRow.swift; sourceTree = "<group>"; };
 		07FEAFE02ABD2EE400F4108D /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		07FEAFE32ABD2EE400F4108D /* ScoreFive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreFive.swift; sourceTree = "<group>"; };
+		07FEAFE32ABD2EE400F4108D /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		07FEAFE52ABD2EE400F4108D /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		07FEAFE92ABD2EE500F4108D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07FEAFEC2ABD2EE500F4108D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -100,9 +102,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07D3C3362AC9CA840003C7FA /* NewGameView */ = {
+			isa = PBXGroup;
+			children = (
+				07FEB0162AC0A43F00F4108D /* NewGameView.swift */,
+			);
+			path = NewGameView;
+			sourceTree = "<group>";
+		};
+		07D3C3372AC9CA8A0003C7FA /* RecordView */ = {
+			isa = PBXGroup;
+			children = (
+				07FEB0302AC0E89400F4108D /* RecordView.swift */,
+				07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */,
+			);
+			path = RecordView;
+			sourceTree = "<group>";
+		};
+		07D3C3382AC9CC240003C7FA /* EditRoundView */ = {
+			isa = PBXGroup;
+			children = (
+				074601312AC11413006A3CBE /* EditRoundView.swift */,
+			);
+			path = EditRoundView;
+			sourceTree = "<group>";
+		};
+		07D3C3392AC9CC3C0003C7FA /* RootView */ = {
+			isa = PBXGroup;
+			children = (
+				07FEAFE52ABD2EE400F4108D /* RootView.swift */,
+			);
+			path = RootView;
+			sourceTree = "<group>";
+		};
+		07D3C33A2AC9CC4E0003C7FA /* LoadGameView */ = {
+			isa = PBXGroup;
+			children = (
+				07FEB0262AC0CE7600F4108D /* LoadGameView.swift */,
+				07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */,
+			);
+			path = LoadGameView;
+			sourceTree = "<group>";
+		};
 		07F8AFD12AC8CE8300771FBC /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				07FEAFE32ABD2EE400F4108D /* App.swift */,
 				07F8AFD32AC8CEAA00771FBC /* Models */,
 				07F8AFD22AC8CE9600771FBC /* Views */,
 				07FEB02C2AC0D67E00F4108D /* Environment.swift */,
@@ -115,13 +160,11 @@
 		07F8AFD22AC8CE9600771FBC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				07FEB0162AC0A43F00F4108D /* NewGameView.swift */,
-				07FEB0302AC0E89400F4108D /* RecordView.swift */,
-				074601312AC11413006A3CBE /* EditRoundView.swift */,
-				07496AC52AC87BEA005E76B5 /* RowView.swift */,
-				07FEAFE32ABD2EE400F4108D /* ScoreFive.swift */,
-				07FEAFE52ABD2EE400F4108D /* RootView.swift */,
-				07FEB0262AC0CE7600F4108D /* LoadGameView.swift */,
+				07D3C33A2AC9CC4E0003C7FA /* LoadGameView */,
+				07D3C3392AC9CC3C0003C7FA /* RootView */,
+				07D3C3382AC9CC240003C7FA /* EditRoundView */,
+				07D3C3372AC9CA8A0003C7FA /* RecordView */,
+				07D3C3362AC9CA840003C7FA /* NewGameView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -350,12 +393,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				07FEAFE62ABD2EE400F4108D /* RootView.swift in Sources */,
-				07496AC62AC87BEA005E76B5 /* RowView.swift in Sources */,
+				07496AC62AC87BEA005E76B5 /* RecordViewRow.swift in Sources */,
 				074601322AC11413006A3CBE /* EditRoundView.swift in Sources */,
 				07FEB02D2AC0D67E00F4108D /* Environment.swift in Sources */,
 				07FEB02F2AC0D86000F4108D /* Modifiers.swift in Sources */,
+				07D3C33C2AC9CC690003C7FA /* LoadGameViewRow.swift in Sources */,
 				07FEB0122AC09EF100F4108D /* Record.swift in Sources */,
-				07FEAFE42ABD2EE400F4108D /* ScoreFive.swift in Sources */,
+				07FEAFE42ABD2EE400F4108D /* App.swift in Sources */,
 				07FEB0312AC0E89400F4108D /* RecordView.swift in Sources */,
 				07FEB0272AC0CE7600F4108D /* LoadGameView.swift in Sources */,
 				07FEB0172AC0A43F00F4108D /* NewGameView.swift in Sources */,

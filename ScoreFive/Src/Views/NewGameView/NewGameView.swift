@@ -31,8 +31,7 @@ struct NewGameView: View {
 
     // MARK: - API
 
-    @Binding
-    var pages: [Record]
+    let didCreateRecord: (Record) -> Void
 
     // MARK: - View
 
@@ -170,7 +169,7 @@ struct NewGameView: View {
         let card = ScoreCard(players: names, scoreLimit: scoreLimit ?? 50)
         let record = Record(scoreCard: card)
         modelContext.insert(record)
-        pages.append(record)
+        didCreateRecord(record)
         dismiss()
     }
 
@@ -192,6 +191,8 @@ struct NewGameView: View {
 }
 
 #Preview {
-    NewGameView(pages: .constant([]))
-        .modelContainer(for: Record.self, inMemory: true)
+    NewGameView() { _ in
+
+    }
+    .modelContainer(for: Record.self, inMemory: true)
 }

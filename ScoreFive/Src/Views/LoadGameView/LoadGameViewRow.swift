@@ -1,5 +1,5 @@
 // ScoreFive
-// ScoreFive.swift
+// LoadGameViewRow.swift
 //
 // MIT License
 //
@@ -23,33 +23,47 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftData
 import SwiftUI
 
-@main
-struct ScoreFive: App {
+struct LoadGameViewRow: View {
 
-    // MARK: - App
+    // MARK: - API
 
-    var body: some Scene {
-        WindowGroup {
-            RootView()
+    let record: Record
+
+    let onSelect: (Record) -> Void
+
+    // MARK: - View
+
+    @ViewBuilder
+    var body: some View {
+        Button {
+            onSelect(record)
+        } label: {
+            HStack {
+                Image(systemName: record.isComplete ? "flag.checkered" : "clock")
+                    .foregroundColor(Color.label)
+                VStack(alignment: .leading) {
+                    Text(playerNamesListFormatter.string(from: record.players) ?? "Unknown")
+                        .foregroundStyle(Color.label)
+                    Text(recordLastUpdatedDateFormatter.string(from: record.lastUpdated))
+                        .font(.caption)
+                        .foregroundStyle(Color.secondaryLabel)
+                }
+            }
         }
-        .modelContainer(sharedModelContainer)
     }
 
     // MARK: - Private
 
-    private var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Record.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+    @Environment(\.playerNamesListFormatter)
+    private var playerNamesListFormatter: ListFormatter
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @Environment(\.recordLastUpdatedDateFormatter)
+    private var recordLastUpdatedDateFormatter: DateFormatter
+
+}
+
+#Preview {
+    LoadGameViewRow(record: .init(scoreCard: .init(players: ["Dad", "Mom", "God", "Bro"], scoreLimit: 250))) { _ in }
 }

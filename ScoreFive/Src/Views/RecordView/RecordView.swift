@@ -40,13 +40,13 @@ struct RecordView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0.0) {
-                RowView(entries: activeRecord.players.map { player in
-                    RowView.Entry(
+                RecordViewRow(entries: activeRecord.players.map { player in
+                    RecordViewRow.Entry(
                         content: player.playerSignpost,
                         highlight: .none
                     )
                 })
-                .rowViewConfiguration(hasTopDivider: true, hasBottomDivider: true)
+                .recordViewRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
                 Spacer()
                     .frame(maxWidth: .infinity, minHeight: 1.0, maxHeight: 1.0)
                 List {
@@ -54,11 +54,11 @@ struct RecordView: View {
                         Button {
                             editingRound = round
                         } label: {
-                            RowView(
+                            RecordViewRow(
                                 signpost: ((activeRecord.scoreCard.rounds.firstIndex(of: round) ?? 0) + 1).description,
                                 entries: activeRecord.players
                                     .map { player in
-                                        RowView.Entry(
+                                        RecordViewRow.Entry(
                                             content: round[player]?.description,
                                             highlight: round.highlight(for: player),
                                             eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
@@ -75,7 +75,7 @@ struct RecordView: View {
                     }
                     .listRowInsets(.init())
                     .listRowSeparator(.hidden)
-                    .rowViewConfiguration(hasTopDivider: true)
+                    .recordViewRowConfiguration(hasTopDivider: true)
                     Button {
                         addingRound.toggle()
                     } label: {
@@ -93,14 +93,14 @@ struct RecordView: View {
                     .listRowInsets(.init())
                     .listRowSeparator(.hidden)
                 }
-                RowView(entries: activeRecord.scoreCard.players.map { player in
-                    RowView.Entry(
+                RecordViewRow(entries: activeRecord.scoreCard.players.map { player in
+                    RecordViewRow.Entry(
                         content: activeRecord.scoreCard[player].description,
                         highlight: activeRecord.scoreCard.highlight(for: player),
                         eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
                     )
                 })
-                .rowViewConfiguration(isAccented: true, hasTopDivider: true)
+                .recordViewRowConfiguration(isAccented: true, hasTopDivider: true)
             }
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
@@ -167,7 +167,7 @@ private extension ScoreCard.Round {
             .max() ?? 50
     }
 
-    func highlight(for player: String) -> RowView.Entry.Highlight {
+    func highlight(for player: String) -> RecordViewRow.Entry.Highlight {
         switch self[player] {
         case lowestScore:
             .winning
@@ -198,7 +198,7 @@ private extension ScoreCard {
             .max() ?? 0
     }
 
-    func highlight(for player: String) -> RowView.Entry.Highlight {
+    func highlight(for player: String) -> RecordViewRow.Entry.Highlight {
         guard !rounds.isEmpty, alivePlayers.contains(player) else {
             return .none
         }

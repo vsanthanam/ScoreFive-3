@@ -58,6 +58,61 @@ private struct RecordLastUpdatedDateFormatterViewModifier: ViewModifier {
 
 }
 
+private struct RowViewConfigurationViewModifier: ViewModifier {
+
+    // MARK: - Initializers
+
+    init(configuration: RecordViewRow.Configuration) {
+        rowViewConfiguration = configuration
+        isAccented = nil
+        hasTopDivider = nil
+        hasBottomDivider = nil
+    }
+
+    init(
+        isAccented: Bool?,
+        hasTopDivider: Bool?,
+        hasBottomDivider: Bool?
+    ) {
+        rowViewConfiguration = nil
+        self.isAccented = isAccented
+        self.hasTopDivider = hasTopDivider
+        self.hasBottomDivider = hasBottomDivider
+    }
+
+    // MARK: - API
+
+    let rowViewConfiguration: RecordViewRow.Configuration?
+
+    let isAccented: Bool?
+
+    let hasTopDivider: Bool?
+
+    let hasBottomDivider: Bool?
+
+    // MARK: - ViewModifier
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        content
+            .environment(\.recordViewRowConfiguration, newConfiguration)
+    }
+
+    // MARK: - Private
+
+    @Environment(\.recordViewRowConfiguration)
+    private var existingConfiguration: RecordViewRow.Configuration
+
+    private var newConfiguration: RecordViewRow.Configuration {
+        rowViewConfiguration ?? .init(
+            isAccented: isAccented ?? existingConfiguration.isAccented,
+            hasTopDivider: hasTopDivider ?? existingConfiguration.hasTopDivider,
+            hasBottomDivider: hasBottomDivider ?? existingConfiguration.hasTopDivider
+        )
+    }
+
+}
+
 extension View {
 
     func playerNamesListFormatter(_ formatter: ListFormatter) -> some View {
@@ -67,6 +122,24 @@ extension View {
 
     func recordLastUpdatedDateFormatter(_ formatter: DateFormatter) -> some View {
         let modifier = RecordLastUpdatedDateFormatterViewModifier(formatter: formatter)
+        return ModifiedContent(content: self, modifier: modifier)
+    }
+
+    func recordViewRowConfiguration(_ configuration: RecordViewRow.Configuration) -> some View {
+        let modifier = RowViewConfigurationViewModifier(configuration: configuration)
+        return ModifiedContent(content: self, modifier: modifier)
+    }
+
+    func recordViewRowConfiguration(
+        isAccented: Bool? = nil,
+        hasTopDivider: Bool? = nil,
+        hasBottomDivider: Bool? = nil
+    ) -> some View {
+        let modifier = RowViewConfigurationViewModifier(
+            isAccented: isAccented,
+            hasTopDivider: hasTopDivider,
+            hasBottomDivider: hasBottomDivider
+        )
         return ModifiedContent(content: self, modifier: modifier)
     }
 

@@ -32,6 +32,7 @@ final class Record {
 
     init(scoreCard: ScoreCard) {
         scoreCardData = try! JSONEncoder().encode(scoreCard)
+//        self.scoreCard = scoreCard
         players = scoreCard.players
         isComplete = scoreCard.alivePlayers.count < 2
         lastUpdated = .now

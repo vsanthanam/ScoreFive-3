@@ -62,7 +62,9 @@ struct RootView: View {
             .frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
             .background(Color.secondarySystemBackground)
             .sheet(isPresented: $showNewGame) {
-                NewGameView(pages: $pages)
+                NewGameView { record in
+                    pages.append(record)
+                }
             }
             .sheet(isPresented: $showLoadGame) {
                 LoadGameView() { record in

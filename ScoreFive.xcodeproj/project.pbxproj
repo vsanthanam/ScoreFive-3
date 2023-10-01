@@ -10,6 +10,7 @@
 		074601322AC11413006A3CBE /* EditRoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074601312AC11413006A3CBE /* EditRoundView.swift */; };
 		07496AC62AC87BEA005E76B5 /* RecordViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */; };
 		07D3C33C2AC9CC690003C7FA /* LoadGameViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */; };
+		07D3C3402ACA347F0003C7FA /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C33F2ACA347F0003C7FA /* MoreView.swift */; };
 		07F8AFD62AC8E63400771FBC /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 07F8AFD52AC8E63400771FBC /* Utils */; };
 		07F8AFD92AC8E66300771FBC /* FiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 07F8AFD82AC8E66300771FBC /* FiveKit */; };
 		07FEAFE42ABD2EE400F4108D /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE32ABD2EE400F4108D /* App.swift */; };
@@ -51,6 +52,7 @@
 		074601312AC11413006A3CBE /* EditRoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoundView.swift; sourceTree = "<group>"; };
 		07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewRow.swift; sourceTree = "<group>"; };
 		07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGameViewRow.swift; sourceTree = "<group>"; };
+		07D3C33F2ACA347F0003C7FA /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		07FEAFE02ABD2EE400F4108D /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07FEAFE32ABD2EE400F4108D /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		07FEAFE52ABD2EE400F4108D /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -144,6 +146,14 @@
 			path = LoadGameView;
 			sourceTree = "<group>";
 		};
+		07D3C33E2ACA34770003C7FA /* MoreView */ = {
+			isa = PBXGroup;
+			children = (
+				07D3C33F2ACA347F0003C7FA /* MoreView.swift */,
+			);
+			path = MoreView;
+			sourceTree = "<group>";
+		};
 		07F8AFD12AC8CE8300771FBC /* Src */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +170,7 @@
 		07F8AFD22AC8CE9600771FBC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				07D3C33E2ACA34770003C7FA /* MoreView */,
 				07D3C33A2AC9CC4E0003C7FA /* LoadGameView */,
 				07D3C3392AC9CC3C0003C7FA /* RootView */,
 				07D3C3382AC9CC240003C7FA /* EditRoundView */,
@@ -348,6 +359,7 @@
 			packageReferences = (
 				07F8AFD42AC8E63400771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/Utils" */,
 				07F8AFD72AC8E66300771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/FiveKit" */,
+				07D3C33D2ACA340F0003C7FA /* XCRemoteSwiftPackageReference "SafariUI" */,
 			);
 			productRefGroup = 07FEAFE12ABD2EE400F4108D /* Products */;
 			projectDirPath = "";
@@ -399,6 +411,7 @@
 				07FEB02F2AC0D86000F4108D /* Modifiers.swift in Sources */,
 				07D3C33C2AC9CC690003C7FA /* LoadGameViewRow.swift in Sources */,
 				07FEB0122AC09EF100F4108D /* Record.swift in Sources */,
+				07D3C3402ACA347F0003C7FA /* MoreView.swift in Sources */,
 				07FEAFE42ABD2EE400F4108D /* App.swift in Sources */,
 				07FEB0312AC0E89400F4108D /* RecordView.swift in Sources */,
 				07FEB0272AC0CE7600F4108D /* LoadGameView.swift in Sources */,
@@ -565,7 +578,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 100;
 				DEVELOPMENT_ASSET_PATHS = "\"ScoreFive/Preview Content\"";
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				ENABLE_PREVIEWS = YES;
@@ -580,7 +593,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFive3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -596,7 +609,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 100;
 				DEVELOPMENT_ASSET_PATHS = "\"ScoreFive/Preview Content\"";
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				ENABLE_PREVIEWS = YES;
@@ -611,7 +624,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.varunsanthanam.ScoreFive3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -747,6 +760,17 @@
 			relativePath = ScoreFive/Src/Packages/FiveKit;
 		};
 /* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		07D3C33D2ACA340F0003C7FA /* XCRemoteSwiftPackageReference "SafariUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:vsanthanam/SafariUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		07F8AFD52AC8E63400771FBC /* Utils */ = {

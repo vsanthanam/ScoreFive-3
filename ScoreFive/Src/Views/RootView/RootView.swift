@@ -48,6 +48,9 @@ struct RootView: View {
                     pages.append(record)
                 }
             }
+            .sheet(isPresented: $showMore) {
+                MoreView()
+            }
             .navigationDestination(for: Record.self) { record in
                 RecordView(activeRecord: record)
             }
@@ -64,20 +67,49 @@ struct RootView: View {
                 .foregroundColor(Color.secondarySystemGroupedBackground)
                 .shadow(radius: 16)
             VStack {
+                Image(systemName: "suit.spade")
+                    .font(.largeTitle)
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Spacer()
                 Text("Score Five")
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity)
-                    .font(/*@START_MENU_TOKEN@*/ .title/*@END_MENU_TOKEN@*/)
+                    .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding(24.0)
-                Button("New Game") {
+                Button {
                     showNewGame.toggle()
+                } label: {
+                    Text("New Game")
+                        .fontWeight(.semibold)
+                        .frame(minWidth: buttonWidth)
                 }
+                .buttonStyle(.borderedProminent)
                 if !records.isEmpty {
-                    Button("Load Game") {
+                    Button {
                         showLoadGame.toggle()
+                    } label: {
+                        Text("Load Game")
+                            .fontWeight(.semibold)
+                            .frame(minWidth: buttonWidth)
                     }
+                    .buttonStyle(.bordered)
                 }
+                Button {
+                    showMore.toggle()
+                } label: {
+                    Text("More")
+                        .fontWeight(.semibold)
+                        .frame(minWidth: buttonWidth)
+                }
+                .buttonStyle(.bordered)
+                Spacer()
+                Image(systemName: "suit.spade")
+                    .font(.largeTitle)
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .rotationEffect(.degrees(180))
             }
             .buttonStyle(.borderedProminent)
         }
@@ -93,6 +125,9 @@ struct RootView: View {
     @State
     private var showLoadGame = false
 
+    @State
+    private var showMore = false
+
     @Query(sort: \Record.lastUpdated)
     private var records: [Record]
 
@@ -107,6 +142,9 @@ struct RootView: View {
 
     @ScaledMetric(relativeTo: .body)
     private var cardCornerRadius = 16.0
+
+    @ScaledMetric(relativeTo: .body)
+    private var buttonWidth = 100.0
 }
 
 #Preview {

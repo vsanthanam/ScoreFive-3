@@ -40,69 +40,11 @@ struct RecordView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0.0) {
-                RecordViewRow(entries: activeRecord.players.map { player in
-                    RecordViewRow.Entry(
-                        content: player.playerSignpost,
-                        highlight: .none
-                    )
-                })
-                .recordViewRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
+                playerNamesHeader
                 Spacer()
                     .frame(maxWidth: .infinity, minHeight: 1.0, maxHeight: 1.0)
-                List {
-                    ForEach(activeRecord.scoreCard.rounds) { round in
-                        Button {
-                            editingRound = round
-                        } label: {
-                            RecordViewRow(
-                                signpost: ((activeRecord.scoreCard.rounds.firstIndex(of: round) ?? 0) + 1).description,
-                                entries: activeRecord.players
-                                    .map { player in
-                                        RecordViewRow.Entry(
-                                            content: round[player]?.description,
-                                            highlight: round.highlight(for: player),
-                                            eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
-                                        )
-                                    }
-                            )
-                        }
-                        .deleteDisabled(!activeRecord.scoreCard.canRemoveRound(id: round.id))
-                    }
-                    .onDelete { indexSet in
-                        indexSet.forEach { index in
-                            activeRecord.scoreCard.removeRound(atIndex: index)
-                        }
-                    }
-                    .listRowInsets(.init())
-                    .listRowSeparator(.hidden)
-                    .recordViewRowConfiguration(hasTopDivider: true)
-                    if activeRecord.scoreCard.alivePlayers.count > 1 {
-                        Button {
-                            addingRound.toggle()
-                        } label: {
-                            VStack(spacing: 0.0) {
-                                Divider()
-                                HStack(spacing: 0.0) {
-                                    Spacer()
-                                        .frame(width: 44.0, height: 44.0)
-                                    Text("Add Scores")
-                                        .frame(maxWidth: .infinity)
-                                        .fontWeight(.semibold)
-                                }
-                            }
-                        }
-                        .listRowInsets(.init())
-                        .listRowSeparator(.hidden)
-                    }
-                }
-                RecordViewRow(entries: activeRecord.scoreCard.players.map { player in
-                    RecordViewRow.Entry(
-                        content: activeRecord.scoreCard[player].description,
-                        highlight: activeRecord.scoreCard.highlight(for: player),
-                        eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
-                    )
-                })
-                .recordViewRowConfiguration(isAccented: true, hasTopDivider: true)
+                roundsList
+                totalScoresFooter
             }
             .navigationTitle("Score Card")
             .navigationBarTitleDisplayMode(.inline)
@@ -133,12 +75,89 @@ struct RecordView: View {
 
     // MARK: - Private
 
+    @ViewBuilder
+    private var roundsList: some View {
+        List {
+            ForEach(activeRecord.scoreCard.rounds) { round in
+                Button {
+                    editingRound = round
+                } label: {
+                    RecordViewRow(
+                        signpost: ((activeRecord.scoreCard.rounds.firstIndex(of: round) ?? 0) + 1).description,
+                        entries: activeRecord.players
+                            .map { player in
+                                RecordViewRow.Entry(
+                                    content: round[player]?.description,
+                                    highlight: round.highlight(for: player),
+                                    eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
+                                )
+                            }
+                    )
+                }
+                .deleteDisabled(!activeRecord.scoreCard.canRemoveRound(id: round.id))
+            }
+            .onDelete { indexSet in
+                indexSet.forEach { index in
+                    activeRecord.scoreCard.removeRound(atIndex: index)
+                }
+            }
+            .listRowInsets(.init())
+            .listRowSeparator(.hidden)
+            .recordViewRowConfiguration(hasTopDivider: true)
+            if activeRecord.scoreCard.alivePlayers.count > 1 {
+                buildAddScoresButton
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var buildAddScoresButton: some View {
+        Button {
+            addingRound.toggle()
+        } label: {
+            VStack(spacing: 0.0) {
+                Divider()
+                HStack(spacing: 0.0) {
+                    Spacer()
+                        .frame(width: 44.0, height: 44.0)
+                    Text("Add Scores")
+                        .frame(maxWidth: .infinity)
+                        .fontWeight(.semibold)
+                }
+            }
+        }
+        .listRowInsets(.init())
+        .listRowSeparator(.hidden)
+    }
+
+    @ViewBuilder
+    private var playerNamesHeader: some View {
+        RecordViewRow(entries: activeRecord.players.map { player in
+            RecordViewRow.Entry(
+                content: player.playerSignpost,
+                highlight: .none
+            )
+        })
+        .recordViewRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
+    }
+
+    @ViewBuilder
+    private var totalScoresFooter: some View {
+        RecordViewRow(entries: activeRecord.scoreCard.players.map { player in
+            RecordViewRow.Entry(
+                content: activeRecord.scoreCard[player].description,
+                highlight: activeRecord.scoreCard.highlight(for: player),
+                eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
+            )
+        })
+        .recordViewRowConfiguration(isAccented: true, hasTopDivider: true)
+    }
+
     @State
     private var addingRound = false
 
     @State
     private var editingRound: ScoreCard.Round? = nil
-
 }
 
 private extension String {

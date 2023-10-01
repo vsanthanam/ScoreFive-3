@@ -39,73 +39,13 @@ struct NewGameView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section {
-                    TextField(
-                        "Score Limit",
-                        value: $scoreLimit.animation(),
-                        format: .number
-                    )
-                    .focused($focus, equals: .scoreLimit)
-                    .keyboardType(.numberPad)
-                } header: {
-                    Text("Score Limit")
-                } footer: {
-                    if validScoreLimit {
-                        EmptyView()
-                    } else {
-                        Text("Score limit must be >= 50")
-                            .foregroundStyle(Color.red)
-                    }
-                }
-                Section {
-                    ForEach(players) { player in
-                        let index = players.firstIndex(of: player)!
-                        TextField("Player \(index + 1)", text: $players.animation()[index].name)
-                            .focused($focus, equals: .player(index))
-                            .submitLabel(player == players.last ? .done : .next)
-                            .onSubmit {
-                                if player == players.last {
-                                    focus = nil
-                                } else {
-                                    focus = .player(index + 1)
-                                }
-                            }
-                    }
-                    .onDelete { indexSet in
-                        withAnimation {
-                            players.remove(atOffsets: indexSet)
-                        }
-                    }
-                    .deleteDisabled(players.count == 2)
-                } header: {
-                    Text("Player Names")
-                } footer: {
-                    if validPlayerNames {
-                        EmptyView()
-                    } else {
-                        Text("Player names must be unique")
-                            .foregroundStyle(Color.red)
-                    }
-                }
+                scoreLimitSection
+                playersSection
                 if players.count < 8 {
-                    Section {
-                        Button {
-                            withAnimation {
-                                addPlayer()
-                            }
-                        } label: {
-                            Text("Add Player")
-                                .frame(maxWidth: .infinity)
-                        }
-                    }
+                    addPlayerSection
                 }
                 if validScoreLimit, validPlayerNames {
-                    Section {
-                        Button(action: startGame) {
-                            Text("Start Game")
-                                .frame(maxWidth: .infinity)
-                        }
-                    }
+                    startGameSection
                 }
             }
             .navigationTitle("New Game")
@@ -122,6 +62,86 @@ struct NewGameView: View {
         }
         .onAppear {
             focus = .scoreLimit
+        }
+    }
+
+    @ViewBuilder
+    private var scoreLimitSection: some View {
+        Section {
+            TextField(
+                "Score Limit",
+                value: $scoreLimit.animation(),
+                format: .number
+            )
+            .focused($focus, equals: .scoreLimit)
+            .keyboardType(.numberPad)
+        } header: {
+            Text("Score Limit")
+        } footer: {
+            if validScoreLimit {
+                EmptyView()
+            } else {
+                Text("Score limit must be >= 50")
+                    .foregroundStyle(Color.red)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var playersSection: some View {
+        Section {
+            ForEach(players) { player in
+                let index = players.firstIndex(of: player)!
+                TextField("Player \(index + 1)", text: $players.animation()[index].name)
+                    .focused($focus, equals: .player(index))
+                    .submitLabel(player == players.last ? .done : .next)
+                    .onSubmit {
+                        if player == players.last {
+                            focus = nil
+                        } else {
+                            focus = .player(index + 1)
+                        }
+                    }
+            }
+            .onDelete { indexSet in
+                withAnimation {
+                    players.remove(atOffsets: indexSet)
+                }
+            }
+            .deleteDisabled(players.count == 2)
+        } header: {
+            Text("Player Names")
+        } footer: {
+            if validPlayerNames {
+                EmptyView()
+            } else {
+                Text("Player names must be unique")
+                    .foregroundStyle(Color.red)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var addPlayerSection: some View {
+        Section {
+            Button {
+                withAnimation {
+                    addPlayer()
+                }
+            } label: {
+                Text("Add Player")
+                    .frame(maxWidth: .infinity)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var startGameSection: some View {
+        Section {
+            Button(action: startGame) {
+                Text("Start Game")
+                    .frame(maxWidth: .infinity)
+            }
         }
     }
 

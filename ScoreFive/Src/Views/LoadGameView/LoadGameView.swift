@@ -38,33 +38,11 @@ struct LoadGameView: View {
         NavigationStack {
             List {
                 if allRecords.count != incompleteRecords.count {
-                    Section {
-                        Toggle("Show Complete Games", isOn: $showAll.animation())
-                    }
+                    recordToggleSection
                 }
-                Section {
-                    ForEach(visibleRecords) { record in
-                        LoadGameViewRow(record: record, onSelect: selectRecord)
-                    }
-                    .onDelete { indexSet in
-                        withAnimation {
-                            indexSet
-                                .forEach { index in
-                                    modelContext.delete(visibleRecords[index])
-                                }
-                        }
-                    }
-                }
+                recordListSection
                 if showAll || allRecords.count == incompleteRecords.count {
-                    Section {
-                        Button {
-                            confirmDeleteAll.toggle()
-                        } label: {
-                            Text("Delete All")
-                                .foregroundStyle(Color.red)
-                                .frame(maxWidth: .infinity)
-                        }
-                    }
+                    deleteAllSection
                 }
             }
             .navigationTitle("Load Game")
@@ -97,6 +75,43 @@ struct LoadGameView: View {
     }
 
     // MARK: - Private
+
+    @ViewBuilder
+    private var recordToggleSection: some View {
+        Section {
+            Toggle("Show Complete Games", isOn: $showAll.animation())
+        }
+    }
+
+    @ViewBuilder
+    private var recordListSection: some View {
+        Section {
+            ForEach(visibleRecords) { record in
+                LoadGameViewRow(record: record, onSelect: selectRecord)
+            }
+            .onDelete { indexSet in
+                withAnimation {
+                    indexSet
+                        .forEach { index in
+                            modelContext.delete(visibleRecords[index])
+                        }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var deleteAllSection: some View {
+        Section {
+            Button {
+                confirmDeleteAll.toggle()
+            } label: {
+                Text("Delete All")
+                    .foregroundStyle(Color.red)
+                    .frame(maxWidth: .infinity)
+            }
+        }
+    }
 
     @State
     private var showAll = false

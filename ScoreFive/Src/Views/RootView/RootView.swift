@@ -34,30 +34,7 @@ struct RootView: View {
     var body: some View {
         NavigationStack(path: $pages) {
             HStack {
-                ZStack {
-                    Rectangle()
-                        .cornerRadius(cardCornerRadius)
-                        .foregroundColor(Color.secondarySystemGroupedBackground)
-                        .shadow(radius: 16)
-                    VStack {
-                        Text("Score Five")
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth: .infinity)
-                            .font(/*@START_MENU_TOKEN@*/ .title/*@END_MENU_TOKEN@*/)
-                            .fontWeight(.bold)
-                            .padding(24.0)
-                        Button("New Game") {
-                            showNewGame.toggle()
-                        }
-                        if !records.isEmpty {
-                            Button("Load Game") {
-                                showLoadGame.toggle()
-                            }
-                        }
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-                .frame(maxWidth: cardWidth, maxHeight: cardHeight)
+                menuCard
             }
             .frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
             .background(Color.secondarySystemBackground)
@@ -77,10 +54,38 @@ struct RootView: View {
         }
     }
 
+    // MARK: - Private
+
+    @ViewBuilder
+    private var menuCard: some View {
+        ZStack {
+            Rectangle()
+                .cornerRadius(cardCornerRadius)
+                .foregroundColor(Color.secondarySystemGroupedBackground)
+                .shadow(radius: 16)
+            VStack {
+                Text("Score Five")
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+                    .font(/*@START_MENU_TOKEN@*/ .title/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
+                    .padding(24.0)
+                Button("New Game") {
+                    showNewGame.toggle()
+                }
+                if !records.isEmpty {
+                    Button("Load Game") {
+                        showLoadGame.toggle()
+                    }
+                }
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .frame(maxWidth: cardWidth, maxHeight: cardHeight)
+    }
+
     @State
     private var pages = [Record]()
-
-    // MARK: - Private
 
     @State
     private var showNewGame = false

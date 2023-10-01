@@ -33,16 +33,34 @@ struct RootView: View {
     @ViewBuilder
     var body: some View {
         NavigationStack(path: $pages) {
-            VStack {
-                Button("New Game") {
-                    showNewGame.toggle()
-                }
-                if !records.isEmpty {
-                    Button("Load Game") {
-                        showLoadGame.toggle()
+            HStack {
+                ZStack {
+                    Rectangle()
+                        .cornerRadius(cardCornerRadius)
+                        .foregroundColor(Color.secondarySystemGroupedBackground)
+                        .shadow(radius: 16)
+                    VStack {
+                        Text("Score Five")
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity)
+                            .font(/*@START_MENU_TOKEN@*/ .title/*@END_MENU_TOKEN@*/)
+                            .fontWeight(.bold)
+                            .padding(24.0)
+                        Button("New Game") {
+                            showNewGame.toggle()
+                        }
+                        if !records.isEmpty {
+                            Button("Load Game") {
+                                showLoadGame.toggle()
+                            }
+                        }
                     }
+                    .buttonStyle(.borderedProminent)
                 }
+                .frame(maxWidth: cardWidth, maxHeight: cardHeight)
             }
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+            .background(Color.secondarySystemBackground)
             .sheet(isPresented: $showNewGame) {
                 NewGameView(pages: $pages)
             }
@@ -73,6 +91,15 @@ struct RootView: View {
 
     @Environment(\.modelContext)
     private var modelContext: ModelContext
+
+    @ScaledMetric(relativeTo: .body)
+    private var cardWidth = 343.0
+
+    @ScaledMetric(relativeTo: .body)
+    private var cardHeight = 490.0
+
+    @ScaledMetric(relativeTo: .body)
+    private var cardCornerRadius = 16.0
 }
 
 #Preview {

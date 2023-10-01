@@ -151,7 +151,7 @@ struct LoadGameView: View {
                 onSelect(record)
             } label: {
                 HStack {
-                    Image(systemName: record.isComplete ? "flag.checkered" : "clock.badge.checkmark")
+                    Image(systemName: record.isComplete ? "flag.checkered" : "clock")
                         .foregroundColor(Color.label)
                     VStack(alignment: .leading) {
                         Text(playerNamesListFormatter.string(from: record.players) ?? "Unknown")

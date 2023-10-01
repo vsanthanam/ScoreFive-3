@@ -126,7 +126,6 @@ struct RowView: View {
                 Text(signpost ?? "")
                     .foregroundStyle(Color.label)
                     .frame(width: rowHeight, height: rowHeight)
-                Divider()
                 HStack(spacing: 0.0) {
                     ForEach(entries.indices, id: \.self) { index in
                         let entry = entries[index]
@@ -145,6 +144,7 @@ struct RowView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: rowHeight)
+        .fontDesign(.monospaced)
     }
 
     // MARK: - Private

@@ -38,22 +38,24 @@ struct RecordView: View {
 
     @ViewBuilder
     var body: some View {
-        VStack(spacing: 0.0) {
-            RowView(entries: activeRecord.players.map { player in
-                RowView.Entry(
-                    content: player.playerSignpost,
-                    highlight: .none
-                )
-            })
-            .rowViewConfiguration(hasTopDivider: true, hasBottomDivider: true)
-            Spacer()
-                .frame(maxWidth: .infinity, minHeight: 2.0, maxHeight: 2.0)
-            List {
-                ForEach(activeRecord.scoreCard.rounds) { round in
-                    Button {
-                        editingRound = round
-                    } label: {
-                        RowView(signpost: activeRecord.scoreCard.rounds.firstIndex(of: round)?.description ?? "X",
+        ZStack {
+            VStack(spacing: 0.0) {
+                RowView(entries: activeRecord.players.map { player in
+                    RowView.Entry(
+                        content: player.playerSignpost,
+                        highlight: .none
+                    )
+                })
+                .rowViewConfiguration(hasTopDivider: true, hasBottomDivider: true)
+                Spacer()
+                    .frame(maxWidth: .infinity, minHeight: 1.0, maxHeight: 1.0)
+                List {
+                    ForEach(activeRecord.scoreCard.rounds) { round in
+                        Button {
+                            editingRound = round
+                        } label: {
+                            RowView(
+                                signpost: ((activeRecord.scoreCard.rounds.firstIndex(of: round) ?? 0) + 1).description,
                                 entries: activeRecord.players
                                     .map { player in
                                         RowView.Entry(
@@ -61,38 +63,56 @@ struct RecordView: View {
                                             highlight: round.highlight(for: player),
                                             eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
                                         )
-                                    })
+                                    }
+                            )
+                        }
+                        .deleteDisabled(!activeRecord.scoreCard.canRemoveRound(id: round.id))
                     }
-                    .deleteDisabled(!activeRecord.scoreCard.canRemoveRound(id: round.id))
-                }
-                .onDelete { indexSet in
-                    indexSet.forEach { index in
-                        activeRecord.scoreCard.removeRound(atIndex: index)
+                    .onDelete { indexSet in
+                        indexSet.forEach { index in
+                            activeRecord.scoreCard.removeRound(atIndex: index)
+                        }
                     }
+                    .listRowInsets(.init())
+                    .listRowSeparator(.hidden)
+                    .rowViewConfiguration(hasTopDivider: true)
+                    Button {
+                        addingRound.toggle()
+                    } label: {
+                        VStack(spacing: 0.0) {
+                            Divider()
+                            HStack(spacing: 0.0) {
+                                Spacer()
+                                    .frame(width: 44.0, height: 44.0)
+                                Text("Add Scores")
+                                    .frame(maxWidth: .infinity)
+                                    .fontWeight(.semibold)
+                            }
+                        }
+                    }
+                    .listRowInsets(.init())
+                    .listRowSeparator(.hidden)
                 }
-                .listRowInsets(.init())
-                .listRowSeparator(.hidden)
-                .rowViewConfiguration(hasTopDivider: true)
-                Button {
-                    addingRound.toggle()
-                } label: {
-                    Text("Add Scores")
-                        .frame(maxWidth: .infinity)
-                }
-                .listRowInsets(.init())
-                .listRowSeparator(.hidden)
+                RowView(entries: activeRecord.scoreCard.players.map { player in
+                    RowView.Entry(
+                        content: activeRecord.scoreCard[player].description,
+                        highlight: activeRecord.scoreCard.highlight(for: player),
+                        eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
+                    )
+                })
+                .rowViewConfiguration(isAccented: true, hasTopDivider: true)
             }
-            RowView(entries: activeRecord.scoreCard.players.map { player in
-                RowView.Entry(
-                    content: activeRecord.scoreCard[player].description,
-                    highlight: activeRecord.scoreCard.highlight(for: player),
-                    eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
-                )
-            })
-            .rowViewConfiguration(isAccented: true, hasTopDivider: true)
+            .navigationTitle("Score Card")
+            .navigationBarTitleDisplayMode(.inline)
+            .listStyle(.plain)
+            HStack(spacing: 0.0) {
+                Spacer()
+                    .frame(maxWidth: 44.0, maxHeight: .infinity)
+                Divider()
+                Spacer()
+            }
+            .frame(maxWidth: .infinity)
         }
-        .navigationTitle("Score Card")
-        .listStyle(.plain)
         .sheet(isPresented: $addingRound) {
             EditRoundView(
                 scoreCard: $activeRecord.scoreCard,
@@ -125,7 +145,7 @@ private extension String {
         if comps.count == 2, comps[0].lowercased() == "player", Int(comps[1]) != nil {
             return "P" + comps[1]
         } else {
-            return first?.lowercased() ?? "X"
+            return first?.uppercased() ?? "X"
         }
     }
 }

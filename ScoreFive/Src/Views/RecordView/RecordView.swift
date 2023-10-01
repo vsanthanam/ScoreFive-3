@@ -76,22 +76,24 @@ struct RecordView: View {
                     .listRowInsets(.init())
                     .listRowSeparator(.hidden)
                     .recordViewRowConfiguration(hasTopDivider: true)
-                    Button {
-                        addingRound.toggle()
-                    } label: {
-                        VStack(spacing: 0.0) {
-                            Divider()
-                            HStack(spacing: 0.0) {
-                                Spacer()
-                                    .frame(width: 44.0, height: 44.0)
-                                Text("Add Scores")
-                                    .frame(maxWidth: .infinity)
-                                    .fontWeight(.semibold)
+                    if activeRecord.scoreCard.alivePlayers.count > 1 {
+                        Button {
+                            addingRound.toggle()
+                        } label: {
+                            VStack(spacing: 0.0) {
+                                Divider()
+                                HStack(spacing: 0.0) {
+                                    Spacer()
+                                        .frame(width: 44.0, height: 44.0)
+                                    Text("Add Scores")
+                                        .frame(maxWidth: .infinity)
+                                        .fontWeight(.semibold)
+                                }
                             }
                         }
+                        .listRowInsets(.init())
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowInsets(.init())
-                    .listRowSeparator(.hidden)
                 }
                 RecordViewRow(entries: activeRecord.scoreCard.players.map { player in
                     RecordViewRow.Entry(

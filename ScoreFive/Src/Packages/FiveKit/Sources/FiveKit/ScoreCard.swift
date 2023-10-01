@@ -185,6 +185,10 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         return canReplaceRound(atIndex: index, withRound: round)
     }
 
+    /// Replace the round at the provided ID with the provided round
+    /// - Parameters:
+    ///   - id: The ID of the round you wish to replace
+    ///   - round: The round to use instead
     public mutating func replaceRound(id: String, withRound round: Round) {
         precondition(canReplaceRound(id: id, withRound: round))
         guard let old = rounds.filter({ round in round.id == id }).first,
@@ -194,8 +198,12 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         replaceRound(atIndex: index, withRound: round)
     }
 
+    /// The total score for a given player
+    /// - Parameter player: The player you want to get the score for
+    /// - Returns: The total score for that player
     public func totalScore(forPlayer player: String) -> Int {
-        rounds
+        precondition(players.contains(player))
+        return rounds
             .filter { round in
                 round.players.contains(player)
             }
@@ -204,6 +212,8 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
             }
             .reduce(0, +)
     }
+
+    // MARK: - Subscript
 
     public subscript(_ player: String) -> Int {
         totalScore(forPlayer: player)
@@ -218,10 +228,15 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         }
     }
 
+    /// A round in a game of five
     public struct Round: Equatable, Hashable, Sendable, Identifiable, Codable {
 
         // MARK: - Initializers
 
+        /// Create a round with ordered players and an optional ID
+        /// - Parameters:
+        ///   - players: The players who participated in the round
+        ///   - id: The unique identifier of this round
         public init(players: [String], id: ID? = nil) {
             self.players = players
             self.id = id ?? UUID().uuidString
@@ -229,6 +244,7 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
 
         // MARK: - API
 
+        /// Whether or not the round contains legal scores for every player
         public var isComplete: Bool {
             guard players.count >= 2 else {
                 return false
@@ -243,8 +259,13 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
             return true
         }
 
+        /// The players participating in this round
         public let players: [String]
 
+        /// Set the score for a given player
+        /// - Parameters:
+        ///   - score: The score
+        ///   - player: The player
         public mutating func set(score: Int, forPlayer player: String) {
             precondition(players.contains(player))
             do {
@@ -260,16 +281,19 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         }
 
         public func score(forPlayer player: String) -> Int? {
-            scores[player]
+            precondition(players.contains(player))
+            return scores[player]
         }
 
         // MARK: - Subscript
 
         public subscript(_ player: String) -> Int? {
             get {
-                score(forPlayer: player)
+                guard players.contains(player) else { return nil }
+                return score(forPlayer: player)
             }
             set {
+                guard players.contains(player) else { return }
                 if let newValue {
                     set(score: newValue, forPlayer: player)
                 } else {

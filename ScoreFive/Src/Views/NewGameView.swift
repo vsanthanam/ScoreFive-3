@@ -104,7 +104,7 @@ struct NewGameView: View {
                     Section {
                         Button(action: startGame) {
                             Text("Start Game")
-                                .frame(minWidth: .infinity)
+                                .frame(maxWidth: .infinity)
                         }
                     }
                 }

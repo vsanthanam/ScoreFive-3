@@ -47,7 +47,9 @@ struct RootView: View {
                 NewGameView(pages: $pages)
             }
             .sheet(isPresented: $showLoadGame) {
-                LoadGameView(pages: $pages)
+                LoadGameView() { record in
+                    pages.append(record)
+                }
             }
             .navigationDestination(for: Record.self) { record in
                 RecordView(activeRecord: record)

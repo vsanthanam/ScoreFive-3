@@ -29,10 +29,7 @@ import Utils
 
 struct LoadGameView: View {
 
-    // MARK: - API
-
-    @Binding
-    var pages: [Record]
+    let didLoadRecord: (Record) -> Void
 
     // MARK: - View
 
@@ -40,8 +37,10 @@ struct LoadGameView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section {
-                    Toggle("Show All", isOn: $showAll.animation())
+                if allRecords.count != incompleteRecords.count {
+                    Section {
+                        Toggle("Show Complete Games", isOn: $showAll.animation())
+                    }
                 }
                 Section {
                     ForEach(visibleRecords) { record in
@@ -56,13 +55,44 @@ struct LoadGameView: View {
                         }
                     }
                 }
+                if showAll || allRecords.count == incompleteRecords.count {
+                    Section {
+                        Button {
+                            confirmDeleteAll.toggle()
+                        } label: {
+                            Text("Delete All")
+                                .foregroundStyle(Color.red)
+                                .frame(maxWidth: .infinity)
+                        }
+                    }
+                }
             }
             .navigationTitle("Load Game")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .onChange(of: visibleRecords) { lhs, rhs in
+        .onChange(of: allRecords) { lhs, rhs in
             if rhs.isEmpty {
                 dismiss()
             }
+        }
+        .onAppear() {
+            if visibleRecords.isEmpty {
+                showAll.toggle()
+            }
+        }
+        .confirmationDialog(
+            "Are You Sure?",
+            isPresented: $confirmDeleteAll,
+            titleVisibility: .visible
+        ) {
+            Button("Cancel", role: .cancel) {
+                confirmDeleteAll.toggle()
+            }
+            Button("Delete All", role: .destructive) {
+                deleteAll()
+            }
+        } message: {
+            Text("This action is irreversible. All score cards — including unfinished ones — will be immediately deleted forever.")
         }
     }
 
@@ -70,6 +100,9 @@ struct LoadGameView: View {
 
     @State
     private var showAll = false
+
+    @State
+    private var confirmDeleteAll = false
 
     @Query(sort: \Record.lastUpdated, order: .reverse)
     private var allRecords: [Record]
@@ -91,8 +124,15 @@ struct LoadGameView: View {
     }
 
     private func selectRecord(_ record: Record) {
-        pages.append(record)
+        didLoadRecord(record)
         dismiss()
+    }
+
+    private func deleteAll() {
+        withAnimation {
+            allRecords
+                .forEach(modelContext.delete)
+        }
     }
 
     private struct Row: View {
@@ -110,12 +150,16 @@ struct LoadGameView: View {
             Button {
                 onSelect(record)
             } label: {
-                VStack(alignment: .leading) {
-                    Text(playerNamesListFormatter.string(from: record.players) ?? "Unknown")
-                        .foregroundStyle(Color.label)
-                    Text(recordLastUpdatedDateFormatter.string(from: record.lastUpdated))
-                        .font(.caption)
-                        .foregroundStyle(Color.secondaryLabel)
+                HStack {
+                    Image(systemName: record.isComplete ? "flag.checkered" : "clock.badge.checkmark")
+                        .foregroundColor(Color.label)
+                    VStack(alignment: .leading) {
+                        Text(playerNamesListFormatter.string(from: record.players) ?? "Unknown")
+                            .foregroundStyle(Color.label)
+                        Text(recordLastUpdatedDateFormatter.string(from: record.lastUpdated))
+                            .font(.caption)
+                            .foregroundStyle(Color.secondaryLabel)
+                    }
                 }
             }
         }
@@ -132,6 +176,8 @@ struct LoadGameView: View {
 }
 
 #Preview {
-    LoadGameView(pages: .constant([]))
-        .modelContainer(for: Record.self, inMemory: true)
+    LoadGameView() { _ in
+
+    }
+    .modelContainer(for: Record.self, inMemory: true)
 }

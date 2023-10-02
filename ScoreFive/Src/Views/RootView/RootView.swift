@@ -33,7 +33,7 @@ struct RootView: View {
     @ViewBuilder
     var body: some View {
         NavigationStack(path: $pages) {
-            HStack {
+            HStack(alignment: .center) {
                 menuCard
             }
             .frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
@@ -113,7 +113,8 @@ struct RootView: View {
             }
             .buttonStyle(.borderedProminent)
         }
-        .frame(maxWidth: cardWidth, maxHeight: cardHeight)
+        .aspectRatio(CGSize(width: 25, height: 35), contentMode: .fit)
+        .frame(maxHeight: 475.0)
     }
 
     @State
@@ -133,12 +134,6 @@ struct RootView: View {
 
     @Environment(\.modelContext)
     private var modelContext: ModelContext
-
-    @ScaledMetric(relativeTo: .body)
-    private var cardWidth = 343.0
-
-    @ScaledMetric(relativeTo: .body)
-    private var cardHeight = 490.0
 
     @ScaledMetric(relativeTo: .body)
     private var cardCornerRadius = 16.0

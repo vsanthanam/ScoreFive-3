@@ -30,3 +30,6 @@ public macro Link(_ value: StaticString) -> URL = #externalMacro(module: "Macros
 
 @freestanding(expression)
 public macro Date(_ value: StaticString) -> Date = #externalMacro(module: "MacrosMacros", type: "DateMacro")
+
+@freestanding(expression)
+public macro MailTo(_ value: StaticString) -> URL = #externalMacro(module: "MacrosMacros", type: "MailToMacro")

@@ -41,14 +41,12 @@ struct MoreView: View {
                     Button {
                         openSourceCode()
                     } label: {
-                        Label {
-                            Text("Source Code")
-                                .foregroundStyle(Color.label)
-                        } icon: {
-                            Image(systemName: "chevron.left.forwardslash.chevron.right")
+                        HStack {
+                            Label("Source Code", systemImage: "chevron.left.forwardslash.chevron.right")
+                            Spacer()
+                            Chevron()
                         }
                     }
-                    .asLink()
                 } header: {
                     Text("About")
                 }
@@ -56,16 +54,26 @@ struct MoreView: View {
                     Button {
                         safariURL = #Link("https://www.scorefive.app")
                     } label: {
-                        Label {
-                            Text("Instructions")
-                                .foregroundStyle(Color.label)
-                        } icon: {
-                            Image(systemName: "book")
+                        HStack {
+                            Label("Instructions", systemImage: "book")
+                            Spacer()
+                            Chevron()
                         }
                     }
-                    .asLink()
+                    Button {
+                        openEmail()
+                    } label: {
+                        HStack {
+                            Label("Email", systemImage: "envelope")
+                            Spacer()
+                            Chevron()
+                        }
+                    }
+                } header: {
+                    Text("Help")
                 }
             }
+            .labelStyle(CellStyle())
             .navigationTitle("More")
             .safari(url: $safariURL)
         }
@@ -77,8 +85,25 @@ struct MoreView: View {
     private func openSourceCode() {
         UIApplication.shared.open(#Link("https://github.com/vsanthanam/ScoreFive-3"))
     }
+
+    private func openEmail() {
+        UIApplication.shared.open(#MailTo("talkto@vsanthanam.com"))
+    }
 }
 
 #Preview {
     MoreView()
+}
+
+struct CellStyle: LabelStyle {
+
+    @ViewBuilder
+    func makeBody(configuration: Configuration) -> some View {
+        Label {
+            configuration.title
+                .foregroundStyle(Color.label)
+        } icon: {
+            configuration.icon
+        }
+    }
 }

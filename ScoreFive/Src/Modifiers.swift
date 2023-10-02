@@ -113,19 +113,6 @@ private struct RowViewConfigurationViewModifier: ViewModifier {
 
 }
 
-private struct AsNavigationLinkViewModifier: ViewModifier {
-
-    @ViewBuilder
-    func body(content: Content) -> some View {
-        NavigationLink {
-            EmptyView()
-        } label: {
-            content
-        }
-    }
-
-}
-
 extension View {
 
     func playerNamesListFormatter(_ formatter: ListFormatter) -> some View {
@@ -153,11 +140,6 @@ extension View {
             hasTopDivider: hasTopDivider,
             hasBottomDivider: hasBottomDivider
         )
-        return ModifiedContent(content: self, modifier: modifier)
-    }
-
-    func asLink() -> some View {
-        let modifier = AsNavigationLinkViewModifier()
         return ModifiedContent(content: self, modifier: modifier)
     }
 

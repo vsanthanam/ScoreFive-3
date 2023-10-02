@@ -11,6 +11,9 @@
 		07496AC62AC87BEA005E76B5 /* RecordViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */; };
 		07D3C33C2AC9CC690003C7FA /* LoadGameViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */; };
 		07D3C3402ACA347F0003C7FA /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C33F2ACA347F0003C7FA /* MoreView.swift */; };
+		07D3C3442ACA4E2C0003C7FA /* SafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 07D3C3432ACA4E2C0003C7FA /* SafariView */; };
+		07D3C3462ACA4EC00003C7FA /* Macros in Resources */ = {isa = PBXBuildFile; fileRef = 07D3C3452ACA4EC00003C7FA /* Macros */; };
+		07D3C3492ACA50D30003C7FA /* Macros in Frameworks */ = {isa = PBXBuildFile; productRef = 07D3C3482ACA50D30003C7FA /* Macros */; };
 		07F8AFD62AC8E63400771FBC /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 07F8AFD52AC8E63400771FBC /* Utils */; };
 		07F8AFD92AC8E66300771FBC /* FiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 07F8AFD82AC8E66300771FBC /* FiveKit */; };
 		07FEAFE42ABD2EE400F4108D /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE32ABD2EE400F4108D /* App.swift */; };
@@ -53,6 +56,7 @@
 		07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewRow.swift; sourceTree = "<group>"; };
 		07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGameViewRow.swift; sourceTree = "<group>"; };
 		07D3C33F2ACA347F0003C7FA /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
+		07D3C3452ACA4EC00003C7FA /* Macros */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Macros; sourceTree = "<group>"; };
 		07FEAFE02ABD2EE400F4108D /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07FEAFE32ABD2EE400F4108D /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		07FEAFE52ABD2EE400F4108D /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 				07F8AFD62AC8E63400771FBC /* Utils in Frameworks */,
 				07F8AFD92AC8E66300771FBC /* FiveKit in Frameworks */,
 				07FEB0372AC0EC5800F4108D /* Utils in Frameworks */,
+				07D3C3492ACA50D30003C7FA /* Macros in Frameworks */,
+				07D3C3442ACA4E2C0003C7FA /* SafariView in Frameworks */,
 				07FEB0252AC0CC4C00F4108D /* FiveKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +262,7 @@
 		07FEB0202AC0CC3B00F4108D /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				07D3C3452ACA4EC00003C7FA /* Macros */,
 				07FEB0352AC0EBB600F4108D /* Utils */,
 				07FEB0212AC0CC3B00F4108D /* FiveKit */,
 			);
@@ -283,6 +290,8 @@
 				07FEB0362AC0EC5800F4108D /* Utils */,
 				07F8AFD52AC8E63400771FBC /* Utils */,
 				07F8AFD82AC8E66300771FBC /* FiveKit */,
+				07D3C3432ACA4E2C0003C7FA /* SafariView */,
+				07D3C3482ACA50D30003C7FA /* Macros */,
 			);
 			productName = ScoreFive;
 			productReference = 07FEAFE02ABD2EE400F4108D /* ScoreFive.app */;
@@ -360,6 +369,7 @@
 				07F8AFD42AC8E63400771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/Utils" */,
 				07F8AFD72AC8E66300771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/FiveKit" */,
 				07D3C33D2ACA340F0003C7FA /* XCRemoteSwiftPackageReference "SafariUI" */,
+				07D3C3472ACA50D30003C7FA /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/Macros" */,
 			);
 			productRefGroup = 07FEAFE12ABD2EE400F4108D /* Products */;
 			projectDirPath = "";
@@ -380,6 +390,7 @@
 				07FEB0222AC0CC3B00F4108D /* FiveKit in Resources */,
 				07FEAFED2ABD2EE500F4108D /* Preview Assets.xcassets in Resources */,
 				07FEAFEA2ABD2EE500F4108D /* Assets.xcassets in Resources */,
+				07D3C3462ACA4EC00003C7FA /* Macros in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -751,6 +762,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		07D3C3472ACA50D30003C7FA /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/Macros" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ScoreFive/Src/Packages/Macros;
+		};
 		07F8AFD42AC8E63400771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/Utils" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ScoreFive/Src/Packages/Utils;
@@ -773,6 +788,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		07D3C3432ACA4E2C0003C7FA /* SafariView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07D3C33D2ACA340F0003C7FA /* XCRemoteSwiftPackageReference "SafariUI" */;
+			productName = SafariView;
+		};
+		07D3C3482ACA50D30003C7FA /* Macros */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Macros;
+		};
 		07F8AFD52AC8E63400771FBC /* Utils */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Utils;

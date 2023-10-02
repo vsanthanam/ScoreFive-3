@@ -23,6 +23,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Macros
+import SafariView
+import StoreKit
 import SwiftUI
 import Utils
 
@@ -35,12 +38,45 @@ struct MoreView: View {
                 Section {
                     Label("Version", systemImage: "info.circle")
                         .badge("\(Bundle.main.shortVersion) (\(Bundle.main.build))")
+                    Button {
+                        openSourceCode()
+                    } label: {
+                        Label {
+                            Text("Source Code")
+                                .foregroundStyle(Color.label)
+                        } icon: {
+                            Image(systemName: "chevron.left.forwardslash.chevron.right")
+                        }
+                    }
+                    .asLink()
+                } header: {
+                    Text("About")
+                }
+                Section {
+                    Button {
+                        safariURL = #Link("https://www.scorefive.app")
+                    } label: {
+                        Label {
+                            Text("Instructions")
+                                .foregroundStyle(Color.label)
+                        } icon: {
+                            Image(systemName: "book")
+                        }
+                    }
+                    .asLink()
                 }
             }
             .navigationTitle("More")
+            .safari(url: $safariURL)
         }
     }
 
+    @State
+    private var safariURL: URL?
+
+    private func openSourceCode() {
+        UIApplication.shared.open(#Link("https://github.com/vsanthanam/ScoreFive-3"))
+    }
 }
 
 #Preview {

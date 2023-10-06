@@ -31,6 +31,8 @@ import Utils
 
 struct MoreView: View {
 
+    // MARK: - View
+
     @ViewBuilder
     var body: some View {
         NavigationStack {
@@ -38,9 +40,7 @@ struct MoreView: View {
                 Section {
                     Label("Version", systemImage: "info.circle")
                         .badge("\(Bundle.main.shortVersion) (\(Bundle.main.build))")
-                    Button {
-                        openSourceCode()
-                    } label: {
+                    Button(action: openSourceCode) {
                         HStack {
                             Label("Source Code", systemImage: "chevron.left.forwardslash.chevron.right")
                             Spacer()

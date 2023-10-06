@@ -38,19 +38,6 @@ struct MoreView: View {
         NavigationStack {
             List {
                 Section {
-                    Label("Version", systemImage: "info.circle")
-                        .badge("\(Bundle.main.shortVersion) (\(Bundle.main.build))")
-                    Button(action: openSourceCode) {
-                        HStack {
-                            Label("Source Code", systemImage: "chevron.left.forwardslash.chevron.right")
-                            Spacer()
-                            Chevron()
-                        }
-                    }
-                } header: {
-                    Text("About")
-                }
-                Section {
                     Button {
                         safariURL = #Link("https://www.scorefive.app")
                     } label: {
@@ -64,13 +51,40 @@ struct MoreView: View {
                         openEmail()
                     } label: {
                         HStack {
-                            Label("Email", systemImage: "envelope")
+                            Label("Contact Us", systemImage: "envelope")
                             Spacer()
                             Chevron()
                         }
                     }
                 } header: {
-                    Text("Help")
+                    Text("Get Help")
+                }
+                Section {
+                    Button {
+                        leaveReview()
+                    } label: {
+                        Label("Leave Review", systemImage: "star.bubble")
+                    }
+                    ShareLink(item: #Link("https://www.apple.com")) {
+                        Label("Tell a Friend", systemImage: "square.and.arrow.up")
+                    }
+                } header: {
+                    Text("Support Us")
+                }
+                Section {
+                    Label("Version", systemImage: "info.circle")
+                        .badge("\(Bundle.main.shortVersion) (\(Bundle.main.build))")
+                    Button {
+                        openSourceCode()
+                    } label: {
+                        HStack {
+                            Label("Source Code", systemImage: "chevron.left.forwardslash.chevron.right")
+                            Spacer()
+                            Chevron()
+                        }
+                    }
+                } header: {
+                    Text("About")
                 }
             }
             .labelStyle(CellStyle())
@@ -82,12 +96,30 @@ struct MoreView: View {
     @State
     private var safariURL: URL?
 
+    @AppStorage("moreView.hasLeftReview")
+    private var hasLeftReview = false
+
+    @Environment(\.requestReview)
+    private var requestReview: RequestReviewAction
+
+    @MainActor
     private func openSourceCode() {
         UIApplication.shared.open(#Link("https://github.com/vsanthanam/ScoreFive-3"))
     }
 
+    @MainActor
     private func openEmail() {
         UIApplication.shared.open(#MailTo("talkto@vsanthanam.com"))
+    }
+
+    @MainActor
+    private func leaveReview() {
+        if !hasLeftReview {
+            requestReview()
+            hasLeftReview = true
+        } else {
+            UIApplication.shared.open(#Link("https://www.apple.com"))
+        }
     }
 }
 

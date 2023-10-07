@@ -31,7 +31,13 @@ let package = Package(
         ),
 
         // Library that exposes a macro as part of its API, which is used in client programs.
-        .target(name: "Macros", dependencies: ["MacrosMacros"]),
+        .target(
+            name: "Macros",
+            dependencies: ["MacrosMacros"],
+            swiftSettings: [
+                .enableExperimentalFeature("StrictConcurrency")
+            ]
+        ),
 
         // A test target used to develop the macro implementation.
         .testTarget(
@@ -39,6 +45,9 @@ let package = Package(
             dependencies: [
                 "MacrosMacros",
                 .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
+            ],
+            swiftSettings: [
+                .enableExperimentalFeature("StrictConcurrency")
             ]
         ),
     ]

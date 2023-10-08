@@ -59,8 +59,8 @@ public struct DateMacro: ExpressionMacro {
 
 private extension String {
     var isDate: Bool {
-        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.date.rawValue)
-        guard let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: utf16.count)),
+        guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.date.rawValue),
+              let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: utf16.count)),
               match.resultType == .date else {
             return false
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		072BE9192AD5BCAE0004845E /* AcknowledgementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072BE9182AD5BCAE0004845E /* AcknowledgementView.swift */; };
 		074601322AC11413006A3CBE /* EditRoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074601312AC11413006A3CBE /* EditRoundView.swift */; };
 		07496AC62AC87BEA005E76B5 /* RecordViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */; };
 		07D3C33C2AC9CC690003C7FA /* LoadGameViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		072BE9182AD5BCAE0004845E /* AcknowledgementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementView.swift; sourceTree = "<group>"; };
 		074601312AC11413006A3CBE /* EditRoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoundView.swift; sourceTree = "<group>"; };
 		07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewRow.swift; sourceTree = "<group>"; };
 		07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGameViewRow.swift; sourceTree = "<group>"; };
@@ -112,6 +114,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		072BE9172AD5BC8C0004845E /* AcknowledgementView */ = {
+			isa = PBXGroup;
+			children = (
+				072BE9182AD5BCAE0004845E /* AcknowledgementView.swift */,
+			);
+			path = AcknowledgementView;
+			sourceTree = "<group>";
+		};
 		07D3C3362AC9CA840003C7FA /* NewGameView */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,9 +176,9 @@
 		07F8AFD12AC8CE8300771FBC /* Src */ = {
 			isa = PBXGroup;
 			children = (
-				07FEAFE32ABD2EE400F4108D /* App.swift */,
 				07F8AFD32AC8CEAA00771FBC /* Models */,
 				07F8AFD22AC8CE9600771FBC /* Views */,
+				07FEAFE32ABD2EE400F4108D /* App.swift */,
 				07FEB02C2AC0D67E00F4108D /* Environment.swift */,
 				07FEB02E2AC0D86000F4108D /* Modifiers.swift */,
 				07FEB0202AC0CC3B00F4108D /* Packages */,
@@ -179,6 +189,7 @@
 		07F8AFD22AC8CE9600771FBC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				072BE9172AD5BC8C0004845E /* AcknowledgementView */,
 				07D3C33E2ACA34770003C7FA /* MoreView */,
 				07D3C33A2AC9CC4E0003C7FA /* LoadGameView */,
 				07D3C3392AC9CC3C0003C7FA /* RootView */,
@@ -425,6 +436,7 @@
 				07FEB02D2AC0D67E00F4108D /* Environment.swift in Sources */,
 				07FEB02F2AC0D86000F4108D /* Modifiers.swift in Sources */,
 				07D3C33C2AC9CC690003C7FA /* LoadGameViewRow.swift in Sources */,
+				072BE9192AD5BCAE0004845E /* AcknowledgementView.swift in Sources */,
 				07FEB0122AC09EF100F4108D /* Record.swift in Sources */,
 				07D3C3402ACA347F0003C7FA /* MoreView.swift in Sources */,
 				07FEAFE42ABD2EE400F4108D /* App.swift in Sources */,

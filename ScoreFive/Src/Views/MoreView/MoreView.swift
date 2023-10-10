@@ -83,6 +83,11 @@ struct MoreView: View {
                             Chevron()
                         }
                     }
+                    NavigationLink {
+                        AcknowledgementView()
+                    } label: {
+                        Label("Acknowledgements", systemImage: "person.3")
+                    }
                 } header: {
                     Text("About")
                 }

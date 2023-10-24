@@ -10,6 +10,7 @@
 		072BE9192AD5BCAE0004845E /* AcknowledgementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072BE9182AD5BCAE0004845E /* AcknowledgementView.swift */; };
 		074601322AC11413006A3CBE /* EditRoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074601312AC11413006A3CBE /* EditRoundView.swift */; };
 		07496AC62AC87BEA005E76B5 /* RecordViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */; };
+		079CB60C2AE798E300D80AA0 /* ScoreCardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CB60B2AE798E300D80AA0 /* ScoreCardExtensions.swift */; };
 		07D3C33C2AC9CC690003C7FA /* LoadGameViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */; };
 		07D3C3402ACA347F0003C7FA /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C33F2ACA347F0003C7FA /* MoreView.swift */; };
 		07D3C3442ACA4E2C0003C7FA /* SafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 07D3C3432ACA4E2C0003C7FA /* SafariView */; };
@@ -58,6 +59,7 @@
 		072BE9182AD5BCAE0004845E /* AcknowledgementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementView.swift; sourceTree = "<group>"; };
 		074601312AC11413006A3CBE /* EditRoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoundView.swift; sourceTree = "<group>"; };
 		07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewRow.swift; sourceTree = "<group>"; };
+		079CB60B2AE798E300D80AA0 /* ScoreCardExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCardExtensions.swift; sourceTree = "<group>"; };
 		07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGameViewRow.swift; sourceTree = "<group>"; };
 		07D3C33F2ACA347F0003C7FA /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		07D3C3452ACA4EC00003C7FA /* Macros */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Macros; sourceTree = "<group>"; };
@@ -124,6 +126,14 @@
 			path = AcknowledgementView;
 			sourceTree = "<group>";
 		};
+		079CB60A2AE7989200D80AA0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				079CB60B2AE798E300D80AA0 /* ScoreCardExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		07D3C3362AC9CA840003C7FA /* NewGameView */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +188,7 @@
 		07F8AFD12AC8CE8300771FBC /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				079CB60A2AE7989200D80AA0 /* Extensions */,
 				07F8AFD32AC8CEAA00771FBC /* Models */,
 				07F8AFD22AC8CE9600771FBC /* Views */,
 				07FEAFE32ABD2EE400F4108D /* App.swift */,
@@ -442,6 +453,7 @@
 				07D3C33C2AC9CC690003C7FA /* LoadGameViewRow.swift in Sources */,
 				072BE9192AD5BCAE0004845E /* AcknowledgementView.swift in Sources */,
 				07FEB0122AC09EF100F4108D /* Record.swift in Sources */,
+				079CB60C2AE798E300D80AA0 /* ScoreCardExtensions.swift in Sources */,
 				07D3C3402ACA347F0003C7FA /* MoreView.swift in Sources */,
 				07FEAFE42ABD2EE400F4108D /* App.swift in Sources */,
 				07FEB0312AC0E89400F4108D /* RecordView.swift in Sources */,

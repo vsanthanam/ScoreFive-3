@@ -59,6 +59,7 @@ struct RootView: View {
 
     // MARK: - Private
 
+    @MainActor
     @ViewBuilder
     private var menuCard: some View {
         PlayingCardView {

@@ -24,6 +24,7 @@
 // SOFTWARE.
 
 import Foundation
+import Macros
 import SwiftUI
 
 private struct PlayerNamesListFormatterEnvironmentKey: EnvironmentKey {
@@ -42,7 +43,7 @@ private struct RecordLastUpdatedDateFormatterEnvironmentKey: EnvironmentKey {
 
     typealias Value = DateFormatter
 
-    static let defaultValue: DateFormatter = {
+    static let defaultValue: Value = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
@@ -56,8 +57,19 @@ private struct RecordViewRowConfigurationEnvironmentKey: EnvironmentKey {
 
     typealias Value = RecordViewRow.Configuration
 
-    static let defaultValue: RecordViewRow.Configuration = .init()
+    static let defaultValue: Value = .init()
 
+}
+
+private struct AcknowledgementsEnvironmentKey: EnvironmentKey {
+
+    // MARK: - EnvironmentKey
+
+    typealias Value = [Acknowledgement]
+
+    static let defaultValue: [Acknowledgement] = [
+        .init(url: #Link("https://vsanthanam.github.io/SafariUI/"), name: "SafariUI", id: "safariui")
+    ]
 }
 
 extension EnvironmentValues {
@@ -87,6 +99,10 @@ extension EnvironmentValues {
         set {
             self[RecordViewRowConfigurationEnvironmentKey.self] = newValue
         }
+    }
+
+    var acknowledgements: [Acknowledgement] {
+        self[AcknowledgementsEnvironmentKey.self]
     }
 
 }

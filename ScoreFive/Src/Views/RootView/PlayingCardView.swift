@@ -30,7 +30,7 @@ struct PlayingCardView<Content>: View where Content: View {
     // MARK: - API
 
     @ViewBuilder
-    let content: () -> Content
+    let content: Content
 
     // MARK: - View
 
@@ -48,7 +48,7 @@ struct PlayingCardView<Content>: View where Content: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundStyle(Color.accentColor)
                 Spacer()
-                content()
+                content
                 Spacer()
                 Image(systemName: "suit.spade.fill")
                     .font(.largeTitle)

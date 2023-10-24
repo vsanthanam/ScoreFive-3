@@ -16,6 +16,7 @@
 		07D3C3462ACA4EC00003C7FA /* Macros in Resources */ = {isa = PBXBuildFile; fileRef = 07D3C3452ACA4EC00003C7FA /* Macros */; };
 		07D3C3492ACA50D30003C7FA /* Macros in Frameworks */ = {isa = PBXBuildFile; productRef = 07D3C3482ACA50D30003C7FA /* Macros */; };
 		07D3C34B2ACA6DA20003C7FA /* PlayingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C34A2ACA6DA20003C7FA /* PlayingCardView.swift */; };
+		07E6E7482AE78743004106A6 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E6E7472AE78743004106A6 /* Acknowledgement.swift */; };
 		07F8AFD62AC8E63400771FBC /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 07F8AFD52AC8E63400771FBC /* Utils */; };
 		07F8AFD92AC8E66300771FBC /* FiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 07F8AFD82AC8E66300771FBC /* FiveKit */; };
 		07FEAFE42ABD2EE400F4108D /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE32ABD2EE400F4108D /* App.swift */; };
@@ -61,6 +62,7 @@
 		07D3C33F2ACA347F0003C7FA /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		07D3C3452ACA4EC00003C7FA /* Macros */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Macros; sourceTree = "<group>"; };
 		07D3C34A2ACA6DA20003C7FA /* PlayingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardView.swift; sourceTree = "<group>"; };
+		07E6E7472AE78743004106A6 /* Acknowledgement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acknowledgement.swift; sourceTree = "<group>"; };
 		07FEAFE02ABD2EE400F4108D /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07FEAFE32ABD2EE400F4108D /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		07FEAFE52ABD2EE400F4108D /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				07FEB0112AC09EF100F4108D /* Record.swift */,
+				07E6E7472AE78743004106A6 /* Acknowledgement.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				07FEAFE62ABD2EE400F4108D /* RootView.swift in Sources */,
 				07496AC62AC87BEA005E76B5 /* RecordViewRow.swift in Sources */,
 				07D3C34B2ACA6DA20003C7FA /* PlayingCardView.swift in Sources */,
+				07E6E7482AE78743004106A6 /* Acknowledgement.swift in Sources */,
 				074601322AC11413006A3CBE /* EditRoundView.swift in Sources */,
 				07FEB02D2AC0D67E00F4108D /* Environment.swift in Sources */,
 				07FEB02F2AC0D86000F4108D /* Modifiers.swift in Sources */,
@@ -613,6 +617,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ScoreFive;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -645,6 +651,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScoreFive/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ScoreFive;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -65,6 +65,7 @@ struct NewGameView: View {
         }
     }
 
+    @MainActor
     @ViewBuilder
     private var scoreLimitSection: some View {
         Section {
@@ -87,6 +88,7 @@ struct NewGameView: View {
         }
     }
 
+    @MainActor
     @ViewBuilder
     private var playersSection: some View {
         Section {
@@ -121,6 +123,7 @@ struct NewGameView: View {
         }
     }
 
+    @MainActor
     @ViewBuilder
     private var addPlayerSection: some View {
         Section {
@@ -135,6 +138,7 @@ struct NewGameView: View {
         }
     }
 
+    @MainActor
     @ViewBuilder
     private var startGameSection: some View {
         Section {

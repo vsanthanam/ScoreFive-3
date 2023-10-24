@@ -101,6 +101,15 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         rounds.append(round)
     }
 
+    /// Create a new score card with an additional round
+    /// - Parameter round: The new round
+    /// - Returns: The new score card
+    public func withRound(_ round: Round) -> ScoreCard {
+        var copy = self
+        copy.addRound(round)
+        return copy
+    }
+
     /// Whether or not a round at a provided index can be removed from the game
     /// - Parameter index: The index you wish to remove
     /// - Returns: `true` if the round can be removed, or `false` if it cannot be removed (or if no such index exists)
@@ -118,6 +127,12 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
     public mutating func removeRound(atIndex index: Int) {
         precondition(canRemoveRound(atIndex: index))
         rounds.remove(at: index)
+    }
+
+    public func withoutRound(atIndex index: Int) -> ScoreCard {
+        var copy = self
+        copy.removeRound(atIndex: index)
+        return copy
     }
 
     /// Whether or not a round with the provided ID can be removed from the score card
@@ -140,6 +155,12 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
             fatalError()
         }
         removeRound(atIndex: index)
+    }
+
+    public func withoutRound(id: String) -> ScoreCard {
+        var copy = self
+        copy.removeRound(id: id)
+        return copy
     }
 
     /// Whether or not the round at the provided index can be replaced with the provided round
@@ -172,6 +193,12 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         rounds[index] = newRound
     }
 
+    public func replacingRound(atIndex index: Int, withRound round: Round) -> ScoreCard {
+        var copy = self
+        copy.replaceRound(atIndex: index, withRound: round)
+        return copy
+    }
+
     /// Whether or not the round with the provided ID can be replaced with the provided round
     /// - Parameters:
     ///   - id: The ID of the round you wish to replace
@@ -196,6 +223,19 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
             fatalError()
         }
         replaceRound(atIndex: index, withRound: round)
+    }
+
+    public func replacingRound(id: String, withRound round: Round) -> ScoreCard {
+        var copy = self
+        copy.replaceRound(id: id, withRound: round)
+        return self
+    }
+
+    public func dropLast(_ k: Int = 1) -> ScoreCard {
+        precondition(rounds.count >= k)
+        var copy = self
+        copy.rounds = Array(rounds.dropLast(k))
+        return copy
     }
 
     /// The total score for a given player

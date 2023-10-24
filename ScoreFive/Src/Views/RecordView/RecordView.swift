@@ -84,7 +84,7 @@ struct RecordView: View {
                     editingRound = round
                 } label: {
                     RecordViewRow(
-                        signpost: ((activeRecord.scoreCard.rounds.firstIndex(of: round) ?? 0) + 1).description,
+                        signpost: activeRecord.scoreCard.startingPlayer(atIndex: activeRecord.scoreCard.rounds.firstIndex(of: round) ?? 0).playerSignpost,
                         entries: activeRecord.players
                             .map { player in
                                 RecordViewRow.Entry(
@@ -106,25 +106,24 @@ struct RecordView: View {
             .listRowSeparator(.hidden)
             .recordViewRowConfiguration(hasTopDivider: true)
             if activeRecord.scoreCard.alivePlayers.count > 1 {
-                buildAddScoresButton
+                addScoresButton
             }
         }
     }
 
     @MainActor
     @ViewBuilder
-    private var buildAddScoresButton: some View {
+    private var addScoresButton: some View {
         Button {
             addingRound.toggle()
         } label: {
             VStack(spacing: 0.0) {
                 Divider()
                 HStack(spacing: 0.0) {
-                    Spacer()
+                    Text(activeRecord.scoreCard.startingPlayer(atIndex: activeRecord.scoreCard.rounds.count).playerSignpost)
                         .frame(width: 44.0, height: 44.0)
                     Text("Add Scores")
                         .frame(maxWidth: .infinity)
-                        .fontWeight(.semibold)
                 }
             }
         }
@@ -141,7 +140,7 @@ struct RecordView: View {
                 highlight: .none
             )
         })
-        .recordViewRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
+        .recordViewRowConfiguration(isAccented: true, hasTopDivider: true, hasBottomDivider: true)
     }
 
     @MainActor

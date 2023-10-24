@@ -25,151 +25,230 @@
 
 import SwiftUI
 
-struct RecordViewRow: View {
+struct Entries<T>: View {
 
-    // MARK: - Initializers
-
-    init(signpost: String? = nil, entries: [RecordViewRow.Entry]) {
-        self.signpost = signpost
-        self.entries = entries
+    init(
+        values: [T],
+        toString: @escaping (T) -> String,
+        isWinner: @escaping (T) -> Bool = { _ in false },
+        isLoser: @escaping (T) -> Bool = { _ in false },
+        isEliminated: @escaping (T) -> Bool = { _ in false },
+        isAccented: @escaping (T) -> Bool = { _ in false }
+    ) {
+        self.values = values
+        self.toString = toString
+        self.isWinner = isWinner
+        self.isLoser = isLoser
+        self.isEliminated = isEliminated
+        self.isAccented = isAccented
     }
 
-    init(signpost: String? = nil, entries: [String]) {
-        self.init(signpost: signpost, entries: entries.map { entry in
-            Entry(content: entry)
-        })
+    init(
+        values: [T],
+        toString: @escaping (T) -> String = \.description,
+        isWinner: @escaping (T) -> Bool = { _ in false },
+        isLoser: @escaping (T) -> Bool = { _ in false },
+        isEliminated: @escaping (T) -> Bool = { _ in false },
+        isAccented: @escaping (T) -> Bool = { _ in false }
+    ) where T: CustomStringConvertible {
+        self.values = values
+        self.toString = toString
+        self.isWinner = isWinner
+        self.isLoser = isLoser
+        self.isEliminated = isEliminated
+        self.isAccented = isAccented
     }
 
-    // MARK: - API
-
-    let signpost: String?
-
-    let entries: [Entry]
-
-    struct Configuration {
-
-        // MARK: - Initializers
-
-        init(
-            isAccented: Bool = false,
-            hasTopDivider: Bool = false,
-            hasBottomDivider: Bool = false
-        ) {
-            self.isAccented = isAccented
-            self.hasTopDivider = hasTopDivider
-            self.hasBottomDivider = hasBottomDivider
+    init<Value>(
+        values: [Value?],
+        toString: @escaping (Value) -> String,
+        isWinner: @escaping (Value) -> Bool = { _ in false },
+        isLoser: @escaping (Value) -> Bool = { _ in false },
+        isEliminated: @escaping (Value) -> Bool = { _ in false },
+        isAccented: @escaping (Value) -> Bool = { _ in false }
+    ) where T == Value? {
+        self.values = values
+        self.toString = { value in
+            value.map(toString) ?? ""
         }
-
-        // MARK: - API
-
-        let isAccented: Bool
-        let hasTopDivider: Bool
-        let hasBottomDivider: Bool
-    }
-
-    struct Entry: Hashable {
-
-        // MARK: - Initializers
-
-        init(
-            content: String?,
-            highlight: RecordViewRow.Entry.Highlight = .none,
-            eliminated: Bool = false
-        ) {
-            self.content = content
-            self.highlight = highlight
-            self.eliminated = eliminated
+        self.isWinner = { value in
+            value.map(isWinner) ?? false
         }
-
-        // MARK: - API
-
-        let content: String?
-
-        let highlight: Highlight
-
-        let eliminated: Bool
-
-        enum Highlight: Hashable {
-
-            // MARK: - Cases
-
-            case none
-
-            case winning
-
-            case losing
-
-            // MARK: - API
-
-            var color: Color {
-                switch self {
-                case .none:
-                    .label
-                case .winning:
-                    .green
-                case .losing:
-                    .red
-                }
-            }
+        self.isLoser = { value in
+            value.map(isLoser) ?? false
+        }
+        self.isEliminated = { value in
+            value.map(isEliminated) ?? false
+        }
+        self.isAccented = { value in
+            value.map(isAccented) ?? false
         }
     }
 
-    // MARK: - View
+    init<Value>(
+        values: [Value?],
+        toString: @escaping (Value) -> String = \.description,
+        isWinner: @escaping (Value) -> Bool = { _ in false },
+        isLoser: @escaping (Value) -> Bool = { _ in false },
+        isEliminated: @escaping (Value) -> Bool = { _ in false },
+        isAccented: @escaping (Value) -> Bool = { _ in false }
+    ) where T == Value?, Value: CustomStringConvertible {
+        self.values = values
+        self.toString = { value in
+            value.map(toString) ?? ""
+        }
+        self.isWinner = { value in
+            value.map(isWinner) ?? false
+        }
+        self.isLoser = { value in
+            value.map(isLoser) ?? false
+        }
+        self.isEliminated = { value in
+            value.map(isEliminated) ?? false
+        }
+        self.isAccented = { value in
+            value.map(isAccented) ?? false
+        }
+    }
 
     @ViewBuilder
     var body: some View {
-        VStack(spacing: .zero) {
+        HStack(spacing: 0.0) {
+            ForEach(values.indices, id: \.self) { index in
+                let value = values[index]
+                Text(toString(value))
+                    .foregroundStyle(color(for: value))
+                    .frame(maxWidth: .infinity)
+                    .fontWeight(isAccented(value) ? .semibold : .regular)
+                    .opacity(isEliminated(value) ? 0.3 : 1.0)
+            }
+            .fontDesign(.monospaced)
+        }
+    }
+
+    private let values: [T]
+
+    private let toString: (T) -> String
+
+    private let isWinner: (T) -> Bool
+
+    private let isLoser: (T) -> Bool
+
+    private let isEliminated: (T) -> Bool
+
+    private let isAccented: (T) -> Bool
+
+    private func color(for value: T) -> Color {
+        if isWinner(value) {
+            return .green
+        } else if isLoser(value) {
+            return .red
+        } else {
+            return .label
+        }
+    }
+
+}
+
+struct RecordViewRow<Signpost, Content>: View where Signpost: View, Content: View {
+
+    init(@ViewBuilder content: () -> Content) where Signpost == Spacer {
+        signpost = Spacer()
+        self.content = content()
+    }
+
+    init(
+        @ViewBuilder signpost: () -> Signpost,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.signpost = signpost()
+        self.content = content()
+    }
+
+    @ViewBuilder
+    let signpost: Signpost
+
+    @ViewBuilder
+    let content: Content
+
+    @ScaledMetric
+    var rowHeight = 44.0
+
+    @Environment(\.recordViewRowConfiguration)
+    var configuration: RecordViewRowConfiguration
+
+    @ViewBuilder
+    var body: some View {
+        VStack(spacing: 0.0) {
             if configuration.hasTopDivider {
                 Divider()
             }
             HStack(spacing: 0.0) {
-                Text(signpost ?? "")
-                    .foregroundStyle(Color.label)
+                signpost
                     .frame(width: rowHeight, height: rowHeight)
-                HStack(spacing: 0.0) {
-                    ForEach(entries.indices, id: \.self) { index in
-                        let entry = entries[index]
-                        Text(entry.content ?? "")
-                            .foregroundStyle(entry.highlight.color)
-                            .frame(maxWidth: .infinity)
-                            .fontWeight(configuration.isAccented ? .bold : .regular)
-                            .opacity(entry.eliminated ? 0.3 : 1.0)
-
-                    }
-                }
-                .frame(maxWidth: .infinity)
+                Divider()
+                content
+                    .frame(maxWidth: .infinity)
             }
             if configuration.hasBottomDivider {
                 Divider()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: rowHeight)
-        .fontDesign(.monospaced)
+    }
+}
+
+struct RecordViewRowConfiguration: Equatable, Hashable, Sendable {
+    let hasTopDivider: Bool
+    let hasBottomDivider: Bool
+}
+
+struct RecordViewRowConfigurationEnvironmentKey: EnvironmentKey {
+
+    typealias Value = RecordViewRowConfiguration
+
+    static let defaultValue: Value = .init(hasTopDivider: false, hasBottomDivider: false)
+
+}
+
+extension EnvironmentValues {
+
+    var recordViewRowConfiguration: RecordViewRowConfiguration {
+        get {
+            self[RecordViewRowConfigurationEnvironmentKey.self]
+        }
+        set {
+            self[RecordViewRowConfigurationEnvironmentKey.self] = newValue
+        }
     }
 
-    // MARK: - Private
-
-    @ScaledMetric(relativeTo: .body)
-    private var rowHeight = 44.0
-
-    @Environment(\.recordViewRowConfiguration)
-    private var configuration: Configuration
 }
 
-#Preview(traits: .sizeThatFitsLayout) {
-    RecordViewRow(signpost: "X", entries: [
-        .init(content: "12", highlight: .none, eliminated: false),
-        .init(content: "24", highlight: .losing, eliminated: false),
-        .init(content: "0", highlight: .winning, eliminated: false)
-    ])
+struct RecordViewRowConfigurationViewModifier: ViewModifier {
+
+    let configuration: RecordViewRowConfiguration
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        content
+            .environment(\.recordViewRowConfiguration, configuration)
+    }
 }
 
-#Preview(traits: .sizeThatFitsLayout) {
-    RecordViewRow(signpost: "X", entries: [
-        .init(content: "252", highlight: .none, eliminated: true),
-        .init(content: "124", highlight: .losing, eliminated: false),
-        .init(content: "80", highlight: .winning, eliminated: false),
-        .init(content: "101", highlight: .none, eliminated: false)
-    ])
-    .recordViewRowConfiguration(isAccented: true, hasTopDivider: true, hasBottomDivider: true)
+extension View {
+
+    func recordViewRowConfiguration(
+        hasTopDivider: Bool = false,
+        hasBottomDivider: Bool = false
+    ) -> some View {
+        let configuration = RecordViewRowConfiguration(hasTopDivider: hasTopDivider, hasBottomDivider: hasBottomDivider)
+        return recordViewRowConfiguration(configuration)
+    }
+
+    func recordViewRowConfiguration(
+        _ configuration: RecordViewRowConfiguration
+    ) -> some View {
+        let modifier = RecordViewRowConfigurationViewModifier(configuration: configuration)
+        return ModifiedContent(content: self, modifier: modifier)
+    }
 }

@@ -75,6 +75,7 @@ struct RecordView: View {
 
     // MARK: - Private
 
+    @MainActor
     @ViewBuilder
     private var roundsList: some View {
         List {
@@ -110,6 +111,7 @@ struct RecordView: View {
         }
     }
 
+    @MainActor
     @ViewBuilder
     private var buildAddScoresButton: some View {
         Button {
@@ -130,6 +132,7 @@ struct RecordView: View {
         .listRowSeparator(.hidden)
     }
 
+    @MainActor
     @ViewBuilder
     private var playerNamesHeader: some View {
         RecordViewRow(entries: activeRecord.players.map { player in
@@ -141,6 +144,7 @@ struct RecordView: View {
         .recordViewRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
     }
 
+    @MainActor
     @ViewBuilder
     private var totalScoresFooter: some View {
         RecordViewRow(entries: activeRecord.scoreCard.players.map { player in

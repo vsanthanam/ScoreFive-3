@@ -1,5 +1,5 @@
 // ScoreFive
-// AcknowledgementView.swift
+// Acknowledgement.swift
 //
 // MIT License
 //
@@ -23,40 +23,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Macros
-import SafariView
-import SwiftUI
-import Utils
+import Foundation
 
-struct AcknowledgementView: View {
-    // MARK: - View
-
-    @ViewBuilder
-    var body: some View {
-        List(acknowledgements) { acknowledgement in
-            Button {
-                safariURL = acknowledgement.url
-            } label: {
-                VStack(alignment: .leading) {
-                    Text(acknowledgement.name)
-                        .foregroundStyle(Color.label)
-                    Text(acknowledgement.url.absoluteString)
-                        .font(.caption)
-                        .foregroundStyle(Color.secondaryLabel)
-                }
-            }
-        }
-        .safari(url: $safariURL)
-        .navigationTitle("Acknowledgements")
-    }
-
-    @State
-    private var safariURL: URL?
-
-    @Environment(\.acknowledgements)
-    private var acknowledgements: [Acknowledgement]
-}
-
-#Preview {
-    AcknowledgementView()
+struct Acknowledgement: Equatable, Hashable, Sendable, Identifiable {
+    let url: URL
+    let name: String
+    let id: String
 }

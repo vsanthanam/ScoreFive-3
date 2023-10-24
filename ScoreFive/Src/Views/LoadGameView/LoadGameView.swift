@@ -76,6 +76,7 @@ struct LoadGameView: View {
 
     // MARK: - Private
 
+    @MainActor
     @ViewBuilder
     private var recordToggleSection: some View {
         Section {
@@ -83,6 +84,7 @@ struct LoadGameView: View {
         }
     }
 
+    @MainActor
     @ViewBuilder
     private var recordListSection: some View {
         Section {
@@ -100,6 +102,7 @@ struct LoadGameView: View {
         }
     }
 
+    @MainActor
     @ViewBuilder
     private var deleteAllSection: some View {
         Section {

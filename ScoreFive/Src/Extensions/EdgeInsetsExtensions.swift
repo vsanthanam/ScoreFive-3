@@ -1,5 +1,5 @@
 // ScoreFive
-// Modifiers.swift
+// EdgeInsetsExtensions.swift
 //
 // MIT License
 //
@@ -23,51 +23,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
 import SwiftUI
 
-private struct PlayerNamesListFormatterViewModifier: ViewModifier {
+extension EdgeInsets {
 
-    // MARK: - API
-
-    let formatter: ListFormatter
-
-    // MARK: - ViewModifier
-
-    @ViewBuilder
-    func body(content: Content) -> some View {
-        content
-            .environment(\.playerNamesListFormatter, formatter)
-    }
-
-}
-
-private struct RecordLastUpdatedDateFormatterViewModifier: ViewModifier {
-
-    // MARK: - API
-
-    let formatter: DateFormatter
-
-    // MARK: - ViewModifier
-
-    @ViewBuilder
-    func body(content: Content) -> some View {
-        content
-            .environment(\.recordLastUpdatedDateFormatter, formatter)
-    }
-
-}
-
-extension View {
-
-    func playerNamesListFormatter(_ formatter: ListFormatter) -> some View {
-        let modifier = PlayerNamesListFormatterViewModifier(formatter: formatter)
-        return ModifiedContent(content: self, modifier: modifier)
-    }
-
-    func recordLastUpdatedDateFormatter(_ formatter: DateFormatter) -> some View {
-        let modifier = RecordLastUpdatedDateFormatterViewModifier(formatter: formatter)
-        return ModifiedContent(content: self, modifier: modifier)
-    }
+    static let zero: EdgeInsets = .init()
 
 }

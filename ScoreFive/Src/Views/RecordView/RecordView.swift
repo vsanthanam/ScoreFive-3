@@ -38,25 +38,16 @@ struct RecordView: View {
 
     @ViewBuilder
     var body: some View {
-        ZStack {
-            VStack(spacing: 0.0) {
-                playerNamesHeader
-                Spacer()
-                    .frame(maxWidth: .infinity, minHeight: 1.0, maxHeight: 1.0)
-                roundsList
-                totalScoresFooter
-            }
-            .navigationTitle("Score Card")
-            .navigationBarTitleDisplayMode(.inline)
-            .listStyle(.plain)
-            HStack(spacing: 0.0) {
-                Spacer()
-                    .frame(maxWidth: 44.0, maxHeight: .infinity)
-                Divider()
-                Spacer()
-            }
-            .frame(maxWidth: .infinity)
+        VStack(spacing: 0.0) {
+            playerNamesHeader
+            Spacer()
+                .frame(maxWidth: .infinity, minHeight: 1.0, maxHeight: 1.0)
+            roundsList
+            totalScoresFooter
         }
+        .navigationTitle("Score Card")
+        .navigationBarTitleDisplayMode(.inline)
+        .listStyle(.plain)
         .sheet(isPresented: $addingRound) {
             EditRoundView(
                 scoreCard: $activeRecord.scoreCard,
@@ -83,17 +74,27 @@ struct RecordView: View {
                 Button {
                     editingRound = round
                 } label: {
-                    RecordViewRow(
-                        signpost: activeRecord.scoreCard.startingPlayer(atIndex: activeRecord.scoreCard.rounds.firstIndex(of: round) ?? 0).playerSignpost,
-                        entries: activeRecord.players
+                    RecordViewRow {
+                        Text(activeRecord.scoreCard.startingPlayer(atIndex: activeRecord.scoreCard.rounds.firstIndex(of: round) ?? 0).playerSignpost)
+                    } content: {
+                        let scores = activeRecord.scoreCard.players
                             .map { player in
-                                RecordViewRow.Entry(
-                                    content: round[player]?.description,
-                                    highlight: round.highlight(for: player),
-                                    eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
-                                )
+                                round[player]
                             }
-                    )
+                        let aliveScores = activeRecord.scoreCard.alivePlayers
+                            .compactMap { player in
+                                round[player]
+                            }
+                        Entries(
+                            values: scores,
+                            isWinner: { value in
+                                value == aliveScores.min()
+                            },
+                            isLoser: { value in
+                                value == aliveScores.max()
+                            }
+                        )
+                    }
                 }
                 .deleteDisabled(!activeRecord.scoreCard.canRemoveRound(id: round.id))
             }
@@ -104,7 +105,7 @@ struct RecordView: View {
             }
             .listRowInsets(.init())
             .listRowSeparator(.hidden)
-            .recordViewRowConfiguration(hasTopDivider: true)
+            .recordViewRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
             if activeRecord.scoreCard.alivePlayers.count > 1 {
                 addScoresButton
             }
@@ -122,6 +123,7 @@ struct RecordView: View {
                 HStack(spacing: 0.0) {
                     Text(activeRecord.scoreCard.startingPlayer(atIndex: activeRecord.scoreCard.rounds.count).playerSignpost)
                         .frame(width: 44.0, height: 44.0)
+                        .opacity(0.3)
                     Text("Add Scores")
                         .frame(maxWidth: .infinity)
                 }
@@ -134,26 +136,42 @@ struct RecordView: View {
     @MainActor
     @ViewBuilder
     private var playerNamesHeader: some View {
-        RecordViewRow(entries: activeRecord.players.map { player in
-            RecordViewRow.Entry(
-                content: player.playerSignpost,
-                highlight: .none
+        RecordViewRow {
+            Entries(
+                values: activeRecord.scoreCard.players.map(\.playerSignpost),
+                isEliminated: { player in
+                    !activeRecord.scoreCard.alivePlayers.contains(player)
+                },
+                isAccented: { _ in
+                    true
+                }
             )
-        })
-        .recordViewRowConfiguration(isAccented: true, hasTopDivider: true, hasBottomDivider: true)
+        }
+        .recordViewRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
     }
 
     @MainActor
     @ViewBuilder
     private var totalScoresFooter: some View {
-        RecordViewRow(entries: activeRecord.scoreCard.players.map { player in
-            RecordViewRow.Entry(
-                content: activeRecord.scoreCard[player].description,
-                highlight: activeRecord.scoreCard.highlight(for: player),
-                eliminated: !activeRecord.scoreCard.alivePlayers.contains(player)
+        RecordViewRow {
+            let scores = activeRecord.players
+                .map { player in
+                    activeRecord.scoreCard.totalScore(forPlayer: player)
+                }
+            Entries(
+                values: scores,
+                isWinner: { value in
+                    value == activeRecord.scoreCard.highestScore
+                },
+                isLoser: { value in
+                    value == activeRecord.scoreCard.lowestScore
+                },
+                isAccented: { _ in
+                    true
+                }
             )
-        })
-        .recordViewRowConfiguration(isAccented: true, hasTopDivider: true)
+        }
+        .recordViewRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
     }
 
     @State
@@ -190,23 +208,11 @@ private extension ScoreCard.Round {
             }
             .max() ?? 50
     }
-
-    func highlight(for player: String) -> RecordViewRow.Entry.Highlight {
-        switch self[player] {
-        case lowestScore:
-            .winning
-        case highestScore:
-            .losing
-        default:
-            .none
-        }
-
-    }
 }
 
 private extension ScoreCard {
 
-    private var lowestScore: Int {
+    var lowestScore: Int {
         alivePlayers
             .compactMap { player in
                 self[player]
@@ -214,26 +220,12 @@ private extension ScoreCard {
             .min() ?? 0
     }
 
-    private var highestScore: Int {
+    var highestScore: Int {
         alivePlayers
             .compactMap { player in
                 self[player]
             }
             .max() ?? 0
-    }
-
-    func highlight(for player: String) -> RecordViewRow.Entry.Highlight {
-        guard !rounds.isEmpty, alivePlayers.contains(player) else {
-            return .none
-        }
-        switch self[player] {
-        case lowestScore:
-            return .winning
-        case highestScore:
-            return .losing
-        default:
-            return .none
-        }
     }
 
 }

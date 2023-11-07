@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		072BE9192AD5BCAE0004845E /* AcknowledgementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072BE9182AD5BCAE0004845E /* AcknowledgementView.swift */; };
 		074601322AC11413006A3CBE /* EditRoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074601312AC11413006A3CBE /* EditRoundView.swift */; };
-		07496AC62AC87BEA005E76B5 /* RecordViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */; };
 		079CB60C2AE798E300D80AA0 /* ScoreCardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CB60B2AE798E300D80AA0 /* ScoreCardExtensions.swift */; };
+		079CB60E2AE7A08600D80AA0 /* RecordViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CB60D2AE7A08600D80AA0 /* RecordViewRow.swift */; };
+		079CB6102AE7B1C700D80AA0 /* EdgeInsetsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CB60F2AE7B1C700D80AA0 /* EdgeInsetsExtensions.swift */; };
 		07D3C33C2AC9CC690003C7FA /* LoadGameViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */; };
 		07D3C3402ACA347F0003C7FA /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C33F2ACA347F0003C7FA /* MoreView.swift */; };
 		07D3C3442ACA4E2C0003C7FA /* SafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 07D3C3432ACA4E2C0003C7FA /* SafariView */; };
@@ -58,8 +59,9 @@
 /* Begin PBXFileReference section */
 		072BE9182AD5BCAE0004845E /* AcknowledgementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementView.swift; sourceTree = "<group>"; };
 		074601312AC11413006A3CBE /* EditRoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoundView.swift; sourceTree = "<group>"; };
-		07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewRow.swift; sourceTree = "<group>"; };
 		079CB60B2AE798E300D80AA0 /* ScoreCardExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCardExtensions.swift; sourceTree = "<group>"; };
+		079CB60D2AE7A08600D80AA0 /* RecordViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewRow.swift; sourceTree = "<group>"; };
+		079CB60F2AE7B1C700D80AA0 /* EdgeInsetsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetsExtensions.swift; sourceTree = "<group>"; };
 		07D3C33B2AC9CC690003C7FA /* LoadGameViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGameViewRow.swift; sourceTree = "<group>"; };
 		07D3C33F2ACA347F0003C7FA /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		07D3C3452ACA4EC00003C7FA /* Macros */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Macros; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				079CB60B2AE798E300D80AA0 /* ScoreCardExtensions.swift */,
+				079CB60F2AE7B1C700D80AA0 /* EdgeInsetsExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -146,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				07FEB0302AC0E89400F4108D /* RecordView.swift */,
-				07496AC52AC87BEA005E76B5 /* RecordViewRow.swift */,
+				079CB60D2AE7A08600D80AA0 /* RecordViewRow.swift */,
 			);
 			path = RecordView;
 			sourceTree = "<group>";
@@ -444,7 +447,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				07FEAFE62ABD2EE400F4108D /* RootView.swift in Sources */,
-				07496AC62AC87BEA005E76B5 /* RecordViewRow.swift in Sources */,
 				07D3C34B2ACA6DA20003C7FA /* PlayingCardView.swift in Sources */,
 				07E6E7482AE78743004106A6 /* Acknowledgement.swift in Sources */,
 				074601322AC11413006A3CBE /* EditRoundView.swift in Sources */,
@@ -456,6 +458,8 @@
 				079CB60C2AE798E300D80AA0 /* ScoreCardExtensions.swift in Sources */,
 				07D3C3402ACA347F0003C7FA /* MoreView.swift in Sources */,
 				07FEAFE42ABD2EE400F4108D /* App.swift in Sources */,
+				079CB60E2AE7A08600D80AA0 /* RecordViewRow.swift in Sources */,
+				079CB6102AE7B1C700D80AA0 /* EdgeInsetsExtensions.swift in Sources */,
 				07FEB0312AC0E89400F4108D /* RecordView.swift in Sources */,
 				07FEB0272AC0CE7600F4108D /* LoadGameView.swift in Sources */,
 				07FEB0172AC0A43F00F4108D /* NewGameView.swift in Sources */,

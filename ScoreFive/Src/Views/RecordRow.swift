@@ -1,5 +1,5 @@
 // ScoreFive
-// PlayingCardView.swift
+// RecordRow.swift
 //
 // MIT License
 //
@@ -25,46 +25,55 @@
 
 import SwiftUI
 
-struct PlayingCardView<Content>: View where Content: View {
+struct RecordRow<Signpost, Content>: View where Signpost: View, Content: View {
 
-    // MARK: - API
+    // MARK: - Initializers
 
-    @ViewBuilder
-    let content: Content
+    init(
+        @ViewBuilder content: () -> Content
+    ) where Signpost == Spacer {
+        signpost = Spacer()
+        self.content = content()
+    }
+
+    init(
+        @ViewBuilder signpost: () -> Signpost,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.signpost = signpost()
+        self.content = content()
+    }
 
     // MARK: - View
 
     @ViewBuilder
     var body: some View {
-        ZStack {
-            Rectangle()
-                .cornerRadius(16)
-                .foregroundColor(Color.secondarySystemGroupedBackground)
-                .shadow(radius: 16)
-            VStack {
-                Image(systemName: "suit.spade.fill")
-                    .font(.largeTitle)
-                    .padding(16)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundStyle(Color.accentColor)
-                Spacer()
+        VStack(spacing: 0.0) {
+            if configuration.hasTopDivider {
+                Divider()
+            }
+            HStack(spacing: 0.0) {
+                signpost
+                    .frame(width: rowHeight, height: rowHeight)
+                Divider()
                 content
-                Spacer()
-                Image(systemName: "suit.spade.fill")
-                    .font(.largeTitle)
-                    .padding(16)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .rotationEffect(.degrees(180))
-                    .foregroundStyle(Color.accentColor)
+                    .frame(maxWidth: .infinity)
+            }
+            if configuration.hasBottomDivider {
+                Divider()
             }
         }
-        .aspectRatio(CGSize(width: 25, height: 35), contentMode: .fit)
-        .frame(maxHeight: 475.0)
+        .frame(maxWidth: .infinity, maxHeight: rowHeight)
     }
-}
 
-#Preview {
-    PlayingCardView {
-        Text("Card Content")
-    }
+    // MARK: - Private
+
+    private let signpost: Signpost
+    private let content: Content
+
+    @ScaledMetric
+    private var rowHeight = 44.0
+
+    @Environment(\.recordRowConfiguration)
+    private var configuration: RecordRowConfiguration
 }

@@ -1,5 +1,5 @@
 // ScoreFive
-// App.swift
+// PlayerNamesListFormatterModifier.swift
 //
 // MIT License
 //
@@ -23,33 +23,57 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftData
+import Foundation
 import SwiftUI
 
-@main
-struct ScoreFive: App {
+extension View {
 
-    // MARK: - App
-
-    var body: some Scene {
-        WindowGroup {
-            RootScreen()
-        }
-        .modelContainer(sharedModelContainer)
+    func playerNamesListFormatter(_ formatter: ListFormatter) -> some View {
+        let modifier = PlayerNamesListFormatterViewModifier(formatter: formatter)
+        return ModifiedContent(content: self, modifier: modifier)
     }
 
-    // MARK: - Private
+}
 
-    private var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Record.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+extension EnvironmentValues {
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+    var playerNamesListFormatter: ListFormatter {
+        get {
+            self[PlayerNamesListFormatterEnvironmentKey.self]
         }
-    }()
+        set {
+            self[PlayerNamesListFormatterEnvironmentKey.self] = newValue
+        }
+    }
+
+}
+
+private struct PlayerNamesListFormatterViewModifier: ViewModifier {
+
+    // MARK: - Initializers
+
+    init(formatter: ListFormatter) {
+        self.formatter = formatter
+    }
+
+    // MARK: - ViewModifier
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        content
+            .environment(\.playerNamesListFormatter, formatter)
+    }
+
+    private let formatter: ListFormatter
+
+}
+
+private struct PlayerNamesListFormatterEnvironmentKey: EnvironmentKey {
+
+    // MARK: - EnvironmentKey
+
+    typealias Value = ListFormatter
+
+    static let defaultValue: Value = .init()
+
 }

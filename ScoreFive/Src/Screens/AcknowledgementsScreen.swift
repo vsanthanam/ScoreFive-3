@@ -1,5 +1,5 @@
 // ScoreFive
-// App.swift
+// AcknowledgementsScreen.swift
 //
 // MIT License
 //
@@ -23,33 +23,45 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftData
+import Macros
+import SafariView
 import SwiftUI
+import Utils
 
-@main
-struct ScoreFive: App {
+struct AcknowledgementsScreen: View {
 
-    // MARK: - App
+    // MARK: - Initializers
 
-    var body: some Scene {
-        WindowGroup {
-            RootScreen()
+    init() {}
+
+    // MARK: - View
+
+    @ViewBuilder
+    var body: some View {
+        List(acknowledgements) { acknowledgement in
+            Button {
+                safariURL = acknowledgement.url
+            } label: {
+                VStack(alignment: .leading) {
+                    Text(acknowledgement.name)
+                        .foregroundStyle(Color.label)
+                    Text(acknowledgement.url.absoluteString)
+                        .font(.caption)
+                        .foregroundStyle(Color.secondaryLabel)
+                }
+            }
         }
-        .modelContainer(sharedModelContainer)
+        .safari(url: $safariURL)
+        .navigationTitle("Acknowledgements")
     }
 
-    // MARK: - Private
+    @State
+    private var safariURL: URL?
 
-    private var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Record.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+    @Environment(\.acknowledgements)
+    private var acknowledgements: [Acknowledgement]
+}
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+#Preview {
+    AcknowledgementsScreen()
 }

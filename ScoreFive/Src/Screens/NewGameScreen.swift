@@ -1,5 +1,5 @@
 // ScoreFive
-// NewGameView.swift
+// NewGameScreen.swift
 //
 // MIT License
 //
@@ -27,11 +27,13 @@ import FiveKit
 import SwiftData
 import SwiftUI
 
-struct NewGameView: View {
+struct NewGameScreen: View {
 
-    // MARK: - API
+    // MARK: - Initializers
 
-    let didCreateRecord: (Record) -> Void
+    init(didCreateRecord: @escaping (Record) -> Void) {
+        self.didCreateRecord = didCreateRecord
+    }
 
     // MARK: - View
 
@@ -64,6 +66,43 @@ struct NewGameView: View {
             focus = .scoreLimit
         }
     }
+
+    // MARK: - Private
+
+    private enum Focus: Equatable, Hashable, Sendable {
+        case scoreLimit
+        case player(_ index: Int)
+    }
+
+    private struct Player: Equatable, Hashable, Identifiable {
+        init(name: String = "", id: String? = nil) {
+            self.name = name
+            self.id = id ?? UUID().uuidString
+        }
+
+        var name: String
+        let id: String
+    }
+
+    private let didCreateRecord: (Record) -> Void
+
+    @State
+    private var scoreLimit: Int? = 250
+
+    @State
+    private var players: [Player] = [.init(), .init()]
+
+    @State
+    private var activeRecord: Record?
+
+    @FocusState
+    private var focus: Focus?
+
+    @Environment(\.dismiss)
+    private var dismiss: DismissAction
+
+    @Environment(\.modelContext)
+    private var modelContext: ModelContext
 
     @MainActor
     @ViewBuilder
@@ -149,24 +188,6 @@ struct NewGameView: View {
         }
     }
 
-    @State
-    private var scoreLimit: Int? = 250
-
-    @State
-    private var players: [Player] = [.init(), .init()]
-
-    @State
-    private var activeRecord: Record?
-
-    @FocusState
-    private var focus: Focus?
-
-    @Environment(\.dismiss)
-    private var dismiss: DismissAction
-
-    @Environment(\.modelContext)
-    private var modelContext: ModelContext
-
     private var validScoreLimit: Bool {
         guard let scoreLimit else { return false }
         return scoreLimit >= 50
@@ -197,25 +218,10 @@ struct NewGameView: View {
         dismiss()
     }
 
-    private enum Focus: Equatable, Hashable, Sendable {
-        case scoreLimit
-        case player(_ index: Int)
-    }
-
-    private struct Player: Equatable, Hashable, Identifiable {
-        init(name: String = "", id: String? = nil) {
-            self.name = name
-            self.id = id ?? UUID().uuidString
-        }
-
-        var name: String
-        let id: String
-    }
-
 }
 
 #Preview {
-    NewGameView() { _ in
+    NewGameScreen() { _ in
 
     }
     .modelContainer(for: Record.self, inMemory: true)

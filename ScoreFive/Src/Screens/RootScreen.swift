@@ -1,5 +1,5 @@
 // ScoreFive
-// RootView.swift
+// RootScreen.swift
 //
 // MIT License
 //
@@ -26,7 +26,11 @@
 import SwiftData
 import SwiftUI
 
-struct RootView: View {
+struct RootScreen: View {
+
+    // MARK: - Initializers
+
+    init() {}
 
     // MARK: - View
 
@@ -39,17 +43,17 @@ struct RootView: View {
             .frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
             .background(Color.secondarySystemBackground)
             .sheet(isPresented: $showNewGame) {
-                NewGameView { record in
+                NewGameScreen { record in
                     pages.append(record)
                 }
             }
             .sheet(isPresented: $showLoadGame) {
-                LoadGameView() { record in
+                LoadGameScreen { record in
                     pages.append(record)
                 }
             }
             .sheet(isPresented: $showMore) {
-                MoreView()
+                MoreScreen()
             }
             .navigationDestination(for: Record.self) { record in
                 RecordView(activeRecord: record)
@@ -59,10 +63,34 @@ struct RootView: View {
 
     // MARK: - Private
 
+    @State
+    private var pages = [Record]()
+
+    @State
+    private var showNewGame = false
+
+    @State
+    private var showLoadGame = false
+
+    @State
+    private var showMore = false
+
+    @Query(sort: \Record.lastUpdated)
+    private var records: [Record]
+
+    @Environment(\.modelContext)
+    private var modelContext: ModelContext
+
+    @ScaledMetric(relativeTo: .body)
+    private var cardCornerRadius = 16.0
+
+    @ScaledMetric(relativeTo: .body)
+    private var buttonWidth = 100.0
+
     @MainActor
     @ViewBuilder
     private var menuCard: some View {
-        PlayingCardView {
+        PlayingCard {
             Text("Score Five")
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
@@ -98,32 +126,9 @@ struct RootView: View {
         }
     }
 
-    @State
-    private var pages = [Record]()
-
-    @State
-    private var showNewGame = false
-
-    @State
-    private var showLoadGame = false
-
-    @State
-    private var showMore = false
-
-    @Query(sort: \Record.lastUpdated)
-    private var records: [Record]
-
-    @Environment(\.modelContext)
-    private var modelContext: ModelContext
-
-    @ScaledMetric(relativeTo: .body)
-    private var cardCornerRadius = 16.0
-
-    @ScaledMetric(relativeTo: .body)
-    private var buttonWidth = 100.0
 }
 
 #Preview {
-    RootView()
+    RootScreen()
         .modelContainer(for: Record.self, inMemory: true)
 }

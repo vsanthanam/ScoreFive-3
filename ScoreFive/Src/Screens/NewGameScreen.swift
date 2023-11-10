@@ -65,6 +65,7 @@ struct NewGameScreen: View {
         .onAppear {
             focus = .scoreLimit
         }
+        .interactiveDismissDisabled(changesEntered)
     }
 
     // MARK: - Private
@@ -196,6 +197,10 @@ struct NewGameScreen: View {
     private var validPlayerNames: Bool {
         let names = players.compactMap(\.name.nilIfEmpty?.localizedLowercase)
         return names.count == Set(names).count
+    }
+
+    private var changesEntered: Bool {
+        scoreLimit != 250 || players.map(\.name) != ["", ""]
     }
 
     private func addPlayer() {

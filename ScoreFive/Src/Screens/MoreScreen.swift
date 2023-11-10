@@ -1,5 +1,5 @@
 // ScoreFive
-// MoreView.swift
+// MoreScreen.swift
 //
 // MIT License
 //
@@ -29,7 +29,11 @@ import StoreKit
 import SwiftUI
 import Utils
 
-struct MoreView: View {
+struct MoreScreen: View {
+
+    // MARK: - Initializers
+
+    init() {}
 
     // MARK: - View
 
@@ -84,7 +88,7 @@ struct MoreView: View {
                         }
                     }
                     NavigationLink {
-                        AcknowledgementView()
+                        AcknowledgementsScreen()
                     } label: {
                         Label("Acknowledgements", systemImage: "person.3")
                     }
@@ -129,18 +133,5 @@ struct MoreView: View {
 }
 
 #Preview {
-    MoreView()
-}
-
-struct CellStyle: LabelStyle {
-
-    @ViewBuilder
-    func makeBody(configuration: Configuration) -> some View {
-        Label {
-            configuration.title
-                .foregroundStyle(Color.label)
-        } icon: {
-            configuration.icon
-        }
-    }
+    MoreScreen()
 }

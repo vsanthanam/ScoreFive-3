@@ -52,14 +52,14 @@ final class Record {
         }
     }
 
-    private(set) var lastUpdated: Date
+    private(set) var lastUpdated = Date.now
 
-    private(set) var players: [String]
+    private(set) var players = [String]()
 
-    private(set) var isComplete: Bool
+    private(set) var isComplete = false
 
     // NOTE: - This is a workaround because SwiftData's codable support appears to be broken
-    private var scoreCardData: Data
+    private var scoreCardData = Data()
 
 //    var game: ScoreCard {
 //        didSet {

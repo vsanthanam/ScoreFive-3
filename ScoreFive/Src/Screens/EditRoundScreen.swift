@@ -1,5 +1,5 @@
 // ScoreFive
-// EditRoundView.swift
+// EditRoundScreen.swift
 //
 // MIT License
 //
@@ -28,14 +28,15 @@ import SwiftUI
 
 struct EditRoundView: View {
 
-    // MARK: - API
-
-    @Binding
-    var scoreCard: ScoreCard
-
-    let editingRound: ScoreCard.Round?
-
-    let players: [String]
+    init(
+        scoreCard: Binding<ScoreCard>,
+        editingRound: ScoreCard.Round?,
+        players: [String]
+    ) {
+        _scoreCard = scoreCard
+        self.editingRound = editingRound
+        self.players = players
+    }
 
     // MARK: - View
 
@@ -95,6 +96,12 @@ struct EditRoundView: View {
     }
 
     // MARK: - Private
+
+    private let editingRound: ScoreCard.Round?
+    private let players: [String]
+
+    @Binding
+    private var scoreCard: ScoreCard
 
     @FocusState
     private var focus: String?

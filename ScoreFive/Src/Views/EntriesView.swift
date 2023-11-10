@@ -1,5 +1,5 @@
 // ScoreFive
-// RecordViewRow.swift
+// EntriesView.swift
 //
 // MIT License
 //
@@ -25,7 +25,9 @@
 
 import SwiftUI
 
-struct Entries<T>: View {
+struct EntriesView<T>: View {
+
+    // MARK: - Initializers
 
     init(
         values: [T],
@@ -111,6 +113,8 @@ struct Entries<T>: View {
         }
     }
 
+    // MARK: - View
+
     @ViewBuilder
     var body: some View {
         HStack(spacing: 0.0) {
@@ -126,16 +130,13 @@ struct Entries<T>: View {
         }
     }
 
+    // MARK: - Private
+
     private let values: [T]
-
     private let toString: (T) -> String
-
     private let isWinner: (T) -> Bool
-
     private let isLoser: (T) -> Bool
-
     private let isEliminated: (T) -> Bool
-
     private let isAccented: (T) -> Bool
 
     private func color(for value: T) -> Color {
@@ -148,107 +149,4 @@ struct Entries<T>: View {
         }
     }
 
-}
-
-struct RecordViewRow<Signpost, Content>: View where Signpost: View, Content: View {
-
-    init(@ViewBuilder content: () -> Content) where Signpost == Spacer {
-        signpost = Spacer()
-        self.content = content()
-    }
-
-    init(
-        @ViewBuilder signpost: () -> Signpost,
-        @ViewBuilder content: () -> Content
-    ) {
-        self.signpost = signpost()
-        self.content = content()
-    }
-
-    @ViewBuilder
-    let signpost: Signpost
-
-    @ViewBuilder
-    let content: Content
-
-    @ScaledMetric
-    var rowHeight = 44.0
-
-    @Environment(\.recordViewRowConfiguration)
-    var configuration: RecordViewRowConfiguration
-
-    @ViewBuilder
-    var body: some View {
-        VStack(spacing: 0.0) {
-            if configuration.hasTopDivider {
-                Divider()
-            }
-            HStack(spacing: 0.0) {
-                signpost
-                    .frame(width: rowHeight, height: rowHeight)
-                Divider()
-                content
-                    .frame(maxWidth: .infinity)
-            }
-            if configuration.hasBottomDivider {
-                Divider()
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: rowHeight)
-    }
-}
-
-struct RecordViewRowConfiguration: Equatable, Hashable, Sendable {
-    let hasTopDivider: Bool
-    let hasBottomDivider: Bool
-}
-
-struct RecordViewRowConfigurationEnvironmentKey: EnvironmentKey {
-
-    typealias Value = RecordViewRowConfiguration
-
-    static let defaultValue: Value = .init(hasTopDivider: false, hasBottomDivider: false)
-
-}
-
-extension EnvironmentValues {
-
-    var recordViewRowConfiguration: RecordViewRowConfiguration {
-        get {
-            self[RecordViewRowConfigurationEnvironmentKey.self]
-        }
-        set {
-            self[RecordViewRowConfigurationEnvironmentKey.self] = newValue
-        }
-    }
-
-}
-
-struct RecordViewRowConfigurationViewModifier: ViewModifier {
-
-    let configuration: RecordViewRowConfiguration
-
-    @ViewBuilder
-    func body(content: Content) -> some View {
-        content
-            .environment(\.recordViewRowConfiguration, configuration)
-    }
-}
-
-extension View {
-
-    func recordViewRowConfiguration(
-        hasTopDivider: Bool = false,
-        hasBottomDivider: Bool = false
-    ) -> some View {
-        let configuration = RecordViewRowConfiguration(hasTopDivider: hasTopDivider, hasBottomDivider: hasBottomDivider)
-        return recordViewRowConfiguration(configuration)
-    }
-
-    func recordViewRowConfiguration(
-        _ configuration: RecordViewRowConfiguration
-    ) -> some View {
-        let modifier = RecordViewRowConfigurationViewModifier(configuration: configuration)
-        return ModifiedContent(content: self, modifier: modifier)
-    }
 }

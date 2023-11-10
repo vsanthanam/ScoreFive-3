@@ -1,5 +1,5 @@
 // ScoreFive
-// AcknowledgementView.swift
+// Styles.swift
 //
 // MIT License
 //
@@ -23,40 +23,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Macros
-import SafariView
 import SwiftUI
-import Utils
 
-struct AcknowledgementView: View {
-    // MARK: - View
+struct CellStyle: LabelStyle {
+
+    // MARK: - LabelStyle
 
     @ViewBuilder
-    var body: some View {
-        List(acknowledgements) { acknowledgement in
-            Button {
-                safariURL = acknowledgement.url
-            } label: {
-                VStack(alignment: .leading) {
-                    Text(acknowledgement.name)
-                        .foregroundStyle(Color.label)
-                    Text(acknowledgement.url.absoluteString)
-                        .font(.caption)
-                        .foregroundStyle(Color.secondaryLabel)
-                }
-            }
+    func makeBody(configuration: Configuration) -> some View {
+        Label {
+            configuration.title
+                .foregroundStyle(Color.label)
+        } icon: {
+            configuration.icon
         }
-        .safari(url: $safariURL)
-        .navigationTitle("Acknowledgements")
     }
-
-    @State
-    private var safariURL: URL?
-
-    @Environment(\.acknowledgements)
-    private var acknowledgements: [Acknowledgement]
-}
-
-#Preview {
-    AcknowledgementView()
 }

@@ -1,5 +1,5 @@
 // ScoreFive
-// RecordView.swift
+// RecordScreen.swift
 //
 // MIT License
 //
@@ -29,10 +29,11 @@ import Utils
 
 struct RecordView: View {
 
-    // MARK: - API
+    // MARK: - Initializers
 
-    @Bindable
-    var activeRecord: Record
+    init(activeRecord: Record) {
+        self.activeRecord = activeRecord
+    }
 
     // MARK: - View
 
@@ -66,6 +67,15 @@ struct RecordView: View {
 
     // MARK: - Private
 
+    @Bindable
+    private var activeRecord: Record
+
+    @State
+    private var addingRound = false
+
+    @State
+    private var editingRound: ScoreCard.Round? = nil
+
     @MainActor
     @ViewBuilder
     private var roundsList: some View {
@@ -74,7 +84,7 @@ struct RecordView: View {
                 Button {
                     editingRound = round
                 } label: {
-                    RecordViewRow {
+                    RecordRow {
                         Text(activeRecord.scoreCard.startingPlayer(atIndex: activeRecord.scoreCard.rounds.firstIndex(of: round) ?? 0).playerSignpost)
                     } content: {
                         let scores = activeRecord.scoreCard.players
@@ -85,7 +95,7 @@ struct RecordView: View {
                             .compactMap { player in
                                 round[player]
                             }
-                        Entries(
+                        EntriesView(
                             values: scores,
                             isWinner: { value in
                                 value == aliveScores.min()
@@ -105,7 +115,7 @@ struct RecordView: View {
             }
             .listRowInsets(.init())
             .listRowSeparator(.hidden)
-            .recordViewRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
+            .recordRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
             if activeRecord.scoreCard.alivePlayers.count > 1 {
                 addScoresButton
             }
@@ -136,8 +146,8 @@ struct RecordView: View {
     @MainActor
     @ViewBuilder
     private var playerNamesHeader: some View {
-        RecordViewRow {
-            Entries(
+        RecordRow {
+            EntriesView(
                 values: activeRecord.scoreCard.players.map(\.playerSignpost),
                 isEliminated: { player in
                     !activeRecord.scoreCard.alivePlayers.contains(player)
@@ -147,18 +157,18 @@ struct RecordView: View {
                 }
             )
         }
-        .recordViewRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
+        .recordRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
     }
 
     @MainActor
     @ViewBuilder
     private var totalScoresFooter: some View {
-        RecordViewRow {
+        RecordRow {
             let scores = activeRecord.players
                 .map { player in
                     activeRecord.scoreCard.totalScore(forPlayer: player)
                 }
-            Entries(
+            EntriesView(
                 values: scores,
                 isWinner: { value in
                     value == activeRecord.scoreCard.highestScore
@@ -171,14 +181,9 @@ struct RecordView: View {
                 }
             )
         }
-        .recordViewRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
+        .recordRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
     }
 
-    @State
-    private var addingRound = false
-
-    @State
-    private var editingRound: ScoreCard.Round? = nil
 }
 
 private extension String {

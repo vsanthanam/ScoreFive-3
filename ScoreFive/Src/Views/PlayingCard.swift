@@ -1,5 +1,5 @@
 // ScoreFive
-// LoadGameViewRow.swift
+// PlayingCard.swift
 //
 // MIT License
 //
@@ -25,45 +25,52 @@
 
 import SwiftUI
 
-struct LoadGameViewRow: View {
+struct PlayingCard<Content>: View where Content: View {
 
-    // MARK: - API
+    // MARK: - Initializers
 
-    let record: Record
-
-    let onSelect: (Record) -> Void
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
 
     // MARK: - View
 
     @ViewBuilder
     var body: some View {
-        Button {
-            onSelect(record)
-        } label: {
-            HStack {
-                Image(systemName: record.isComplete ? "flag.checkered" : "clock")
-                    .foregroundColor(Color.label)
-                VStack(alignment: .leading) {
-                    Text(playerNamesListFormatter.string(from: record.players) ?? "Unknown")
-                        .foregroundStyle(Color.label)
-                    Text(recordLastUpdatedDateFormatter.string(from: record.lastUpdated))
-                        .font(.caption)
-                        .foregroundStyle(Color.secondaryLabel)
-                }
+        ZStack {
+            Rectangle()
+                .cornerRadius(16)
+                .foregroundColor(Color.secondarySystemGroupedBackground)
+                .shadow(radius: 16)
+            VStack {
+                Image(systemName: "suit.spade.fill")
+                    .font(.largeTitle)
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundStyle(Color.accentColor)
+                Spacer()
+                content
+                Spacer()
+                Image(systemName: "suit.spade.fill")
+                    .font(.largeTitle)
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .rotationEffect(.degrees(180))
+                    .foregroundStyle(Color.accentColor)
             }
         }
+        .aspectRatio(CGSize(width: 25, height: 35), contentMode: .fit)
+        .frame(maxHeight: 475.0)
     }
 
     // MARK: - Private
 
-    @Environment(\.playerNamesListFormatter)
-    private var playerNamesListFormatter: ListFormatter
-
-    @Environment(\.recordLastUpdatedDateFormatter)
-    private var recordLastUpdatedDateFormatter: DateFormatter
+    private let content: Content
 
 }
 
 #Preview {
-    LoadGameViewRow(record: .init(scoreCard: .init(players: ["Dad", "Mom", "God", "Bro"], scoreLimit: 250))) { _ in }
+    PlayingCard {
+        Text("Card Content")
+    }
 }

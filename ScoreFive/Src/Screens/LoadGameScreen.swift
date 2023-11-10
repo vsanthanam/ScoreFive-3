@@ -1,5 +1,5 @@
 // ScoreFive
-// LoadGameView.swift
+// LoadGameScreen.swift
 //
 // MIT License
 //
@@ -27,9 +27,13 @@ import SwiftData
 import SwiftUI
 import Utils
 
-struct LoadGameView: View {
+struct LoadGameScreen: View {
 
-    let didLoadRecord: (Record) -> Void
+    // MARK: - Initializers
+
+    init(didLoadRecord: @escaping (Record) -> Void) {
+        self.didLoadRecord = didLoadRecord
+    }
 
     // MARK: - View
 
@@ -76,6 +80,23 @@ struct LoadGameView: View {
 
     // MARK: - Private
 
+    private let didLoadRecord: (Record) -> Void
+
+    @State
+    private var showAll = false
+
+    @State
+    private var confirmDeleteAll = false
+
+    @Query(sort: \Record.lastUpdated, order: .reverse)
+    private var allRecords: [Record]
+
+    @Environment(\.modelContext)
+    private var modelContext: ModelContext
+
+    @Environment(\.dismiss)
+    private var dismiss: DismissAction
+
     @MainActor
     @ViewBuilder
     private var recordToggleSection: some View {
@@ -89,7 +110,7 @@ struct LoadGameView: View {
     private var recordListSection: some View {
         Section {
             ForEach(visibleRecords) { record in
-                LoadGameViewRow(record: record, onSelect: selectRecord)
+                LoadGameRow(record: record, onSelect: selectRecord)
             }
             .onDelete { indexSet in
                 withAnimation {
@@ -116,21 +137,6 @@ struct LoadGameView: View {
         }
     }
 
-    @State
-    private var showAll = false
-
-    @State
-    private var confirmDeleteAll = false
-
-    @Query(sort: \Record.lastUpdated, order: .reverse)
-    private var allRecords: [Record]
-
-    @Environment(\.modelContext)
-    private var modelContext: ModelContext
-
-    @Environment(\.dismiss)
-    private var dismiss: DismissAction
-
     private var incompleteRecords: [Record] {
         allRecords.filter { record in
             !record.isComplete
@@ -155,7 +161,7 @@ struct LoadGameView: View {
 }
 
 #Preview {
-    LoadGameView() { _ in
+    LoadGameScreen { _ in
 
     }
     .modelContainer(for: Record.self, inMemory: true)

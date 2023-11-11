@@ -105,6 +105,7 @@ struct RecordView: View {
                             }
                         )
                     }
+                    .background(((activeRecord.scoreCard.rounds.firstIndex(of: round) ?? 0) % 2 == 0) ? Color.systemBackground : Color.secondarySystemBackground)
                 }
                 .deleteDisabled(!activeRecord.scoreCard.canRemoveRound(id: round.id))
             }
@@ -128,16 +129,15 @@ struct RecordView: View {
         Button {
             addingRound.toggle()
         } label: {
-            VStack(spacing: 0.0) {
-                Divider()
-                HStack(spacing: 0.0) {
-                    Text(activeRecord.scoreCard.startingPlayer(atIndex: activeRecord.scoreCard.rounds.count).playerSignpost)
-                        .frame(width: 44.0, height: 44.0)
-                        .opacity(0.3)
-                    Text("Add Scores")
-                        .frame(maxWidth: .infinity)
-                }
+            RecordRow {
+                Text(activeRecord.scoreCard.startingPlayer(atIndex: activeRecord.scoreCard.rounds.count).playerSignpost)
+                    .frame(width: 44.0, height: 44.0)
+                    .opacity(0.3)
+            } content: {
+                Text("Add Scores")
+                    .opacity(0.3)
             }
+            .recordRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
         }
         .listRowInsets(.init())
         .listRowSeparator(.hidden)

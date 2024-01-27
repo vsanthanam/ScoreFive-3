@@ -141,11 +141,11 @@ struct EntriesView<T>: View {
 
     private func color(for value: T) -> Color {
         if isWinner(value) {
-            return .green
+            .green
         } else if isLoser(value) {
-            return .red
+            .red
         } else {
-            return .label
+            .label
         }
     }
 

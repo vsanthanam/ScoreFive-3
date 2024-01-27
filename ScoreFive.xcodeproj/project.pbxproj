@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		072BE9192AD5BCAE0004845E /* AcknowledgementsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072BE9182AD5BCAE0004845E /* AcknowledgementsScreen.swift */; };
 		074601322AC11413006A3CBE /* EditRoundScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074601312AC11413006A3CBE /* EditRoundScreen.swift */; };
+		0783E2992B651ED90002CB7A /* SwiftUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = 0783E2982B651ED90002CB7A /* SwiftUtilities */; };
+		0783E29B2B651ED90002CB7A /* UIUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = 0783E29A2B651ED90002CB7A /* UIUtilities */; };
+		0783E29D2B651F060002CB7A /* Chevron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783E29C2B651F060002CB7A /* Chevron.swift */; };
 		079CB60C2AE798E300D80AA0 /* ScoreCardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CB60B2AE798E300D80AA0 /* ScoreCardExtensions.swift */; };
 		079CB60E2AE7A08600D80AA0 /* RecordRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CB60D2AE7A08600D80AA0 /* RecordRow.swift */; };
 		079CB6102AE7B1C700D80AA0 /* EdgeInsetsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CB60F2AE7B1C700D80AA0 /* EdgeInsetsExtensions.swift */; };
@@ -22,11 +25,8 @@
 		07D3C33C2AC9CC690003C7FA /* LoadGameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C33B2AC9CC690003C7FA /* LoadGameRow.swift */; };
 		07D3C3402ACA347F0003C7FA /* MoreScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C33F2ACA347F0003C7FA /* MoreScreen.swift */; };
 		07D3C3442ACA4E2C0003C7FA /* SafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 07D3C3432ACA4E2C0003C7FA /* SafariView */; };
-		07D3C3462ACA4EC00003C7FA /* Macros in Resources */ = {isa = PBXBuildFile; fileRef = 07D3C3452ACA4EC00003C7FA /* Macros */; };
-		07D3C3492ACA50D30003C7FA /* Macros in Frameworks */ = {isa = PBXBuildFile; productRef = 07D3C3482ACA50D30003C7FA /* Macros */; };
 		07D3C34B2ACA6DA20003C7FA /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D3C34A2ACA6DA20003C7FA /* PlayingCard.swift */; };
 		07E6E7482AE78743004106A6 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E6E7472AE78743004106A6 /* Acknowledgement.swift */; };
-		07F8AFD62AC8E63400771FBC /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 07F8AFD52AC8E63400771FBC /* Utils */; };
 		07F8AFD92AC8E66300771FBC /* FiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 07F8AFD82AC8E66300771FBC /* FiveKit */; };
 		07FEAFE42ABD2EE400F4108D /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE32ABD2EE400F4108D /* App.swift */; };
 		07FEAFE62ABD2EE400F4108D /* RootScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEAFE52ABD2EE400F4108D /* RootScreen.swift */; };
@@ -40,10 +40,8 @@
 		07FEB0222AC0CC3B00F4108D /* FiveKit in Resources */ = {isa = PBXBuildFile; fileRef = 07FEB0212AC0CC3B00F4108D /* FiveKit */; };
 		07FEB0252AC0CC4C00F4108D /* FiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 07FEB0242AC0CC4C00F4108D /* FiveKit */; };
 		07FEB0272AC0CE7600F4108D /* LoadGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEB0262AC0CE7600F4108D /* LoadGameScreen.swift */; };
-		07FEB02D2AC0D67E00F4108D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEB02C2AC0D67E00F4108D /* Environment.swift */; };
 		07FEB02F2AC0D86000F4108D /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEB02E2AC0D86000F4108D /* Modifiers.swift */; };
 		07FEB0312AC0E89400F4108D /* RecordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FEB0302AC0E89400F4108D /* RecordScreen.swift */; };
-		07FEB0372AC0EC5800F4108D /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 07FEB0362AC0EC5800F4108D /* Utils */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +64,7 @@
 /* Begin PBXFileReference section */
 		072BE9182AD5BCAE0004845E /* AcknowledgementsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsScreen.swift; sourceTree = "<group>"; };
 		074601312AC11413006A3CBE /* EditRoundScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoundScreen.swift; sourceTree = "<group>"; };
+		0783E29C2B651F060002CB7A /* Chevron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chevron.swift; sourceTree = "<group>"; };
 		079CB60B2AE798E300D80AA0 /* ScoreCardExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCardExtensions.swift; sourceTree = "<group>"; };
 		079CB60D2AE7A08600D80AA0 /* RecordRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRow.swift; sourceTree = "<group>"; };
 		079CB60F2AE7B1C700D80AA0 /* EdgeInsetsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetsExtensions.swift; sourceTree = "<group>"; };
@@ -78,7 +77,6 @@
 		07B59B8D2AFEC0AF00FA1E64 /* RecordRowConfigurationModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRowConfigurationModifier.swift; sourceTree = "<group>"; };
 		07D3C33B2AC9CC690003C7FA /* LoadGameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGameRow.swift; sourceTree = "<group>"; };
 		07D3C33F2ACA347F0003C7FA /* MoreScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreScreen.swift; sourceTree = "<group>"; };
-		07D3C3452ACA4EC00003C7FA /* Macros */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Macros; sourceTree = "<group>"; };
 		07D3C34A2ACA6DA20003C7FA /* PlayingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
 		07E6E7472AE78743004106A6 /* Acknowledgement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acknowledgement.swift; sourceTree = "<group>"; };
 		07FEAFE02ABD2EE400F4108D /* ScoreFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,10 +95,8 @@
 		07FEB0162AC0A43F00F4108D /* NewGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameScreen.swift; sourceTree = "<group>"; };
 		07FEB0212AC0CC3B00F4108D /* FiveKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FiveKit; sourceTree = "<group>"; };
 		07FEB0262AC0CE7600F4108D /* LoadGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGameScreen.swift; sourceTree = "<group>"; };
-		07FEB02C2AC0D67E00F4108D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		07FEB02E2AC0D86000F4108D /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		07FEB0302AC0E89400F4108D /* RecordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordScreen.swift; sourceTree = "<group>"; };
-		07FEB0352AC0EBB600F4108D /* Utils */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utils; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,12 +104,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07F8AFD62AC8E63400771FBC /* Utils in Frameworks */,
 				07F8AFD92AC8E66300771FBC /* FiveKit in Frameworks */,
-				07FEB0372AC0EC5800F4108D /* Utils in Frameworks */,
-				07D3C3492ACA50D30003C7FA /* Macros in Frameworks */,
 				07D3C3442ACA4E2C0003C7FA /* SafariView in Frameworks */,
 				07FEB0252AC0CC4C00F4108D /* FiveKit in Frameworks */,
+				0783E29B2B651ED90002CB7A /* UIUtilities in Frameworks */,
+				0783E2992B651ED90002CB7A /* SwiftUtilities in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +146,7 @@
 				07D3C34A2ACA6DA20003C7FA /* PlayingCard.swift */,
 				079CB60D2AE7A08600D80AA0 /* RecordRow.swift */,
 				07B59B822AFEBA2A00FA1E64 /* EntriesView.swift */,
+				0783E29C2B651F060002CB7A /* Chevron.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,7 +171,6 @@
 				07F8AFD32AC8CEAA00771FBC /* Models */,
 				07F8AFD22AC8CE9600771FBC /* Screens */,
 				07FEAFE32ABD2EE400F4108D /* App.swift */,
-				07FEB02C2AC0D67E00F4108D /* Environment.swift */,
 				07FEB02E2AC0D86000F4108D /* Modifiers.swift */,
 				07FEB0202AC0CC3B00F4108D /* Packages */,
 			);
@@ -274,8 +269,6 @@
 		07FEB0202AC0CC3B00F4108D /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				07D3C3452ACA4EC00003C7FA /* Macros */,
-				07FEB0352AC0EBB600F4108D /* Utils */,
 				07FEB0212AC0CC3B00F4108D /* FiveKit */,
 			);
 			path = Packages;
@@ -299,11 +292,10 @@
 			name = ScoreFive;
 			packageProductDependencies = (
 				07FEB0242AC0CC4C00F4108D /* FiveKit */,
-				07FEB0362AC0EC5800F4108D /* Utils */,
-				07F8AFD52AC8E63400771FBC /* Utils */,
 				07F8AFD82AC8E66300771FBC /* FiveKit */,
 				07D3C3432ACA4E2C0003C7FA /* SafariView */,
-				07D3C3482ACA50D30003C7FA /* Macros */,
+				0783E2982B651ED90002CB7A /* SwiftUtilities */,
+				0783E29A2B651ED90002CB7A /* UIUtilities */,
 			);
 			productName = ScoreFive;
 			productReference = 07FEAFE02ABD2EE400F4108D /* ScoreFive.app */;
@@ -378,10 +370,9 @@
 			);
 			mainGroup = 07FEAFD72ABD2EE400F4108D;
 			packageReferences = (
-				07F8AFD42AC8E63400771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/Utils" */,
 				07F8AFD72AC8E66300771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/FiveKit" */,
 				07D3C33D2ACA340F0003C7FA /* XCRemoteSwiftPackageReference "SafariUI" */,
-				07D3C3472ACA50D30003C7FA /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/Macros" */,
+				0783E2972B651ED90002CB7A /* XCRemoteSwiftPackageReference "SwiftUtilities" */,
 			);
 			productRefGroup = 07FEAFE12ABD2EE400F4108D /* Products */;
 			projectDirPath = "";
@@ -402,7 +393,6 @@
 				07FEB0222AC0CC3B00F4108D /* FiveKit in Resources */,
 				07FEAFED2ABD2EE500F4108D /* Preview Assets.xcassets in Resources */,
 				07FEAFEA2ABD2EE500F4108D /* Assets.xcassets in Resources */,
-				07D3C3462ACA4EC00003C7FA /* Macros in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,7 +421,6 @@
 				07D3C34B2ACA6DA20003C7FA /* PlayingCard.swift in Sources */,
 				07E6E7482AE78743004106A6 /* Acknowledgement.swift in Sources */,
 				074601322AC11413006A3CBE /* EditRoundScreen.swift in Sources */,
-				07FEB02D2AC0D67E00F4108D /* Environment.swift in Sources */,
 				07FEB02F2AC0D86000F4108D /* Modifiers.swift in Sources */,
 				07D3C33C2AC9CC690003C7FA /* LoadGameRow.swift in Sources */,
 				07B59B882AFEBD6700FA1E64 /* AcknowledgementsModifier.swift in Sources */,
@@ -446,6 +435,7 @@
 				07B59B8C2AFEC08100FA1E64 /* RecordRowConfiguration.swift in Sources */,
 				079CB60E2AE7A08600D80AA0 /* RecordRow.swift in Sources */,
 				079CB6102AE7B1C700D80AA0 /* EdgeInsetsExtensions.swift in Sources */,
+				0783E29D2B651F060002CB7A /* Chevron.swift in Sources */,
 				07FEB0312AC0E89400F4108D /* RecordScreen.swift in Sources */,
 				07B59B8A2AFEBEDE00FA1E64 /* RecordLastUpdatedDateFormatterModifier.swift in Sources */,
 				07B59B8E2AFEC0AF00FA1E64 /* RecordRowConfigurationModifier.swift in Sources */,
@@ -615,7 +605,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 301;
 				DEVELOPMENT_ASSET_PATHS = "\"ScoreFive/Preview Content\"";
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				ENABLE_PREVIEWS = YES;
@@ -649,7 +639,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ScoreFive/ScoreFive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 301;
 				DEVELOPMENT_ASSET_PATHS = "\"ScoreFive/Preview Content\"";
 				DEVELOPMENT_TEAM = 3FJXDZ3HU4;
 				ENABLE_PREVIEWS = YES;
@@ -794,14 +784,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		07D3C3472ACA50D30003C7FA /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/Macros" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ScoreFive/Src/Packages/Macros;
-		};
-		07F8AFD42AC8E63400771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/Utils" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ScoreFive/Src/Packages/Utils;
-		};
 		07F8AFD72AC8E66300771FBC /* XCLocalSwiftPackageReference "ScoreFive/Src/Packages/FiveKit" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ScoreFive/Src/Packages/FiveKit;
@@ -809,6 +791,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0783E2972B651ED90002CB7A /* XCRemoteSwiftPackageReference "SwiftUtilities" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:vsanthanam/SwiftUtilities.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.2;
+			};
+		};
 		07D3C33D2ACA340F0003C7FA /* XCRemoteSwiftPackageReference "SafariUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:vsanthanam/SafariUI.git";
@@ -820,18 +810,20 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0783E2982B651ED90002CB7A /* SwiftUtilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0783E2972B651ED90002CB7A /* XCRemoteSwiftPackageReference "SwiftUtilities" */;
+			productName = SwiftUtilities;
+		};
+		0783E29A2B651ED90002CB7A /* UIUtilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0783E2972B651ED90002CB7A /* XCRemoteSwiftPackageReference "SwiftUtilities" */;
+			productName = UIUtilities;
+		};
 		07D3C3432ACA4E2C0003C7FA /* SafariView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 07D3C33D2ACA340F0003C7FA /* XCRemoteSwiftPackageReference "SafariUI" */;
 			productName = SafariView;
-		};
-		07D3C3482ACA50D30003C7FA /* Macros */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Macros;
-		};
-		07F8AFD52AC8E63400771FBC /* Utils */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Utils;
 		};
 		07F8AFD82AC8E66300771FBC /* FiveKit */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -840,10 +832,6 @@
 		07FEB0242AC0CC4C00F4108D /* FiveKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FiveKit;
-		};
-		07FEB0362AC0EC5800F4108D /* Utils */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Utils;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

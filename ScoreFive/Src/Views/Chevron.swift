@@ -1,5 +1,5 @@
 // ScoreFive
-// MacrosPlugin.swift
+// Chevron.swift
 //
 // MIT License
 //
@@ -23,14 +23,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftCompilerPlugin
-import SwiftSyntaxMacros
+import SwiftUI
+import UIUtilities
 
-@main
-struct MacrosPlugin: CompilerPlugin {
-    let providingMacros: [Macro.Type] = [
-        LinkMacro.self,
-        DateMacro.self,
-        MailToMacro.self
-    ]
+public struct Chevron: View {
+
+    public init() {}
+
+    public var body: some View {
+        NavigationLink {
+            EmptyView()
+        } label: {
+            EmptyView()
+        }
+        .foregroundStyle(Color.label)
+
+        // NOTE: - this is kind of a hack to get a thing that looks like a navigation link but isn't one. Doing it via sfsymbols isn't quite the same.
+    }
+
 }

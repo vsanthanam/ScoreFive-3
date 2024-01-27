@@ -23,12 +23,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Macros
 import SafariView
 import StoreKit
 import SwiftUI
-import Utils
+import SwiftUtilities
 
+@MainActor
 struct MoreScreen: View {
 
     // MARK: - Initializers
@@ -43,10 +43,13 @@ struct MoreScreen: View {
             List {
                 Section {
                     Button {
-                        safariURL = #Link("https://www.scorefive.app")
+                        safariURL = #URL("https://www.scorefive.app")
                     } label: {
                         HStack {
-                            Label("Instructions", systemImage: "book")
+                            Label(
+                                "Instructions",
+                                systemImage: "book"
+                            )
                             Spacer()
                             Chevron()
                         }
@@ -55,7 +58,10 @@ struct MoreScreen: View {
                         openEmail()
                     } label: {
                         HStack {
-                            Label("Contact Us", systemImage: "envelope")
+                            Label(
+                                "Contact Us",
+                                systemImage: "envelope"
+                            )
                             Spacer()
                             Chevron()
                         }
@@ -67,22 +73,36 @@ struct MoreScreen: View {
                     Button {
                         leaveReview()
                     } label: {
-                        Label("Leave Review", systemImage: "star.bubble")
+                        Label(
+                            "Leave Review",
+                            systemImage: "star.bubble"
+                        )
                     }
-                    ShareLink(item: #Link("https://www.apple.com")) {
-                        Label("Tell a Friend", systemImage: "square.and.arrow.up")
+                    ShareLink(item: #URL("https://www.apple.com")) {
+                        Label(
+                            "Tell a Friend",
+                            systemImage: "square.and.arrow.up"
+                        )
                     }
                 } header: {
                     Text("Support Us")
                 }
                 Section {
-                    Label("Version", systemImage: "info.circle")
-                        .badge("\(Bundle.main.shortVersion) (\(Bundle.main.build))")
+                    if let version = Bundle.main.shortVersion, let build = Bundle.main.version {
+                        Label(
+                            "Version",
+                            systemImage: "info.circle"
+                        )
+                        .badge("\(version) (\(build))")
+                    }
                     Button {
                         openSourceCode()
                     } label: {
                         HStack {
-                            Label("Source Code", systemImage: "chevron.left.forwardslash.chevron.right")
+                            Label(
+                                "Source Code",
+                                systemImage: "chevron.left.forwardslash.chevron.right"
+                            )
                             Spacer()
                             Chevron()
                         }
@@ -90,13 +110,16 @@ struct MoreScreen: View {
                     NavigationLink {
                         AcknowledgementsScreen()
                     } label: {
-                        Label("Acknowledgements", systemImage: "person.3")
+                        Label(
+                            "Acknowledgements",
+                            systemImage: "person.3"
+                        )
                     }
                 } header: {
                     Text("About")
                 }
             }
-            .labelStyle(CellStyle())
+            .labelStyle(.cell)
             .navigationTitle("More")
             .safari(url: $safariURL)
         }
@@ -111,23 +134,23 @@ struct MoreScreen: View {
     @Environment(\.requestReview)
     private var requestReview: RequestReviewAction
 
-    @MainActor
+    @Environment(\.openURL)
+    private var openURL: OpenURLAction
+
     private func openSourceCode() {
-        UIApplication.shared.open(#Link("https://github.com/vsanthanam/ScoreFive-3"))
+        openURL(#URL("https://github.com/vsanthanam/ScoreFive-3"))
     }
 
-    @MainActor
     private func openEmail() {
-        UIApplication.shared.open(#MailTo("talkto@vsanthanam.com"))
+        openURL(#MailTo("talkto@vsanthanam.com"))
     }
 
-    @MainActor
     private func leaveReview() {
         if !hasLeftReview {
             requestReview()
             hasLeftReview = true
         } else {
-            UIApplication.shared.open(#Link("https://www.apple.com"))
+            openURL(#URL("https://www.apple.com"))
         }
     }
 }

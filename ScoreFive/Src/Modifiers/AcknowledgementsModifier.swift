@@ -23,8 +23,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Macros
 import SwiftUI
+import SwiftUtilities
 
 extension View {
 
@@ -54,7 +54,7 @@ private struct AcknowledgementsEnvironmentKey: EnvironmentKey {
     typealias Value = [Acknowledgement]
 
     static let defaultValue: [Acknowledgement] = [
-        .init(url: #Link("https://vsanthanam.github.io/SafariUI/"), name: "SafariUI", id: "safariui")
+        .init(url: #URL("https://vsanthanam.github.io/SafariUI/"), name: "SafariUI", id: "safariui")
     ]
 }
 

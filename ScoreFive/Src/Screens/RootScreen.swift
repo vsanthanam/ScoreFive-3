@@ -36,35 +36,39 @@ struct RootScreen: View {
 
     @ViewBuilder
     var body: some View {
-        NavigationStack(path: $pages) {
-            HStack {
-                menuCard
-            }
-            .frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
-            .background(Color.secondarySystemBackground)
-            .sheet(isPresented: $showNewGame) {
-                NewGameScreen { record in
-                    pages.append(record)
+        Group {
+            if let activeRecord {
+                RecordView(activeRecord: activeRecord)
+                    .environment(\.endRecord, EndRecord {
+                        self.activeRecord = nil
+                    })
+            } else {
+                HStack {
+                    menuCard
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.secondarySystemBackground)
             }
-            .sheet(isPresented: $showLoadGame) {
-                LoadGameScreen { record in
-                    pages.append(record)
-                }
+        }
+        .sheet(isPresented: $showNewGame) {
+            NewGameScreen { record in
+                activeRecord = record
             }
-            .sheet(isPresented: $showMore) {
-                MoreScreen()
+        }
+        .sheet(isPresented: $showLoadGame) {
+            LoadGameScreen { record in
+                activeRecord = record
             }
-            .navigationDestination(for: Record.self) { record in
-                RecordView(activeRecord: record)
-            }
+        }
+        .sheet(isPresented: $showMore) {
+            MoreScreen()
         }
     }
 
     // MARK: - Private
 
     @State
-    private var pages = [Record]()
+    private var activeRecord: Record?
 
     @State
     private var showNewGame = false
@@ -131,4 +135,60 @@ struct RootScreen: View {
 #Preview {
     RootScreen()
         .modelContainer(for: Record.self, inMemory: true)
+}
+
+struct EndRecord {
+
+    fileprivate init(action: @escaping () -> Void) {
+        self.action = action
+    }
+
+    private let action: () -> Void
+
+    func callAsFunction() {
+        action()
+    }
+}
+
+struct StartRecord {
+
+    fileprivate init(action: @escaping (Record) -> Void) {
+        self.action = action
+    }
+
+    private let action: (Record) -> Void
+
+    func callAsFunction(_ record: Record) {
+        action(record)
+    }
+}
+
+struct EndRecordEnvironmentKey: EnvironmentKey {
+
+    typealias Value = EndRecord
+
+    static var defaultValue: Value = .init {}
+
+}
+
+struct StartRecordEnvironmentKey: EnvironmentKey {
+
+    typealias Value = StartRecord
+
+    static var defaultValue: Value = .init { _ in }
+
+}
+
+extension EnvironmentValues {
+
+    var endRecord: EndRecord {
+        get { self[EndRecordEnvironmentKey.self] }
+        set { self[EndRecordEnvironmentKey.self] = newValue }
+    }
+
+    var startRecord: StartRecord {
+        get { self[StartRecordEnvironmentKey.self] }
+        set { self[StartRecordEnvironmentKey.self] = newValue }
+    }
+
 }

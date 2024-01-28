@@ -87,7 +87,7 @@ struct EditRoundView: View {
         }
         .onAppear {
             if let editingRound {
-                players.forEach { player in
+                for player in players {
                     scores[player] = editingRound[player]
                 }
             }
@@ -138,7 +138,7 @@ struct EditRoundView: View {
         }
         if let editingRound {
             var newRound = ScoreCard.Round(players: players, id: editingRound.id)
-            players.forEach { player in
+            for player in players {
                 newRound[player] = scores[player]
             }
             return scoreCard.canReplaceRound(id: editingRound.id, withRound: newRound)

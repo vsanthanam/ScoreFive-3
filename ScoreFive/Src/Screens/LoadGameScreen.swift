@@ -25,7 +25,7 @@
 
 import SwiftData
 import SwiftUI
-import Utils
+import SwiftUtilities
 
 struct LoadGameScreen: View {
 
@@ -114,10 +114,9 @@ struct LoadGameScreen: View {
             }
             .onDelete { indexSet in
                 withAnimation {
-                    indexSet
-                        .forEach { index in
-                            modelContext.delete(visibleRecords[index])
-                        }
+                    for index in indexSet {
+                        modelContext.delete(visibleRecords[index])
+                    }
                 }
             }
         }

@@ -25,6 +25,12 @@
 
 import SwiftUI
 
+extension LabelStyle where Self == CellStyle {
+
+    static var cell: CellStyle { .init() }
+
+}
+
 struct CellStyle: LabelStyle {
 
     // MARK: - LabelStyle

@@ -23,10 +23,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Macros
 import SafariView
 import SwiftUI
-import Utils
+import SwiftUtilities
 
 struct AcknowledgementsScreen: View {
 

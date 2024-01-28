@@ -25,8 +25,9 @@
 
 import FiveKit
 import SwiftUI
-import Utils
+import SwiftUtilities
 
+@MainActor
 struct RecordView: View {
 
     // MARK: - Initializers
@@ -76,7 +77,6 @@ struct RecordView: View {
     @State
     private var editingRound: ScoreCard.Round? = nil
 
-    @MainActor
     @ViewBuilder
     private var roundsList: some View {
         List {
@@ -86,6 +86,7 @@ struct RecordView: View {
                 } label: {
                     RecordRow {
                         Text(activeRecord.scoreCard.startingPlayer(atIndex: activeRecord.scoreCard.rounds.firstIndex(of: round) ?? 0).playerSignpost)
+                            .fontDesign(.monospaced)
                     } content: {
                         let scores = activeRecord.scoreCard.players
                             .map { player in
@@ -110,7 +111,7 @@ struct RecordView: View {
                 .deleteDisabled(!activeRecord.scoreCard.canRemoveRound(id: round.id))
             }
             .onDelete { indexSet in
-                indexSet.forEach { index in
+                for index in indexSet {
                     activeRecord.scoreCard.removeRound(atIndex: index)
                 }
             }
@@ -123,7 +124,6 @@ struct RecordView: View {
         }
     }
 
-    @MainActor
     @ViewBuilder
     private var addScoresButton: some View {
         Button {
@@ -143,12 +143,12 @@ struct RecordView: View {
         .listRowSeparator(.hidden)
     }
 
-    @MainActor
     @ViewBuilder
     private var playerNamesHeader: some View {
         RecordRow {
             EntriesView(
-                values: activeRecord.scoreCard.players.map(\.playerSignpost),
+                values: activeRecord.scoreCard.players,
+                toString: \.playerSignpost,
                 isEliminated: { player in
                     !activeRecord.scoreCard.alivePlayers.contains(player)
                 },
@@ -160,21 +160,17 @@ struct RecordView: View {
         .recordRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
     }
 
-    @MainActor
     @ViewBuilder
     private var totalScoresFooter: some View {
         RecordRow {
-            let scores = activeRecord.players
-                .map { player in
-                    activeRecord.scoreCard.totalScore(forPlayer: player)
-                }
+            let scores = activeRecord.players.map(activeRecord.scoreCard.totalScore(forPlayer:))
             EntriesView(
                 values: scores,
                 isWinner: { value in
-                    value == activeRecord.scoreCard.highestScore
+                    value == activeRecord.scoreCard.lowestScore
                 },
                 isLoser: { value in
-                    value == activeRecord.scoreCard.lowestScore
+                    value == activeRecord.scoreCard.highestScore
                 },
                 isAccented: { _ in
                     true

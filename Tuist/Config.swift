@@ -1,5 +1,5 @@
 // ScoreFive
-// AcknowledgementsScreen.swift
+// Config.swift
 //
 // MIT License
 //
@@ -23,44 +23,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SafariView
-import SwiftUI
-import SwiftUtilities
+import ProjectDescription
 
-struct AcknowledgementsScreen: View {
-
-    // MARK: - Initializers
-
-    init() {}
-
-    // MARK: - View
-
-    @ViewBuilder
-    var body: some View {
-        List(acknowledgements) { acknowledgement in
-            Button {
-                safariURL = acknowledgement.url
-            } label: {
-                VStack(alignment: .leading) {
-                    Text(acknowledgement.name)
-                        .foregroundStyle(Color.label)
-                    Text(acknowledgement.url.absoluteString)
-                        .font(.caption)
-                        .foregroundStyle(Color.secondaryLabel)
-                }
-            }
-        }
-        .safari(url: $safariURL)
-        .navigationTitle("Acknowledgements")
-    }
-
-    @State
-    private var safariURL: URL?
-
-    @Environment(\.acknowledgements)
-    private var acknowledgements: [Acknowledgement]
-}
-
-#Preview {
-    AcknowledgementsScreen()
-}
+let config = Config(
+    swiftVersion: "5.9",
+    plugins: []
+)

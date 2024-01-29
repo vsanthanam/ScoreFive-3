@@ -41,7 +41,7 @@ final class Record {
     private(set) var players = [String]()
     private(set) var isComplete = false
 
-    var scoreCard: ScoreCard = .placeholder {
+    var scoreCard = ScoreCard.placeholder {
         didSet {
             lastUpdated = .now
             players = newValue.players

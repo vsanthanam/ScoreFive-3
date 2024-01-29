@@ -31,42 +31,22 @@ import SwiftData
 final class Record {
 
     init(scoreCard: ScoreCard) {
-        scoreCardData = try! JSONEncoder().encode(scoreCard)
-//        self.scoreCard = scoreCard
+        self.scoreCard = scoreCard
         players = scoreCard.players
         isComplete = scoreCard.alivePlayers.count < 2
         lastUpdated = .now
     }
 
-    var scoreCard: ScoreCard {
-        // NOTE: - This is a workaround because SwiftData's codable support appears to be broken
-        get {
-            try! JSONDecoder().decode(ScoreCard.self, from: scoreCardData)
-        }
-        set {
-            let data = try! JSONEncoder().encode(newValue)
-            scoreCardData = data
+    private(set) var lastUpdated = Date.now
+    private(set) var players = [String]()
+    private(set) var isComplete = false
+
+    var scoreCard: ScoreCard = .placeholder {
+        didSet {
             lastUpdated = .now
             players = newValue.players
             isComplete = newValue.alivePlayers.count < 2
         }
     }
-
-    private(set) var lastUpdated = Date.now
-
-    private(set) var players = [String]()
-
-    private(set) var isComplete = false
-
-    // NOTE: - This is a workaround because SwiftData's codable support appears to be broken
-    private var scoreCardData = Data()
-
-//    var game: ScoreCard {
-//        didSet {
-//            lastUpdated = .now
-//            players = newValue.players
-//            isComplete = newValue.alivePlayers.count < 2
-//        }
-//    }
 
 }

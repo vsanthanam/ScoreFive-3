@@ -27,6 +27,9 @@ import FiveKit
 
 extension ScoreCard {
 
+    /// Necessary for CloudKit integration, but never actually used.
+    static var placeholder: ScoreCard { .init(players: ["foo", "bar"], scoreLimit: 250, id: "placeholder") }
+
     func startingPlayer(atIndex index: Int) -> String {
         if index == 0 {
             return players[index % players.count]

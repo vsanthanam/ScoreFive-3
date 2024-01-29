@@ -1,9 +1,9 @@
 import ProjectDescription
 
-// Creates our project using a helper function defined in ProjectDescriptionHelpers
 let project = Project(
     name: "ScoreFive",
     organizationName: "com.varunsanthanam",
+    options: .options(disableBundleAccessors: true, disableSynthesizedResourceAccessors: true),
     packages: [
         .local(path: "Packages/FiveKit"),
         .remote(url: "git@github.com:vsanthanam/SafariUI.git", requirement: .upToNextMajor(from: "3.0.0")),
@@ -17,7 +17,10 @@ let project = Project(
             bundleId: "com.varunsanthanam.ScoreFive2",
             infoPlist: .extendingDefault(with: [
                 "CFBundleShortVersionString": "3.0.0",
-                "CFBundleVersion": "310"
+                "CFBundleVersion": "310",
+                "UILaunchScreen": [
+                    "UILaunchScreen": [:]
+                ]
             ]),
             sources: ["Targets/ScoreFive/Sources/**"],
             resources: ["Targets/ScoreFive/Resources/**"],

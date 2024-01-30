@@ -35,12 +35,6 @@ let project = Project(
     packages: [
         .local(
             path: "Packages/FiveKit"
-        ),
-        .remote(
-            url: "git@github.com:vsanthanam/SwiftUtilities.git",
-            requirement: .exact(
-                "0.0.4"
-            )
         )
     ],
     targets: [
@@ -71,11 +65,7 @@ let project = Project(
                     type: .runtime,
                     condition: nil
                 ),
-                .package(
-                    product: "SwiftUtilities",
-                    type: .runtime,
-                    condition: nil
-                ),
+                .external(name: "SwiftUtilities"),
                 .external(name: "SafariUI")
             ]
         ),

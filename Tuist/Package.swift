@@ -7,6 +7,10 @@ let package = Package(
         .package(
             url: "https://github.com/vsanthanam/SafariUI",
             from: "3.0.0"
+        ),
+        .package(
+            url: "https://github.com/vsanthanam/SwiftUtilities",
+            from: "0.0.0"
         )
     ]
 )

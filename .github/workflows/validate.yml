@@ -1,0 +1,26 @@
+name: Validate
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  lint:
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v3
+      - name: Lint
+        run: swiftformat . --lint
+  build:
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v3
+      - uses: jdx/mise-action@v2
+      - name: Fetch Dependencies
+        run: tuist fetch
+      - name: Generate Project
+        run: tuist generate
+      - name: Run Tests
+        run: tuist test

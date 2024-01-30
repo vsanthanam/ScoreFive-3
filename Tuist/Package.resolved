@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "safariui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vsanthanam/SafariUI",
+      "state" : {
+        "revision" : "a5bc0b529c002f729cd41f1bb008842933bfa923",
+        "version" : "3.0.2"
+      }
+    },
+    {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-syntax.git",

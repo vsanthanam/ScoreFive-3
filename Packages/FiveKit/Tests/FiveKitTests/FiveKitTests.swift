@@ -1,5 +1,5 @@
 // ScoreFive
-// FiveTests.swift
+// FiveKitTests.swift
 //
 // MIT License
 //
@@ -26,12 +26,6 @@
 @testable import FiveKit
 import XCTest
 
-final class FiveTests: XCTestCase {
-    func testExample() throws {
-        // XCTest Documentation
-        // https://developer.apple.com/documentation/xctest
-
-        // Defining Test Cases and Test Methods
-        // https://developer.apple.com/documentation/xctest/defining_test_cases_and_test_methods
-    }
+final class FiveKitTests: XCTestCase {
+    func testExample() throws {}
 }

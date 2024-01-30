@@ -54,7 +54,8 @@ private struct AcknowledgementsEnvironmentKey: EnvironmentKey {
     typealias Value = [Acknowledgement]
 
     static let defaultValue: [Acknowledgement] = [
-        .init(url: #URL("https://vsanthanam.github.io/SafariUI/"), name: "SafariUI", id: "safariui")
+        .init(url: #URL("https://vsanthanam.github.io/SafariUI/"), name: "SafariUI", id: "safariui"),
+        .init(url: #URL("https://vsanthanam/github.io/SwiftUtilities"), name: "SwiftUtilities", id: "swiftutilities")
     ]
 }
 

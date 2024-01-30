@@ -24,5 +24,7 @@ jobs:
         run: tuist fetch
       - name: Generate Project
         run: tuist generate
-      - name: Run Tests
-        run: tuist test
+      - name: Run ScoreFive Tests
+        run: tuist test ScoreFive
+      - name: Run FiveKit Tests
+        run: tuist test FiveKit

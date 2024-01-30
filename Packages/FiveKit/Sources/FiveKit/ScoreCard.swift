@@ -70,7 +70,9 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
     /// Whether or not the score limit can be changed to a new value
     /// - Parameter scoreLimit: The new proposed score limit
     /// - Returns: Whether or not the change is legal
-    public func canSetScoreLimit(to scoreLimit: Int) -> Bool {
+    public func canSetScoreLimit(
+        to scoreLimit: Int
+    ) -> Bool {
         let maxScore = alivePlayers
             .map { player in
                 totalScore(forPlayer: player)
@@ -81,7 +83,9 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
 
     /// Change the score limit of the score lcard
     /// - Parameter scoreLimit: The new score limit
-    public mutating func setScoreLimit(to scoreLimit: Int) {
+    public mutating func setScoreLimit(
+        to scoreLimit: Int
+    ) {
         precondition(canSetScoreLimit(to: scoreLimit))
         self.scoreLimit = scoreLimit
     }
@@ -89,14 +93,18 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
     /// Whether or not a proposed round can be added to the score card
     /// - Parameter round: The propsed new round
     /// - Returns: `true` if the round can be added, otherwise `false`
-    public func canAddRound(_ round: Round) -> Bool {
+    public func canAddRound(
+        _ round: Round
+    ) -> Bool {
         guard alivePlayers.count >= 2, round.isComplete else { return false }
         return alivePlayers == round.players
     }
 
     /// Add a round to the score card
     /// - Parameter round: The new round
-    public mutating func addRound(_ round: Round) {
+    public mutating func addRound(
+        _ round: Round
+    ) {
         precondition(canAddRound(round))
         rounds.append(round)
     }
@@ -104,7 +112,9 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
     /// Create a new score card with an additional round
     /// - Parameter round: The new round
     /// - Returns: The new score card
-    public func withRound(_ round: Round) -> ScoreCard {
+    public func withRound(
+        _ round: Round
+    ) -> ScoreCard {
         var copy = self
         copy.addRound(round)
         return copy
@@ -113,7 +123,9 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
     /// Whether or not a round at a provided index can be removed from the game
     /// - Parameter index: The index you wish to remove
     /// - Returns: `true` if the round can be removed, or `false` if it cannot be removed (or if no such index exists)
-    public func canRemoveRound(atIndex index: Int) -> Bool {
+    public func canRemoveRound(
+        atIndex index: Int
+    ) -> Bool {
         guard rounds.indices.last != index else {
             return true
         }
@@ -124,12 +136,16 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
 
     /// Remove the round at the provided index
     /// - Parameter index: The index
-    public mutating func removeRound(atIndex index: Int) {
+    public mutating func removeRound(
+        atIndex index: Int
+    ) {
         precondition(canRemoveRound(atIndex: index))
         rounds.remove(at: index)
     }
 
-    public func withoutRound(atIndex index: Int) -> ScoreCard {
+    public func withoutRound(
+        atIndex index: Int
+    ) -> ScoreCard {
         var copy = self
         copy.removeRound(atIndex: index)
         return copy
@@ -138,7 +154,9 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
     /// Whether or not a round with the provided ID can be removed from the score card
     /// - Parameter id: The ID of the round you wish to remove
     /// - Returns: `true` if the round can be removed, or `false` if it cannot be removed (or if no such round exists)
-    public func canRemoveRound(id: String) -> Bool {
+    public func canRemoveRound(
+        id: String
+    ) -> Bool {
         guard let round = rounds.filter({ round in round.id == id }).first,
               let index = rounds.firstIndex(of: round) else {
             return false
@@ -148,7 +166,9 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
 
     /// Remove the round with the provided ID from the score card.
     /// - Parameter id: The ID of the round you wish to remove.
-    public mutating func removeRound(id: String) {
+    public mutating func removeRound(
+        id: String
+    ) {
         precondition(canRemoveRound(id: id))
         guard let round = rounds.filter({ round in round.id == id }).first,
               let index = rounds.firstIndex(of: round) else {
@@ -157,7 +177,9 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         removeRound(atIndex: index)
     }
 
-    public func withoutRound(id: String) -> ScoreCard {
+    public func withoutRound(
+        id: String
+    ) -> ScoreCard {
         var copy = self
         copy.removeRound(id: id)
         return copy
@@ -168,7 +190,10 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
     ///   - index: The index of the round you wish to replace
     ///   - round: The new round use instead
     /// - Returns: `true` if the replacement is possible, otherwise `false` if it is not (or if no such round exists to be replaced)
-    public func canReplaceRound(atIndex index: Int, withRound round: Round) -> Bool {
+    public func canReplaceRound(
+        atIndex index: Int,
+        withRound round: Round
+    ) -> Bool {
         guard rounds.indices.contains(index), rounds[index].players == round.players, round.isComplete else {
             return false
         }
@@ -184,7 +209,10 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
     /// - Parameters:
     ///   - index: The index of the round you wish to replace
     ///   - round: The round to use instead
-    public mutating func replaceRound(atIndex index: Int, withRound round: Round) {
+    public mutating func replaceRound(
+        atIndex index: Int,
+        withRound round: Round
+    ) {
         precondition(canReplaceRound(atIndex: index, withRound: round))
         var newRound = Round(players: round.players, id: round.id)
         for player in round.players {
@@ -193,7 +221,10 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         rounds[index] = newRound
     }
 
-    public func replacingRound(atIndex index: Int, withRound round: Round) -> ScoreCard {
+    public func replacingRound(
+        atIndex index: Int,
+        withRound round: Round
+    ) -> ScoreCard {
         var copy = self
         copy.replaceRound(atIndex: index, withRound: round)
         return copy
@@ -204,7 +235,10 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
     ///   - id: The ID of the round you wish to replace
     ///   - round: The round to use instead
     /// - Returns: `true` if the replacement is possible, otherwise `false` if it is not (or if no such round exists to be replaced)
-    public func canReplaceRound(id: String, withRound round: Round) -> Bool {
+    public func canReplaceRound(
+        id: String,
+        withRound round: Round
+    ) -> Bool {
         guard let old = rounds.filter({ round in round.id == id }).first,
               let index = rounds.firstIndex(of: old) else {
             return false
@@ -216,7 +250,10 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
     /// - Parameters:
     ///   - id: The ID of the round you wish to replace
     ///   - round: The round to use instead
-    public mutating func replaceRound(id: String, withRound round: Round) {
+    public mutating func replaceRound(
+        id: String,
+        withRound round: Round
+    ) {
         precondition(canReplaceRound(id: id, withRound: round))
         guard let old = rounds.filter({ round in round.id == id }).first,
               let index = rounds.firstIndex(of: old) else {
@@ -225,13 +262,18 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         replaceRound(atIndex: index, withRound: round)
     }
 
-    public func replacingRound(id: String, withRound round: Round) -> ScoreCard {
+    public func replacingRound(
+        id: String,
+        withRound round: Round
+    ) -> ScoreCard {
         var copy = self
         copy.replaceRound(id: id, withRound: round)
         return self
     }
 
-    public func dropLast(_ k: Int = 1) -> ScoreCard {
+    public func dropLast(
+        _ k: Int = 1
+    ) -> ScoreCard {
         precondition(rounds.count >= k)
         var copy = self
         copy.rounds = Array(rounds.dropLast(k))
@@ -241,7 +283,9 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
     /// The total score for a given player
     /// - Parameter player: The player you want to get the score for
     /// - Returns: The total score for that player
-    public func totalScore(forPlayer player: String) -> Int {
+    public func totalScore(
+        forPlayer player: String
+    ) -> Int {
         precondition(players.contains(player))
         return rounds
             .filter { round in
@@ -306,7 +350,10 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         /// - Parameters:
         ///   - score: The score
         ///   - player: The player
-        public mutating func set(score: Int, forPlayer player: String) {
+        public mutating func set(
+            score: Int,
+            forPlayer player: String
+        ) {
             precondition(players.contains(player))
             do {
                 scores[player] = try validateScore(score)

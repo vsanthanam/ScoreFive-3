@@ -20,7 +20,9 @@ let package = Package(
         ),
         .testTarget(
             name: "FiveKitTests",
-            dependencies: ["FiveKit"],
+            dependencies: [
+                "FiveKit"
+            ],
             swiftSettings: [
                 .enableExperimentalFeature("StrictConcurrency")
             ]

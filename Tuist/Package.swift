@@ -15,9 +15,9 @@ import PackageDescription
 #endif
 
 let package = Package(
-    name: "ExternalPackages",
+    name: "PackageName",
     dependencies: [
         .package(url: "https://github.com/vsanthanam/SafariUI", from: "3.0.0"),
-        .package(url: "https://github.com/vsanthanam/SwiftUtilities", from: "0.0.0")
+        .package(url: "git@github.com:vsanthanam/SwiftUtilities.git", from: "0.0.0")
     ]
 )

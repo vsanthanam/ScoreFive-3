@@ -28,11 +28,26 @@ import ProjectDescription
 let project = Project(
     name: "ScoreFive",
     organizationName: "com.varunsanthanam",
-    options: .options(disableBundleAccessors: true, disableSynthesizedResourceAccessors: true),
+    options: .options(
+        disableBundleAccessors: true,
+        disableSynthesizedResourceAccessors: true
+    ),
     packages: [
-        .local(path: "Packages/FiveKit"),
-        .remote(url: "git@github.com:vsanthanam/SafariUI.git", requirement: .upToNextMajor(from: "3.0.0")),
-        .remote(url: "git@github.com:vsanthanam/SwiftUtilities.git", requirement: .upToNextMajor(from: "0.0.0"))
+        .local(
+            path: "Packages/FiveKit"
+        ),
+        .remote(
+            url: "git@github.com:vsanthanam/SafariUI.git",
+            requirement: .upToNextMajor(
+                from: "3.0.0"
+            )
+        ),
+        .remote(
+            url: "git@github.com:vsanthanam/SwiftUtilities.git",
+            requirement: .upToNextMajor(
+                from: "0.0.0"
+            )
+        )
     ],
     targets: [
         Target(
@@ -47,14 +62,36 @@ let project = Project(
                     "UILaunchScreen": [:]
                 ]
             ]),
-            sources: ["Targets/ScoreFive/Sources/**"],
-            resources: ["Targets/ScoreFive/Resources/**"],
-            entitlements: .file(path: "Targets/ScoreFive/ScoreFive.entitlements"),
+            sources: [
+                "Targets/ScoreFive/Sources/**"
+            ],
+            resources: [
+                "Targets/ScoreFive/Resources/**"
+            ],
+            entitlements: .file(
+                path: "Targets/ScoreFive/ScoreFive.entitlements"
+            ),
             dependencies: [
-                .package(product: "FiveKit", type: .runtime, condition: nil),
-                .package(product: "SafariUI", type: .runtime, condition: nil),
-                .package(product: "SwiftUtilities", type: .runtime, condition: nil),
-                .package(product: "UIUtilities", type: .runtime, condition: nil)
+                .package(
+                    product: "FiveKit",
+                    type: .runtime,
+                    condition: nil
+                ),
+                .package(
+                    product: "SafariUI",
+                    type: .runtime,
+                    condition: nil
+                ),
+                .package(
+                    product: "SwiftUtilities",
+                    type: .runtime,
+                    condition: nil
+                ),
+                .package(
+                    product: "UIUtilities",
+                    type: .runtime,
+                    condition: nil
+                )
             ]
         ),
         Target(
@@ -63,10 +100,14 @@ let project = Project(
             product: .unitTests,
             bundleId: "com.varunsanthanam.ScoreFiveTests",
             infoPlist: .default,
-            sources: ["Targets/ScoreFiveTests/Sources/**"],
+            sources: [
+                "Targets/ScoreFiveTests/Sources/**"
+            ],
             resources: [],
             dependencies: [
-                .target(name: "ScoreFive")
+                .target(
+                    name: "ScoreFive"
+                )
             ]
         ),
         Target(
@@ -75,10 +116,14 @@ let project = Project(
             product: .uiTests,
             bundleId: "com.varunsanthanam.ScoreFiveUITests",
             infoPlist: .default,
-            sources: ["Targets/ScoreFiveUITests/Sources/**"],
+            sources: [
+                "Targets/ScoreFiveUITests/Sources/**"
+            ],
             resources: [],
             dependencies: [
-                .target(name: "ScoreFive")
+                .target(
+                    name: "ScoreFive"
+                )
             ]
         )
     ]

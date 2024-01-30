@@ -8,14 +8,18 @@ let package = Package(
     products: [
         .library(
             name: "FiveKit",
-            targets: ["FiveKit"]
+            targets: [
+                "FiveKit"
+            ]
         ),
     ],
     targets: [
         .target(
             name: "FiveKit",
             swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency")
+                .enableExperimentalFeature(
+                    "StrictConcurrency"
+                )
             ]
         ),
         .testTarget(
@@ -24,7 +28,9 @@ let package = Package(
                 "FiveKit"
             ],
             swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency")
+                .enableExperimentalFeature(
+                    "StrictConcurrency"
+                )
             ]
         ),
     ]

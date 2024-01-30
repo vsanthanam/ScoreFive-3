@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:vsanthanam/SwiftUtilities.git",
       "state" : {
-        "revision" : "b95a5df75a63c16b6f41929c8c2df56c04262451",
-        "version" : "0.0.2"
+        "revision" : "e060c06967779fcebf8e1d8875261e56821738d9",
+        "version" : "0.0.3"
       }
     }
   ],

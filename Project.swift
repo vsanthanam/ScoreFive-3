@@ -87,11 +87,6 @@ let project = Project(
                     type: .runtime,
                     condition: nil
                 ),
-                .package(
-                    product: "UIUtilities",
-                    type: .runtime,
-                    condition: nil
-                )
             ]
         ),
         Target(

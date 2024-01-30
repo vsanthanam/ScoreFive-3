@@ -24,7 +24,7 @@
 // SOFTWARE.
 
 import SwiftUI
-import UIUtilities
+import SwiftUtilities
 
 public struct Chevron: View {
 

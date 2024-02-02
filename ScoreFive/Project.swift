@@ -32,11 +32,6 @@ let project = Project(
         disableBundleAccessors: true,
         disableSynthesizedResourceAccessors: true
     ),
-    packages: [
-        .local(
-            path: "Packages/FiveKit"
-        )
-    ],
     targets: [
         Target(
             name: "ScoreFive",
@@ -51,20 +46,16 @@ let project = Project(
                 ]
             ]),
             sources: [
-                "Targets/ScoreFive/Sources/**"
+                "ScoreFive/Sources/**"
             ],
             resources: [
-                "Targets/ScoreFive/Resources/**"
+                "ScoreFive/Resources/**"
             ],
             entitlements: .file(
-                path: "Targets/ScoreFive/ScoreFive.entitlements"
+                path: "ScoreFive/ScoreFive.entitlements"
             ),
             dependencies: [
-                .package(
-                    product: "FiveKit",
-                    type: .runtime,
-                    condition: nil
-                ),
+                .project(target: "FiveKit", path: "../FiveKit"),
                 .external(name: "SwiftUtilities"),
                 .external(name: "SafariUI")
             ]
@@ -76,7 +67,7 @@ let project = Project(
             bundleId: "com.varunsanthanam.ScoreFiveTests",
             infoPlist: .default,
             sources: [
-                "Targets/ScoreFiveTests/Sources/**"
+                "ScoreFiveTests/Sources/**"
             ],
             resources: [],
             dependencies: [
@@ -92,7 +83,7 @@ let project = Project(
             bundleId: "com.varunsanthanam.ScoreFiveUITests",
             infoPlist: .default,
             sources: [
-                "Targets/ScoreFiveUITests/Sources/**"
+                "ScoreFiveUITests/Sources/**"
             ],
             resources: [],
             dependencies: [

@@ -1,5 +1,5 @@
 // ScoreFive
-// AcknowledgementsModifier.swift
+// StartRecordModifier.swift
 //
 // MIT License
 //
@@ -24,56 +24,56 @@
 // SOFTWARE.
 
 import SwiftUI
-import SwiftUtilities
 
 extension View {
 
-    func acknowledgements(_ acknowledgements: [Acknowledgement]) -> some View {
-        let modifier = AcknowledgementsViewModifier(acknowledgements: acknowledgements)
+    func onRecordStart(_ onStart: @escaping (Record) -> Void) -> some View {
+        let action = StartRecordAction(action: onStart)
+        let modifier = StartRecordViewModifier(startRecord: action)
         return ModifiedContent(content: self, modifier: modifier)
     }
 
 }
 
+struct StartRecordAction {
+
+    fileprivate init(action: @escaping (Record) -> Void) {
+        self.action = action
+    }
+
+    private let action: (Record) -> Void
+
+    func callAsFunction(_ record: Record) {
+        action(record)
+    }
+}
+
+struct StartRecordEnvironmentKey: EnvironmentKey {
+
+    typealias Value = StartRecordAction
+
+    static var defaultValue: Value = .init { _ in }
+
+}
+
 extension EnvironmentValues {
 
-    var acknowledgements: [Acknowledgement] {
-        get {
-            self[AcknowledgementsEnvironmentKey.self]
-        }
-        set {
-            self[AcknowledgementsEnvironmentKey.self] = newValue
-        }
-    }
-}
-
-private struct AcknowledgementsEnvironmentKey: EnvironmentKey {
-
-    // MARK: - EnvironmentKey
-
-    typealias Value = [Acknowledgement]
-
-    static let defaultValue: [Acknowledgement] = []
-}
-
-private struct AcknowledgementsViewModifier: ViewModifier {
-
-    // MARK: - Initializers
-
-    init(acknowledgements: [Acknowledgement]) {
-        self.acknowledgements = acknowledgements
+    var startRecord: StartRecordAction {
+        get { self[StartRecordEnvironmentKey.self] }
+        set { self[StartRecordEnvironmentKey.self] = newValue }
     }
 
-    // MARK: - ViewModifier
+}
 
+struct StartRecordViewModifier: ViewModifier {
+
+    let startRecord: StartRecordAction
+
+    @MainActor
     @ViewBuilder
     func body(content: Content) -> some View {
         content
-            .environment(\.acknowledgements, acknowledgements)
+            .environment(\.startRecord, startRecord)
     }
-
-    // MARK: - Private
-
-    private let acknowledgements: [Acknowledgement]
 
 }

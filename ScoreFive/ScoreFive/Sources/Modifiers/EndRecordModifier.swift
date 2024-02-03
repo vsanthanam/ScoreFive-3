@@ -1,5 +1,5 @@
 // ScoreFive
-// AcknowledgementsModifier.swift
+// EndRecordModifier.swift
 //
 // MIT License
 //
@@ -24,56 +24,56 @@
 // SOFTWARE.
 
 import SwiftUI
-import SwiftUtilities
 
 extension View {
 
-    func acknowledgements(_ acknowledgements: [Acknowledgement]) -> some View {
-        let modifier = AcknowledgementsViewModifier(acknowledgements: acknowledgements)
+    func onRecordEnd(_ onEnd: @escaping () -> Void) -> some View {
+        let action = EndRecordAction(action: onEnd)
+        let modifier = EndRecordViewModifier(endRecord: action)
         return ModifiedContent(content: self, modifier: modifier)
     }
 
 }
 
+struct EndRecordAction {
+
+    fileprivate init(action: @escaping () -> Void) {
+        self.action = action
+    }
+
+    private let action: () -> Void
+
+    func callAsFunction() {
+        action()
+    }
+}
+
+struct EndRecordEnvironmentKey: EnvironmentKey {
+
+    typealias Value = EndRecordAction
+
+    static var defaultValue: Value = .init {}
+
+}
+
 extension EnvironmentValues {
 
-    var acknowledgements: [Acknowledgement] {
-        get {
-            self[AcknowledgementsEnvironmentKey.self]
-        }
-        set {
-            self[AcknowledgementsEnvironmentKey.self] = newValue
-        }
-    }
-}
-
-private struct AcknowledgementsEnvironmentKey: EnvironmentKey {
-
-    // MARK: - EnvironmentKey
-
-    typealias Value = [Acknowledgement]
-
-    static let defaultValue: [Acknowledgement] = []
-}
-
-private struct AcknowledgementsViewModifier: ViewModifier {
-
-    // MARK: - Initializers
-
-    init(acknowledgements: [Acknowledgement]) {
-        self.acknowledgements = acknowledgements
+    var endRecord: EndRecordAction {
+        get { self[EndRecordEnvironmentKey.self] }
+        set { self[EndRecordEnvironmentKey.self] = newValue }
     }
 
-    // MARK: - ViewModifier
+}
 
+struct EndRecordViewModifier: ViewModifier {
+
+    let endRecord: EndRecordAction
+
+    @MainActor
     @ViewBuilder
     func body(content: Content) -> some View {
         content
-            .environment(\.acknowledgements, acknowledgements)
+            .environment(\.endRecord, endRecord)
     }
-
-    // MARK: - Private
-
-    private let acknowledgements: [Acknowledgement]
 
 }

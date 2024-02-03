@@ -25,6 +25,7 @@
 
 import SwiftData
 import SwiftUI
+import SwiftUtilities
 
 struct RootScreen: View {
 
@@ -39,9 +40,6 @@ struct RootScreen: View {
         Group {
             if let activeRecord {
                 RecordView(activeRecord: activeRecord)
-                    .environment(\.endRecord, EndRecord {
-                        self.activeRecord = nil
-                    })
             } else {
                 HStack {
                     menuCard
@@ -50,34 +48,42 @@ struct RootScreen: View {
                 .background(Color.secondarySystemBackground)
             }
         }
-        .sheet(isPresented: $showNewGame) {
-            NewGameScreen { record in
-                activeRecord = record
+        .sheet(item: $sheet, id: \.rawValue) { sheet in
+            switch sheet {
+            case .newGame:
+                NewGameScreen()
+            case .loadGame:
+                LoadGameScreen()
+            case .more:
+                MoreScreen()
             }
         }
-        .sheet(isPresented: $showLoadGame) {
-            LoadGameScreen { record in
-                activeRecord = record
-            }
+        .onRecordStart { record in
+            activeRecord = record
         }
-        .sheet(isPresented: $showMore) {
-            MoreScreen()
+        .onRecordEnd {
+            activeRecord = nil
         }
+        .acknowledgements([
+            .init(url: #URL("https://vsanthanam.github.io/SafariUI/"), name: "SafariUI", id: "safariui"),
+            .init(url: #URL("https://vsanthanam/github.io/SwiftUtilities"), name: "SwiftUtilities", id: "swiftutilities"),
+            .init(url: #URL("https://github.com/apple/swift-syntax"), name: "SwiftSyntax", id: "swiftsyntax")
+        ])
     }
 
     // MARK: - Private
+
+    private enum Sheet: String, Equatable, Hashable, Sendable {
+        case newGame
+        case loadGame
+        case more
+    }
 
     @State
     private var activeRecord: Record?
 
     @State
-    private var showNewGame = false
-
-    @State
-    private var showLoadGame = false
-
-    @State
-    private var showMore = false
+    private var sheet: Sheet?
 
     @Query(sort: \Record.lastUpdated)
     private var records: [Record]
@@ -102,7 +108,7 @@ struct RootScreen: View {
                 .fontWeight(.bold)
                 .padding(24.0)
             Button {
-                showNewGame.toggle()
+                sheet = .newGame
             } label: {
                 Text("New Game")
                     .fontWeight(.semibold)
@@ -111,7 +117,7 @@ struct RootScreen: View {
             .buttonStyle(.borderedProminent)
             if !records.isEmpty {
                 Button {
-                    showLoadGame.toggle()
+                    sheet = .loadGame
                 } label: {
                     Text("Load Game")
                         .fontWeight(.semibold)
@@ -120,7 +126,7 @@ struct RootScreen: View {
                 .buttonStyle(.bordered)
             }
             Button {
-                showMore.toggle()
+                sheet = .more
             } label: {
                 Text("More")
                     .fontWeight(.semibold)
@@ -135,60 +141,4 @@ struct RootScreen: View {
 #Preview {
     RootScreen()
         .modelContainer(for: Record.self, inMemory: true)
-}
-
-struct EndRecord {
-
-    fileprivate init(action: @escaping () -> Void) {
-        self.action = action
-    }
-
-    private let action: () -> Void
-
-    func callAsFunction() {
-        action()
-    }
-}
-
-struct StartRecord {
-
-    fileprivate init(action: @escaping (Record) -> Void) {
-        self.action = action
-    }
-
-    private let action: (Record) -> Void
-
-    func callAsFunction(_ record: Record) {
-        action(record)
-    }
-}
-
-struct EndRecordEnvironmentKey: EnvironmentKey {
-
-    typealias Value = EndRecord
-
-    static var defaultValue: Value = .init {}
-
-}
-
-struct StartRecordEnvironmentKey: EnvironmentKey {
-
-    typealias Value = StartRecord
-
-    static var defaultValue: Value = .init { _ in }
-
-}
-
-extension EnvironmentValues {
-
-    var endRecord: EndRecord {
-        get { self[EndRecordEnvironmentKey.self] }
-        set { self[EndRecordEnvironmentKey.self] = newValue }
-    }
-
-    var startRecord: StartRecord {
-        get { self[StartRecordEnvironmentKey.self] }
-        set { self[StartRecordEnvironmentKey.self] = newValue }
-    }
-
 }

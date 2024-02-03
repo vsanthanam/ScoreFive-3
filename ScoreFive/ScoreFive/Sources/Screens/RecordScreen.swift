@@ -38,9 +38,11 @@ struct RecordView: View {
 
     // MARK: - View
 
+    @MainActor
     @ViewBuilder
     var body: some View {
         VStack(spacing: 0.0) {
+            toolbar
             playerNamesHeader
             Spacer()
                 .frame(maxWidth: .infinity, minHeight: 1.0, maxHeight: 1.0)
@@ -64,6 +66,9 @@ struct RecordView: View {
                 players: round.players
             )
         }
+        .sheet(isPresented: $showingRecordDetail) {
+            RecordDetailScreen(activeRecord: $activeRecord.scoreCard)
+        }
     }
 
     // MARK: - Private
@@ -76,6 +81,12 @@ struct RecordView: View {
 
     @State
     private var editingRound: ScoreCard.Round? = nil
+
+    @State
+    private var showingRecordDetail = false
+
+    @Environment(\.endRecord)
+    private var endRecord: EndRecordAction
 
     @ViewBuilder
     private var roundsList: some View {
@@ -124,6 +135,7 @@ struct RecordView: View {
         }
     }
 
+    @MainActor
     @ViewBuilder
     private var addScoresButton: some View {
         Button {
@@ -143,6 +155,39 @@ struct RecordView: View {
         .listRowSeparator(.hidden)
     }
 
+    @MainActor
+    @ViewBuilder
+    private var toolbar: some View {
+        HStack {
+            Button {
+                withAnimation(.bouncy) {
+                    endRecord()
+                }
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .symbolRenderingMode(.hierarchical)
+                    .foregroundStyle(Color.secondaryLabel)
+                    .font(.title)
+                    .padding(8)
+            }
+            Spacer()
+            Text("ScoreFive")
+                .fontWeight(.semibold)
+            Spacer()
+            Button {
+                showingRecordDetail.toggle()
+            } label: {
+                Image(systemName: "ellipsis.circle.fill")
+                    .symbolRenderingMode(.hierarchical)
+                    .foregroundStyle(Color.secondaryLabel)
+                    .font(.title)
+                    .padding(8)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: 44.0)
+    }
+
+    @MainActor
     @ViewBuilder
     private var playerNamesHeader: some View {
         RecordRow {
@@ -160,6 +205,7 @@ struct RecordView: View {
         .recordRowConfiguration(hasTopDivider: true, hasBottomDivider: true)
     }
 
+    @MainActor
     @ViewBuilder
     private var totalScoresFooter: some View {
         RecordRow {

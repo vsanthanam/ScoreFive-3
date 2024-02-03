@@ -57,7 +57,7 @@ let project = Project(
             dependencies: [
                 .project(target: "FiveKit", path: "../FiveKit"),
                 .external(name: "SwiftUtilities"),
-                .external(name: "SafariUI")
+                .external(name: "SafariView")
             ]
         ),
         Target(

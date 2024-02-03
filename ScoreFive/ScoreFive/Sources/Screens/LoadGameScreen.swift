@@ -29,14 +29,9 @@ import SwiftUtilities
 
 struct LoadGameScreen: View {
 
-    // MARK: - Initializers
-
-    init(didLoadRecord: @escaping (Record) -> Void) {
-        self.didLoadRecord = didLoadRecord
-    }
-
     // MARK: - View
 
+    @MainActor
     @ViewBuilder
     var body: some View {
         NavigationStack {
@@ -80,8 +75,6 @@ struct LoadGameScreen: View {
 
     // MARK: - Private
 
-    private let didLoadRecord: (Record) -> Void
-
     @State
     private var showAll = false
 
@@ -96,6 +89,9 @@ struct LoadGameScreen: View {
 
     @Environment(\.dismiss)
     private var dismiss: DismissAction
+
+    @Environment(\.startRecord)
+    private var startRecord: StartRecordAction
 
     @MainActor
     @ViewBuilder
@@ -147,7 +143,7 @@ struct LoadGameScreen: View {
     }
 
     private func selectRecord(_ record: Record) {
-        didLoadRecord(record)
+        startRecord(record)
         dismiss()
     }
 
@@ -160,8 +156,6 @@ struct LoadGameScreen: View {
 }
 
 #Preview {
-    LoadGameScreen { _ in
-
-    }
-    .modelContainer(for: Record.self, inMemory: true)
+    LoadGameScreen()
+        .modelContainer(for: Record.self, inMemory: true)
 }

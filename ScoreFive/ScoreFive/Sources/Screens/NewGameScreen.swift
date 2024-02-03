@@ -29,12 +29,6 @@ import SwiftUI
 
 struct NewGameScreen: View {
 
-    // MARK: - Initializers
-
-    init(didCreateRecord: @escaping (Record) -> Void) {
-        self.didCreateRecord = didCreateRecord
-    }
-
     // MARK: - View
 
     @ViewBuilder
@@ -85,8 +79,6 @@ struct NewGameScreen: View {
         let id: String
     }
 
-    private let didCreateRecord: (Record) -> Void
-
     @State
     private var scoreLimit: Int? = 250
 
@@ -101,6 +93,9 @@ struct NewGameScreen: View {
 
     @Environment(\.dismiss)
     private var dismiss: DismissAction
+
+    @Environment(\.startRecord)
+    private var startRecord: StartRecordAction
 
     @Environment(\.modelContext)
     private var modelContext: ModelContext
@@ -219,15 +214,13 @@ struct NewGameScreen: View {
         let card = ScoreCard(players: names, scoreLimit: scoreLimit ?? 50)
         let record = Record(scoreCard: card)
         modelContext.insert(record)
-        didCreateRecord(record)
+        startRecord(record)
         dismiss()
     }
 
 }
 
 #Preview {
-    NewGameScreen() { _ in
-
-    }
-    .modelContainer(for: Record.self, inMemory: true)
+    NewGameScreen()
+        .modelContainer(for: Record.self, inMemory: true)
 }

@@ -32,6 +32,11 @@ let project = Project(
         disableBundleAccessors: true,
         disableSynthesizedResourceAccessors: true
     ),
+    settings: .settings(
+        base: [
+            "ENABLE_USER_SCRIPT_SANDBOXING": "YES"
+        ]
+    ),
     targets: [
         Target(
             name: "ScoreFive",

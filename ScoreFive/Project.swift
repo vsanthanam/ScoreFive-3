@@ -42,7 +42,7 @@ let project = Project(
             name: "ScoreFive",
             destinations: .iOS,
             product: .app,
-            bundleId: "com.varunsanthanam.ScoreFive2",
+            bundleId: "com.varunsanthanam.ScoreFive3",
             infoPlist: .extendingDefault(with: [
                 "CFBundleShortVersionString": "3.0.0",
                 "CFBundleVersion": "310",
@@ -61,7 +61,7 @@ let project = Project(
             ),
             dependencies: [
                 .project(target: "FiveKit", path: "../FiveKit"),
-                .external(name: "SwiftUtilities"),
+                .external(name: "SwiftExtensions"),
                 .external(name: "SafariView")
             ]
         ),

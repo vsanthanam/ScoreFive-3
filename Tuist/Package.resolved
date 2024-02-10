@@ -19,12 +19,12 @@
       }
     },
     {
-      "identity" : "swiftutilities",
+      "identity" : "swiftextensions",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vsanthanam/SwiftUtilities",
+      "location" : "https://github.com/vsanthanam/SwiftExtensions",
       "state" : {
-        "revision" : "ed1788564af3818609a78cdf9182627846401486",
-        "version" : "0.0.4"
+        "revision" : "7fef36f2491a73b463d91d665bdf3007334a935b",
+        "version" : "0.0.5"
       }
     }
   ],

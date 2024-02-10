@@ -24,8 +24,8 @@
 // SOFTWARE.
 
 import FiveKit
+import SwiftExtensions
 import SwiftUI
-import SwiftUtilities
 
 @MainActor
 struct RecordView: View {
@@ -67,7 +67,7 @@ struct RecordView: View {
             )
         }
         .sheet(isPresented: $showingRecordDetail) {
-            RecordDetailScreen(activeRecord: $activeRecord.scoreCard)
+            RecordDetailScreen(scoreCard: $activeRecord.scoreCard)
         }
     }
 
@@ -164,7 +164,7 @@ struct RecordView: View {
                     endRecord()
                 }
             } label: {
-                Image(systemName: "xmark.circle.fill")
+                Image(systemName: "pause.circle.fill")
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(Color.secondaryLabel)
                     .font(.title)

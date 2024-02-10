@@ -24,8 +24,8 @@
 // SOFTWARE.
 
 import SwiftData
+import SwiftExtensions
 import SwiftUI
-import SwiftUtilities
 
 struct LoadGameScreen: View {
 

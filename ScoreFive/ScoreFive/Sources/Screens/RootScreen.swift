@@ -24,8 +24,8 @@
 // SOFTWARE.
 
 import SwiftData
+import SwiftExtensions
 import SwiftUI
-import SwiftUtilities
 
 struct RootScreen: View {
 
@@ -65,9 +65,9 @@ struct RootScreen: View {
             activeRecord = nil
         }
         .acknowledgements([
-            .init(url: #URL("https://vsanthanam.github.io/SafariUI/"), name: "SafariUI", id: "safariui"),
-            .init(url: #URL("https://vsanthanam/github.io/SwiftUtilities"), name: "SwiftUtilities", id: "swiftutilities"),
-            .init(url: #URL("https://github.com/apple/swift-syntax"), name: "SwiftSyntax", id: "swiftsyntax")
+            .init(url: #URL("https://vsanthanam.github.io/SafariUI/"), name: "SafariUI", id: "safari-ui"),
+            .init(url: #URL("https://vsanthanam/github.io/SwiftExtensions"), name: "SwiftExtensions", id: "swift-extensions"),
+            .init(url: #URL("https://github.com/apple/swift-syntax"), name: "SwiftSyntax", id: "swift-syntax")
         ])
     }
 

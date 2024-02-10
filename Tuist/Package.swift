@@ -9,8 +9,8 @@ let package = Package(
             from: "3.0.0"
         ),
         .package(
-            url: "https://github.com/vsanthanam/SwiftUtilities",
-            from: "0.0.0"
+            url: "https://github.com/vsanthanam/SwiftExtensions",
+            from: "0.0.5"
         )
     ]
 )

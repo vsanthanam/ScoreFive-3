@@ -25,8 +25,8 @@
 
 import SafariView
 import StoreKit
+import SwiftExtensions
 import SwiftUI
-import SwiftUtilities
 
 @MainActor
 struct MoreScreen: View {

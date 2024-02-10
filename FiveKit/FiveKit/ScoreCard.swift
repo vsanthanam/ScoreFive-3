@@ -333,7 +333,7 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
             guard players.count >= 2 else {
                 return false
             }
-            let zeroes = scores.values.filter { score in score == 0 }
+            let zeroes = scoreMap.values.filter { score in score == 0 }
             guard zeroes.count >= 1 else {
                 return false
             }
@@ -346,6 +346,14 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         /// The players participating in this round
         public let players: [String]
 
+        /// All the scores contained in the round
+        public var scores: [Int] {
+            players
+                .compactMap { player in
+                    self[player]
+                }
+        }
+
         /// Set the score for a given player
         /// - Parameters:
         ///   - score: The score
@@ -356,7 +364,7 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         ) {
             precondition(players.contains(player))
             do {
-                scores[player] = try validateScore(score)
+                scoreMap[player] = try validateScore(score)
             } catch {
                 fatalError()
             }
@@ -364,12 +372,12 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
 
         public mutating func removeScore(forPlayer player: String) {
             precondition(players.contains(player))
-            scores.removeValue(forKey: player)
+            scoreMap.removeValue(forKey: player)
         }
 
         public func score(forPlayer player: String) -> Int? {
             precondition(players.contains(player))
-            return scores[player]
+            return scoreMap[player]
         }
 
         // MARK: - Subscript
@@ -398,7 +406,7 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
 
         // MARK: - Private
 
-        private var scores = [String: Int]()
+        private var scoreMap = [String: Int]()
     }
 
     // MARK: - Identifiable

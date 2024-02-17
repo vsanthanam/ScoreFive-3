@@ -142,7 +142,7 @@ struct MoreScreen: View {
     }
 
     private func openEmail() {
-        openURL(#MailTo("talkto@vsanthanam.com"))
+        openURL(#URL("mailto:talkto@vsanthanam.com"))
     }
 
     private func leaveReview() {

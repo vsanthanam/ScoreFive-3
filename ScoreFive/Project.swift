@@ -32,13 +32,8 @@ let project = Project(
         disableBundleAccessors: true,
         disableSynthesizedResourceAccessors: true
     ),
-    settings: .settings(
-        base: [
-            "ENABLE_USER_SCRIPT_SANDBOXING": "YES"
-        ]
-    ),
     targets: [
-        Target(
+        .target(
             name: "ScoreFive",
             destinations: .iOS,
             product: .app,
@@ -65,7 +60,7 @@ let project = Project(
                 .external(name: "SafariView")
             ]
         ),
-        Target(
+        .target(
             name: "ScoreFiveTests",
             destinations: .iOS,
             product: .unitTests,
@@ -81,7 +76,7 @@ let project = Project(
                 )
             ]
         ),
-        Target(
+        .target(
             name: "ScoreFiveUITests",
             destinations: .iOS,
             product: .uiTests,

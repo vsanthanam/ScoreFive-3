@@ -1,2 +1,3 @@
 [tools]
-tuist = "3.42.2"
+tuist = "4.2.5"
+swiftformat = "0.53.1"

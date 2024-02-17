@@ -33,6 +33,11 @@ extension View {
         return ModifiedContent(content: self, modifier: modifier)
     }
 
+    func acknowledgements(@ArrayBuilder<[Acknowledgement]> _ acknowledgements: () -> [Acknowledgement]) -> some View {
+        let modifier = AcknowledgementsViewModifier(acknowledgements: acknowledgements())
+        return ModifiedContent(content: self, modifier: modifier)
+    }
+
 }
 
 extension EnvironmentValues {

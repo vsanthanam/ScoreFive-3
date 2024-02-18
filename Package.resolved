@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vsanthanam/SwiftExtensions",
       "state" : {
-        "revision" : "7fef36f2491a73b463d91d665bdf3007334a935b",
-        "version" : "0.0.5"
+        "revision" : "912dc9dad9a576a867e2f704af6b2beafd82f3cf",
+        "version" : "0.0.7"
       }
     }
   ],

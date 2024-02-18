@@ -11,19 +11,18 @@ jobs:
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
+      - uses: jdx/mise-action@v2
       - name: Lint
-        run: swiftformat . --lint
+        run: swiftformat --lint .
   test:
     runs-on: macos-13
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: jdx/mise-action@v2
       - name: Xcode Select
         run: sudo xcode-select --switch /Applications/Xcode_15.0.app
       - name: Fetch Dependencies
-        run: tuist fetch
-      - name: Generate Project
-        run: tuist generate
+        run: tuist install
       - name: Run ScoreFive Tests
         run: tuist test ScoreFive
       - name: Run FiveKit Tests

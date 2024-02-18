@@ -32,13 +32,8 @@ let project = Project(
         disableBundleAccessors: true,
         disableSynthesizedResourceAccessors: true
     ),
-    settings: .settings(
-        base: [
-            "ENABLE_USER_SCRIPT_SANDBOXING": "YES"
-        ]
-    ),
     targets: [
-        Target(
+        .target(
             name: "ScoreFive",
             destinations: .iOS,
             product: .app,
@@ -61,11 +56,14 @@ let project = Project(
             ),
             dependencies: [
                 .project(target: "FiveKit", path: "../FiveKit"),
-                .external(name: "SwiftExtensions"),
+                .external(name: "FoundationExtensions"),
+                .external(name: "UIExtensions"),
+                .external(name: "CoreExtensions"),
+                .external(name: "CollectionExtensions"),
                 .external(name: "SafariView")
             ]
         ),
-        Target(
+        .target(
             name: "ScoreFiveTests",
             destinations: .iOS,
             product: .unitTests,
@@ -81,7 +79,7 @@ let project = Project(
                 )
             ]
         ),
-        Target(
+        .target(
             name: "ScoreFiveUITests",
             destinations: .iOS,
             product: .uiTests,

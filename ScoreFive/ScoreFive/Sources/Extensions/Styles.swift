@@ -37,7 +37,12 @@ struct CellStyle: LabelStyle {
 
     @ViewBuilder
     func makeBody(configuration: Configuration) -> some View {
-        Label(title: { configuration.title.foregroundStyle(Color.label) }, icon: { configuration.icon })
-            .labelStyle(.automatic)
+        Label {
+            configuration.title
+                .foregroundStyle(Color.label)
+        } icon: {
+            configuration.icon
+        }
+        .labelStyle(.automatic)
     }
 }

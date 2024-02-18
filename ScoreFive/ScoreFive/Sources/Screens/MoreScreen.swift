@@ -23,10 +23,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import FoundationExtensions
 import SafariView
 import StoreKit
-import SwiftExtensions
 import SwiftUI
+import UIExtensions
 
 @MainActor
 struct MoreScreen: View {
@@ -142,7 +143,7 @@ struct MoreScreen: View {
     }
 
     private func openEmail() {
-        openURL(#MailTo("talkto@vsanthanam.com"))
+        openURL(#URL("mailto:talkto@vsanthanam.com"))
     }
 
     private func leaveReview() {

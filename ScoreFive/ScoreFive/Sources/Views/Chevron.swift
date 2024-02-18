@@ -23,8 +23,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftExtensions
 import SwiftUI
+import UIExtensions
 
 public struct Chevron: View {
 
@@ -41,4 +41,8 @@ public struct Chevron: View {
         // NOTE: - this is kind of a hack to get a thing that looks like a navigation link but isn't one. Doing it via sfsymbols isn't quite the same.
     }
 
+}
+
+#Preview {
+    Chevron()
 }

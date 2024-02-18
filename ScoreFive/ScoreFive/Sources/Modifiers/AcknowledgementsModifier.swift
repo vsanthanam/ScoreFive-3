@@ -23,13 +23,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftExtensions
+import CollectionExtensions
 import SwiftUI
 
 extension View {
 
     func acknowledgements(_ acknowledgements: [Acknowledgement]) -> some View {
         let modifier = AcknowledgementsViewModifier(acknowledgements: acknowledgements)
+        return ModifiedContent(content: self, modifier: modifier)
+    }
+
+    func acknowledgements(@ArrayBuilder<[Acknowledgement]> _ acknowledgements: () -> [Acknowledgement]) -> some View {
+        let modifier = AcknowledgementsViewModifier(acknowledgements: acknowledgements())
         return ModifiedContent(content: self, modifier: modifier)
     }
 

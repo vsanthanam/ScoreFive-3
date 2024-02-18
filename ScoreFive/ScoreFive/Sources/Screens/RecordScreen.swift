@@ -24,8 +24,8 @@
 // SOFTWARE.
 
 import FiveKit
-import SwiftExtensions
 import SwiftUI
+import UIExtensions
 
 @MainActor
 struct RecordView: View {

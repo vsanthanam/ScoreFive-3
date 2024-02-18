@@ -23,9 +23,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import FoundationExtensions
 import SwiftData
-import SwiftExtensions
 import SwiftUI
+import UIExtensions
 
 struct RootScreen: View {
 
@@ -64,11 +65,34 @@ struct RootScreen: View {
         .onRecordEnd {
             activeRecord = nil
         }
-        .acknowledgements([
-            .init(url: #URL("https://vsanthanam.github.io/SafariUI/"), name: "SafariUI", id: "safari-ui"),
-            .init(url: #URL("https://vsanthanam/github.io/SwiftExtensions"), name: "SwiftExtensions", id: "swift-extensions"),
-            .init(url: #URL("https://github.com/apple/swift-syntax"), name: "SwiftSyntax", id: "swift-syntax")
-        ])
+        .acknowledgements {
+            Acknowledgement(
+                url: #URL("https://github.com/apple/swift-syntax"),
+                name: "SwiftSyntax",
+                id: "swift-syntax"
+            )
+            Acknowledgement(
+                url: #URL("https://tuist.io"),
+                name: "Tuist",
+                id: "tuist"
+            )
+            Acknowledgement(
+                url: #URL("https://mise.jdx.dev"),
+                name: "Mise",
+                id: "mise"
+            )
+            Acknowledgement(
+                url: #URL("https://vsanthanam.github.io/SafariUI/"),
+                name: "SafariUI",
+                id: "safari-ui"
+            )
+            Acknowledgement(
+                url: #URL("https://vsanthanam/github.io/SwiftExtensions"),
+                name: "SwiftExtensions",
+                id: "swift-extensions"
+            )
+        }
+
     }
 
     // MARK: - Private

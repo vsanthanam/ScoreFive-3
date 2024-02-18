@@ -73,6 +73,7 @@ private struct RecordLastUpdatedDateFormatterViewModifier: ViewModifier {
 
     // MARK: - ViewModifier
 
+    @MainActor
     @ViewBuilder
     func body(content: Content) -> some View {
         content

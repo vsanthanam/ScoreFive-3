@@ -58,6 +58,7 @@ private struct PlayerNamesListFormatterViewModifier: ViewModifier {
 
     // MARK: - ViewModifier
 
+    @MainActor
     @ViewBuilder
     func body(content: Content) -> some View {
         content

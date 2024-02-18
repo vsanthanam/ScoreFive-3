@@ -56,7 +56,10 @@ let project = Project(
             ),
             dependencies: [
                 .project(target: "FiveKit", path: "../FiveKit"),
-                .external(name: "SwiftExtensions"),
+                .external(name: "FoundationExtensions"),
+                .external(name: "UIExtensions"),
+                .external(name: "CoreExtensions"),
+                .external(name: "CollectionExtensions"),
                 .external(name: "SafariView")
             ]
         ),

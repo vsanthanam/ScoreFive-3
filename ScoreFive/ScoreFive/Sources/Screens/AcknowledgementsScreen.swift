@@ -24,8 +24,8 @@
 // SOFTWARE.
 
 import SafariView
-import SwiftExtensions
 import SwiftUI
+import UIExtensions
 
 struct AcknowledgementsScreen: View {
 

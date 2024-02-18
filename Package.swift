@@ -10,7 +10,7 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/vsanthanam/SwiftExtensions",
-            from: "0.0.5"
+            from: "0.0.7"
         )
     ]
 )

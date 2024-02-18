@@ -23,10 +23,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import FoundationExtensions
 import SafariView
 import StoreKit
-import SwiftExtensions
 import SwiftUI
+import UIExtensions
 
 @MainActor
 struct MoreScreen: View {

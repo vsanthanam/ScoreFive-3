@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Tuist",
+    name: "ExternalDependencies",
     dependencies: [
         .package(
             url: "https://github.com/vsanthanam/SafariUI",
@@ -11,6 +11,14 @@ let package = Package(
         .package(
             url: "https://github.com/vsanthanam/SwiftExtensions",
             from: "0.0.7"
+        ),
+        .package(
+            url: "https://github.com/mattgallagher/CwlPreconditionTesting.git",
+            from: "2.2.0"
+        ),
+        .package(
+            url: "https://github.com/pointfreeco/swift-snapshot-testing",
+            from: "1.0.0"
         )
     ]
 )

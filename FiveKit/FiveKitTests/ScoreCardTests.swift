@@ -1,5 +1,5 @@
 // ScoreFive
-// ScoreFiveTests.swift
+// ScoreCardTests.swift
 //
 // MIT License
 //
@@ -23,32 +23,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@testable import ScoreFive
+import CwlPreconditionTesting
+@testable import FiveKit
 import XCTest
 
-final class ScoreFiveTests: XCTestCase {
+final class ScoreCardTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+    func test_init_invalid_limit() {
+        let e = catchBadInstruction {
+            _ = ScoreCard(players: ["Foo", "Bar"], scoreLimit: 20)
         }
+        XCTAssertNotNil(e)
     }
 
+    func test_init_not_enough_players() {
+        let e = catchBadInstruction {
+            _ = ScoreCard(players: ["Foo"], scoreLimit: 250)
+        }
+        XCTAssertNotNil(e)
+    }
+
+    func test_init_not_duplicate_players() {
+        let e = catchBadInstruction {
+            _ = ScoreCard(players: ["Foo", "Foo"], scoreLimit: 250)
+        }
+        XCTAssertNotNil(e)
+    }
+
+    func test_init() {
+        let card = ScoreCard(players: ["Foo", "Bar", "Baz"], scoreLimit: 101)
+        XCTAssertEqual(card.players, ["Foo", "Bar", "Baz"])
+        XCTAssertEqual(card.scoreLimit, 101)
+    }
 }

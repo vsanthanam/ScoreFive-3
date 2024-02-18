@@ -63,37 +63,56 @@ let project = Project(
                 .external(name: "SafariView")
             ]
         ),
+//        .target(
+//            name: "ScoreFiveTests",
+//            destinations: .iOS,
+//            product: .unitTests,
+//            bundleId: "com.varunsanthanam.ScoreFiveTests",
+//            infoPlist: .default,
+//            sources: [
+//                "ScoreFiveTests/Sources/**"
+//            ],
+//            resources: [],
+//            dependencies: [
+//                .target(
+//                    name: "ScoreFive"
+//                )
+//            ]
+//        ),
         .target(
-            name: "ScoreFiveTests",
+            name: "ScoreFiveSnapshotTests",
             destinations: .iOS,
             product: .unitTests,
-            bundleId: "com.varunsanthanam.ScoreFiveTests",
+            bundleId: "com.varunsanthanam.ScoreFiveSnapshotTests",
             infoPlist: .default,
             sources: [
-                "ScoreFiveTests/Sources/**"
+                "ScoreFiveSnapshotTests/Sources/**"
             ],
             resources: [],
             dependencies: [
                 .target(
                     name: "ScoreFive"
+                ),
+                .external(
+                    name: "SnapshotTesting"
                 )
             ]
         ),
-        .target(
-            name: "ScoreFiveUITests",
-            destinations: .iOS,
-            product: .uiTests,
-            bundleId: "com.varunsanthanam.ScoreFiveUITests",
-            infoPlist: .default,
-            sources: [
-                "ScoreFiveUITests/Sources/**"
-            ],
-            resources: [],
-            dependencies: [
-                .target(
-                    name: "ScoreFive"
-                )
-            ]
-        )
+//        .target(
+//            name: "ScoreFiveUITests",
+//            destinations: .iOS,
+//            product: .uiTests,
+//            bundleId: "com.varunsanthanam.ScoreFiveUITests",
+//            infoPlist: .default,
+//            sources: [
+//                "ScoreFiveUITests/Sources/**"
+//            ],
+//            resources: [],
+//            dependencies: [
+//                .target(
+//                    name: "ScoreFive"
+//                )
+//            ]
+//        )
     ]
 )

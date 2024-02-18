@@ -51,6 +51,9 @@ let project = Project(
             infoPlist: .default,
             sources: [
                 "FiveKitTests/**"
+            ],
+            dependencies: [
+                .external(name: "CwlPreconditionTesting")
             ]
         )
     ]

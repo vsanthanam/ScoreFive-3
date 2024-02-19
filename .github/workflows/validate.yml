@@ -24,6 +24,6 @@ jobs:
       - name: Fetch Dependencies
         run: tuist install
       - name: Run ScoreFive Tests
-        run: tuist test ScoreFive -d "iPhone 15 Pro" --os "iOS 17.2
+        run: tuist test ScoreFive -d "iPhone 15 Pro" --os "iOS 17.2"
       - name: Run FiveKit Tests
-        run: tuist test FiveKit -d "iPhone 15 Pro" --os "iOS 17.2
+        run: tuist test FiveKit -d "iPhone 15 Pro" --os "iOS 17.2"

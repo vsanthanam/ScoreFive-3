@@ -31,7 +31,7 @@ import XCTest
 final class PlayingCardSnapshotTests: SnapshotTestCase {
 
     func test_playing_card_view() {
-        snapshot {
+        snapshotView {
             PlayingCard {
                 Text("Score Five")
                     .multilineTextAlignment(.center)

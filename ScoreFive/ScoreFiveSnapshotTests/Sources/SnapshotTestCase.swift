@@ -28,14 +28,14 @@ import SnapshotTesting
 import SwiftUI
 import XCTest
 
-func snapshot<T>(
-    @ViewBuilder _ view: () -> T,
+func snapshotView<T>(
     named name: String? = nil,
     record recording: Bool = false,
     timeout: TimeInterval = 5,
     file: StaticString = #file,
     testName: String = #function,
-    line: UInt = #line
+    line: UInt = #line,
+    @ViewBuilder _ view: () -> T
 ) where T: View {
     assertSnapshot(
         of: view(),
@@ -48,6 +48,28 @@ func snapshot<T>(
         line: line
     )
 }
+
+func snapshotScreen<T>(
+    named name: String? = nil,
+    record recording: Bool = false,
+    timeout: TimeInterval = 5,
+    file: StaticString = #file,
+    testName: String = #function,
+    line: UInt = #line,
+    @ViewBuilder _ screen: () -> T
+) where T: View {
+    assertSnapshot(
+        of: screen(),
+        as: .image(layout: .device(config: .iPhone13)),
+        named: name,
+        record: recording,
+        timeout: timeout,
+        file: file,
+        testName: testName,
+        line: line
+    )
+}
+
 
 class SnapshotTestCase: XCTestCase {
 

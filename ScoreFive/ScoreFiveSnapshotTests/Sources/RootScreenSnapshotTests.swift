@@ -31,7 +31,7 @@ import XCTest
 final class RootScreenSnapshotTests: SnapshotTestCase {
 
     func test_root_screen() {
-        snapshot {
+        snapshotScreen {
             RootScreen()
                 .modelContainer(for: Record.self, inMemory: true)
         }

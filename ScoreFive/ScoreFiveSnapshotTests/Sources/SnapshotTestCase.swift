@@ -1,5 +1,5 @@
 // ScoreFive
-// PlayingCardSnapshotTests.swift
+// SnapshotTestCase.swift
 //
 // MIT License
 //
@@ -23,30 +23,41 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@testable import ScoreFive
+import FoundationExtensions
 import SnapshotTesting
 import SwiftUI
 import XCTest
 
-final class PlayingCardSnapshotTests: SnapshotTestCase {
+func snapshot<T>(
+    @ViewBuilder _ view: () -> T,
+    named name: String? = nil,
+    record recording: Bool = false,
+    timeout: TimeInterval = 5,
+    file: StaticString = #file,
+    testName: String = #function,
+    line: UInt = #line
+) where T: View {
+    assertSnapshot(
+        of: view(),
+        as: .image,
+        named: name,
+        record: recording,
+        timeout: timeout,
+        file: file,
+        testName: testName,
+        line: line
+    )
+}
 
-    func test_playing_card_view() {
-        snapshot {
-            PlayingCard {
-                Text("Score Five")
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(24.0)
-                Button {} label: {
-                    Text("Button")
-                        .fontWeight(.semibold)
-                        .frame(minWidth: 100)
-                }
-                .buttonStyle(.borderedProminent)
-            }
-        }
+class SnapshotTestCase: XCTestCase {
+
+    override class func setUp() {
+        super.setUp()
+        configure()
     }
 
+}
+
+func configure() {
+    SnapshotTesting.diffTool = EnvironmentVariables["SNAPSHOT_DIFF_TOOL"]
 }

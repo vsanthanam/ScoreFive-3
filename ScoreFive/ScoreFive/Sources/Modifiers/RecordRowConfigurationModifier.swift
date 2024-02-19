@@ -69,6 +69,7 @@ private struct RecordRowConfigurationViewModifier: ViewModifier {
 
     let configuration: RecordRowConfiguration
 
+    @MainActor
     @ViewBuilder
     func body(content: Content) -> some View {
         content

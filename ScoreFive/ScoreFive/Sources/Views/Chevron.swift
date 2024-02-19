@@ -30,6 +30,8 @@ public struct Chevron: View {
 
     public init() {}
 
+    @MainActor
+    @ViewBuilder
     public var body: some View {
         NavigationLink {
             EmptyView()

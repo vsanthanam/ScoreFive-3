@@ -39,6 +39,7 @@ struct LoadGameRow: View {
 
     // MARK: - View
 
+    @MainActor
     @ViewBuilder
     var body: some View {
         Button {

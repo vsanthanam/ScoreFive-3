@@ -35,6 +35,7 @@ struct PlayingCard<Content>: View where Content: View {
 
     // MARK: - View
 
+    @MainActor
     @ViewBuilder
     var body: some View {
         ZStack {
@@ -63,9 +64,8 @@ struct PlayingCard<Content>: View where Content: View {
         .frame(maxHeight: 475.0)
     }
 
-    // MARK: - Private
-
-    private let content: Content
+    @ViewBuilder
+    let content: Content
 
 }
 

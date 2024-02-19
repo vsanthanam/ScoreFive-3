@@ -46,6 +46,7 @@ struct RecordRow<Signpost, Content>: View where Signpost: View, Content: View {
 
     // MARK: - View
 
+    @MainActor
     @ViewBuilder
     var body: some View {
         VStack(spacing: 0.0) {

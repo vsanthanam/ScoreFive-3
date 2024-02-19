@@ -70,7 +70,6 @@ func snapshotScreen<T>(
     )
 }
 
-
 class SnapshotTestCase: XCTestCase {
 
     override class func setUp() {

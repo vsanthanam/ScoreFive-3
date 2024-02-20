@@ -1,5 +1,5 @@
 // ScoreFive
-// RootScreenSnapshotTests.swift
+// NewGameScreenSnapshatTests.swift
 //
 // MIT License
 //
@@ -26,13 +26,12 @@
 @testable import ScoreFive
 import SnapshotTesting
 import SwiftUI
-import XCTest
 
-final class RootScreenSnapshotTests: SnapshotTestCase {
+final class NewGameScreenSnapshotTests: SnapshotTestCase {
 
-    func test_root_screen() {
+    func test_snapshot_new_game_screen() {
         snapshotScreen {
-            RootScreen()
+            NewGameScreen()
                 .modelContainer(for: Record.self, inMemory: true)
         }
     }

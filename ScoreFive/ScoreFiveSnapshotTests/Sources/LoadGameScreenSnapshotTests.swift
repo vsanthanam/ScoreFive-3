@@ -33,7 +33,10 @@ final class LoadGameScreenSnapshotTests: SnapshotTestCase {
     func test_load_game_screen_empty() {
         snapshotScreen {
             LoadGameScreen()
-                .modelContainer(for: Record.self, inMemory: true)
+                .modelContainer(
+                    for: Record.self,
+                    inMemory: true
+                )
         }
     }
 

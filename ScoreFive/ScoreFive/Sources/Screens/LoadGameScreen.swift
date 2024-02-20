@@ -35,21 +35,32 @@ struct LoadGameScreen: View {
     @ViewBuilder
     var body: some View {
         NavigationStack {
-            List {
-                if allRecords.count != incompleteRecords.count {
-                    recordToggleSection
-                }
-                recordListSection
-                if showAll || allRecords.count == incompleteRecords.count {
-                    deleteAllSection
+            Group {
+                if !allRecords.isEmpty {
+                    List {
+                        sortSection
+                        recordListSection
+                        if showAll || allRecords.count == incompleteRecords.count {
+                            deleteAllSection
+                        }
+                    }
+                } else {
+                    ContentUnavailableView {
+                        Label(
+                            "No Games",
+                            systemImage: "gamecontroller.fill"
+                        )
+                    } description: {
+                        Text("Games you've started will appear here")
+                    }
                 }
             }
             .navigationTitle("Load Game")
             .navigationBarTitleDisplayMode(.inline)
-        }
-        .onChange(of: allRecords) { lhs, rhs in
-            if rhs.isEmpty {
-                dismiss()
+            .toolbar {
+                Button("Done") {
+                    dismiss()
+                }
             }
         }
         .onAppear() {
@@ -71,6 +82,12 @@ struct LoadGameScreen: View {
         } message: {
             Text("This action is irreversible. All score cards — including unfinished ones — will be immediately deleted forever.")
         }
+        .animation(.default, value: visibleRecords)
+        .onChange(of: visibleRecords) { lhs, rhs in
+            if visibleRecords.isEmpty, !showAll {
+                showAll = true
+            }
+        }
     }
 
     // MARK: - Private
@@ -81,8 +98,20 @@ struct LoadGameScreen: View {
     @State
     private var confirmDeleteAll = false
 
+    let pickerOptions = ["Last Updated", "Date Created"]
+
+    @State
+    private var sortByLastUpdatedPicker = "Last Updated"
+
+    private var sortByLastUpdated: Bool {
+        sortByLastUpdatedPicker == pickerOptions[0]
+    }
+
     @Query(sort: \Record.lastUpdated, order: .reverse)
-    private var allRecords: [Record]
+    private var allRecordsByLastUpdated: [Record]
+
+    @Query(sort: \Record.createdOn, order: .reverse)
+    private var allRecordsByCreatedOn: [Record]
 
     @Environment(\.modelContext)
     private var modelContext: ModelContext
@@ -93,43 +122,8 @@ struct LoadGameScreen: View {
     @Environment(\.startRecord)
     private var startRecord: StartRecordAction
 
-    @MainActor
-    @ViewBuilder
-    private var recordToggleSection: some View {
-        Section {
-            Toggle("Show Complete Games", isOn: $showAll.animation())
-        }
-    }
-
-    @MainActor
-    @ViewBuilder
-    private var recordListSection: some View {
-        Section {
-            ForEach(visibleRecords) { record in
-                LoadGameRow(record: record, onSelect: selectRecord)
-            }
-            .onDelete { indexSet in
-                withAnimation {
-                    for index in indexSet {
-                        modelContext.delete(visibleRecords[index])
-                    }
-                }
-            }
-        }
-    }
-
-    @MainActor
-    @ViewBuilder
-    private var deleteAllSection: some View {
-        Section {
-            Button {
-                confirmDeleteAll.toggle()
-            } label: {
-                Text("Delete All")
-                    .foregroundStyle(Color.red)
-                    .frame(maxWidth: .infinity)
-            }
-        }
+    private var allRecords: [Record] {
+        sortByLastUpdated ? allRecordsByLastUpdated : allRecordsByCreatedOn
     }
 
     private var incompleteRecords: [Record] {
@@ -148,9 +142,55 @@ struct LoadGameScreen: View {
     }
 
     private func deleteAll() {
-        withAnimation {
-            allRecords
-                .forEach(modelContext.delete)
+        allRecords
+            .forEach(modelContext.delete)
+    }
+
+    @MainActor
+    @ViewBuilder
+    private var sortSection: some View {
+        Section {
+            if allRecords.count != incompleteRecords.count {
+                Toggle("Show Complete Games", isOn: $showAll)
+            }
+            Picker("Sort", selection: $sortByLastUpdatedPicker) {
+                ForEach(pickerOptions, id: \.self) { option in
+                    Text(option)
+                }
+            }
+        }
+    }
+
+    @MainActor
+    @ViewBuilder
+    private var recordListSection: some View {
+        Section {
+            ForEach(visibleRecords) { record in
+                LoadGameRow(
+                    record: record,
+                    lastUpdated: sortByLastUpdated,
+                    onSelect: selectRecord
+                )
+            }
+            .onDelete { indexSet in
+                for index in indexSet {
+                    modelContext.delete(visibleRecords[index])
+                }
+            }
+        }
+    }
+
+    @MainActor
+    @ViewBuilder
+    private var deleteAllSection: some View {
+        Section {
+            Button {
+                confirmDeleteAll.toggle()
+            } label: {
+                Text("Delete All")
+                    .foregroundStyle(Color.red)
+                    .frame(maxWidth: .infinity)
+            }
         }
     }
 }

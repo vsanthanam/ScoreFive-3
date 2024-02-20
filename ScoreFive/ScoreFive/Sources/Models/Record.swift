@@ -25,24 +25,31 @@
 
 import FiveKit
 import Foundation
+import Observation
 import SwiftData
 
 @Model
 final class Record {
 
     init(scoreCard: ScoreCard) {
-        self.scoreCard = scoreCard
+        _scoreCard = scoreCard
         players = scoreCard.players
         isComplete = scoreCard.alivePlayers.count < 2
         lastUpdated = .now
     }
 
     private(set) var lastUpdated = Date.now
+    let createdOn = Date.now
     private(set) var players = [String]()
     private(set) var isComplete = false
+    private var _scoreCard = ScoreCard.placeholder
 
-    var scoreCard = ScoreCard.placeholder {
-        didSet {
+    var scoreCard: ScoreCard {
+        get {
+            _scoreCard
+        }
+        set {
+            _scoreCard = newValue
             lastUpdated = .now
             players = newValue.players
             isComplete = newValue.alivePlayers.count < 2

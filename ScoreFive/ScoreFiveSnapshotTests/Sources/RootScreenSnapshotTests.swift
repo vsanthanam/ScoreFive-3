@@ -1,5 +1,5 @@
 // ScoreFive
-// PlayingCardSnapshotTests.swift
+// RootScreenSnapshotTests.swift
 //
 // MIT License
 //
@@ -28,24 +28,12 @@ import SnapshotTesting
 import SwiftUI
 import XCTest
 
-final class PlayingCardSnapshotTests: SnapshotTestCase {
+final class RootScreenSnapshotTests: SnapshotTestCase {
 
-    func test_playing_card_view() {
-        snapshotView {
-            PlayingCard {
-                Text("Score Five")
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(24.0)
-                Button {} label: {
-                    Text("Button")
-                        .fontWeight(.semibold)
-                        .frame(minWidth: 100)
-                }
-                .buttonStyle(.borderedProminent)
-            }
+    func test_root_screen() {
+        snapshotScreen {
+            RootScreen()
+                .modelContainer(for: Record.self, inMemory: true)
         }
     }
 

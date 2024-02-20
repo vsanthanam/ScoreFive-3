@@ -95,7 +95,13 @@ let project = Project(
                 ),
                 .external(
                     name: "SnapshotTesting"
+                ),
+                .external(
+                    name: "FoundationExtensions"
                 )
+            ],
+            environmentVariables: [
+                "SNAPSHOT_DIFF_TOOL": "ksdiff"
             ]
         ),
 //        .target(

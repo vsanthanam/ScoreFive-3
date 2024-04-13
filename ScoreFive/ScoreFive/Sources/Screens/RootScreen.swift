@@ -49,7 +49,10 @@ struct RootScreen: View {
                 .background(Color.secondarySystemBackground)
             }
         }
-        .sheet(item: $sheet, id: \.rawValue) { sheet in
+        .sheet(
+            item: $sheet,
+            id: \.rawValue
+        ) { sheet in
             switch sheet {
             case .newGame:
                 NewGameScreen()
@@ -90,6 +93,26 @@ struct RootScreen: View {
                 url: #URL("https://vsanthanam/github.io/SwiftExtensions"),
                 name: "SwiftExtensions",
                 id: "swift-extensions"
+            )
+            Acknowledgement(
+                url: #URL("https://github.com/pointfreeco/swift-snapshot-testing"),
+                name: "swift-snapshot-testing",
+                id: "swift-snapshot-testing"
+            )
+            Acknowledgement(
+                url: #URL("https://github.com/mattgallagher/CwlCatchException"),
+                name: "CwlPreconditionTesting",
+                id: "cwl-precondition-testing"
+            )
+            Acknowledgement(
+                url: #URL("https://github.com/nicklockwood/SwiftFormat"),
+                name: "SwiftFormat",
+                id: "swift-format"
+            )
+            Acknowledgement(
+                url: #URL("https://fastlane.tools"),
+                name: "Fastlane",
+                id: "fastlane"
             )
         }
 

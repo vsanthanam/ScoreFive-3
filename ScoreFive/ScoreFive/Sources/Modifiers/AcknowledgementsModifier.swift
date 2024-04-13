@@ -28,14 +28,32 @@ import SwiftUI
 
 extension View {
 
-    func acknowledgements(_ acknowledgements: [Acknowledgement]) -> some View {
-        let modifier = AcknowledgementsViewModifier(acknowledgements: acknowledgements)
-        return ModifiedContent(content: self, modifier: modifier)
+    func acknowledgements(
+        _ acknowledgements: [Acknowledgement]
+    ) -> some View {
+        ModifiedContent(
+            content: self,
+            modifier: AcknowledgementsViewModifier(
+                acknowledgements: acknowledgements
+                    .sorted(
+                        by: \.id
+                    )
+            )
+        )
     }
 
-    func acknowledgements(@ArrayBuilder<[Acknowledgement]> _ acknowledgements: () -> [Acknowledgement]) -> some View {
-        let modifier = AcknowledgementsViewModifier(acknowledgements: acknowledgements())
-        return ModifiedContent(content: self, modifier: modifier)
+    func acknowledgements(
+        @ArrayBuilder<[Acknowledgement]> _ acknowledgements: () -> [Acknowledgement]
+    ) -> some View {
+        ModifiedContent(
+            content: self,
+            modifier: AcknowledgementsViewModifier(
+                acknowledgements: acknowledgements()
+                    .sorted(
+                        by: \.id
+                    )
+            )
+        )
     }
 
 }

@@ -31,9 +31,11 @@ struct LoadGameRow: View {
 
     init(
         record: Record,
+        lastUpdated: Bool = true,
         onSelect: @escaping (Record) -> Void
     ) {
         self.record = record
+        self.lastUpdated = lastUpdated
         self.onSelect = onSelect
     }
 
@@ -51,7 +53,7 @@ struct LoadGameRow: View {
                 VStack(alignment: .leading) {
                     Text(playerNamesListFormatter.string(from: record.players) ?? "Unknown")
                         .foregroundStyle(Color.label)
-                    Text(recordLastUpdatedDateFormatter.string(from: record.lastUpdated))
+                    Text(caption)
                         .font(.caption)
                         .foregroundStyle(Color.secondaryLabel)
                 }
@@ -62,6 +64,7 @@ struct LoadGameRow: View {
     // MARK: - Private
 
     private let record: Record
+    private let lastUpdated: Bool
     private let onSelect: (Record) -> Void
 
     @Environment(\.playerNamesListFormatter)
@@ -69,6 +72,15 @@ struct LoadGameRow: View {
 
     @Environment(\.recordLastUpdatedDateFormatter)
     private var recordLastUpdatedDateFormatter: DateFormatter
+
+    private var caption: String {
+        let dateString = recordLastUpdatedDateFormatter.string(from: lastUpdated ? record.lastUpdated : record.createdOn)
+        if lastUpdated {
+            return "Last updated at \(dateString)"
+        } else {
+            return "Created on \(dateString)"
+        }
+    }
 
 }
 

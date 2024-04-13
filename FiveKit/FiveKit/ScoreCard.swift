@@ -143,6 +143,9 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         rounds.remove(at: index)
     }
 
+    /// Create a score card without the round at the provided index
+    /// - Parameter index: The index of the round you wish to exclude.
+    /// - Returns: The score card, minus the round at the provided index.
     public func withoutRound(
         atIndex index: Int
     ) -> ScoreCard {
@@ -177,6 +180,9 @@ public struct ScoreCard: Equatable, Hashable, Sendable, Identifiable, Codable {
         removeRound(atIndex: index)
     }
 
+    /// Creatre a score card without the round with the provided ID
+    /// - Parameter id: The ID of the round you wish to exclude
+    /// - Returns: The score card, minus the round with the provided ID.
     public func withoutRound(
         id: String
     ) -> ScoreCard {

@@ -1,5 +1,5 @@
 // ScoreFive
-// NewGameScreenSnapshatTests.swift
+// NewGameScreenSnapshotTests.swift
 //
 // MIT License
 //
@@ -32,7 +32,10 @@ final class NewGameScreenSnapshotTests: SnapshotTestCase {
     func test_snapshot_new_game_screen() {
         snapshotScreen {
             NewGameScreen()
-                .modelContainer(for: Record.self, inMemory: true)
+                .modelContainer(
+                    for: Record.self,
+                    inMemory: true
+                )
         }
     }
 

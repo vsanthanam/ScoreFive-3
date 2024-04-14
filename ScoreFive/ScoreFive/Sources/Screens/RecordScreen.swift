@@ -164,7 +164,7 @@ struct RecordView: View {
                     endRecord()
                 }
             } label: {
-                Image(systemName: "pause.circle.fill")
+                #Symbol("pause.circle.fill")
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(Color.secondaryLabel)
                     .font(.title)
@@ -177,7 +177,7 @@ struct RecordView: View {
             Button {
                 showingRecordDetail.toggle()
             } label: {
-                Image(systemName: "ellipsis.circle.fill")
+                #Symbol("ellipsis.circle.fill")
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(Color.secondaryLabel)
                     .font(.title)

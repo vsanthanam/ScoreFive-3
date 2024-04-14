@@ -24,6 +24,7 @@
 // SOFTWARE.
 
 import SwiftUI
+import UIExtensions
 
 struct LoadGameRow: View {
 
@@ -48,7 +49,7 @@ struct LoadGameRow: View {
             onSelect(record)
         } label: {
             HStack {
-                Image(systemName: record.isComplete ? "flag.checkered" : "clock")
+                recordIcon
                     .foregroundColor(Color.label)
                 VStack(alignment: .leading) {
                     Text(playerNamesListFormatter.string(from: record.players) ?? "Unknown")
@@ -72,6 +73,15 @@ struct LoadGameRow: View {
 
     @Environment(\.recordLastUpdatedDateFormatter)
     private var recordLastUpdatedDateFormatter: DateFormatter
+
+    @ViewBuilder
+    private var recordIcon: some View {
+        if record.isComplete {
+            #Symbol("flag.checkered")
+        } else {
+            #Symbol("clock")
+        }
+    }
 
     private var caption: String {
         let dateString = recordLastUpdatedDateFormatter.string(from: lastUpdated ? record.lastUpdated : record.createdOn)

@@ -24,6 +24,7 @@
 // SOFTWARE.
 
 import SwiftUI
+import UIExtensions
 
 struct PlayingCard<Content>: View where Content: View {
 
@@ -44,7 +45,7 @@ struct PlayingCard<Content>: View where Content: View {
                 .foregroundColor(Color.secondarySystemGroupedBackground)
                 .shadow(radius: 16)
             VStack {
-                Image(systemName: "suit.spade.fill")
+                #Symbol("suit.spade.fill")
                     .font(.largeTitle)
                     .padding(16)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -52,7 +53,7 @@ struct PlayingCard<Content>: View where Content: View {
                 Spacer()
                 content
                 Spacer()
-                Image(systemName: "suit.spade.fill")
+                #Symbol("suit.spade.fill")
                     .font(.largeTitle)
                     .padding(16)
                     .frame(maxWidth: .infinity, alignment: .leading)
